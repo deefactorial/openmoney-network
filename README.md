@@ -18,4 +18,4 @@ sudo service nginx restart
 ```
 
 # Start Openmoney API
-[https://github.com/deefactorial/openmoney-api/](openmoney-api)
+[openmoney-api](https://github.com/deefactorial/openmoney-api/)
