@@ -1,0 +1,119 @@
+<style>
+[data-sort=table] > tbody > tr:hover{
+  background-color: #159c6e;
+  cursor: pointer;
+}
+</style>
+<div class="col-sm-12" style="padding-top: 10px;">
+  {{#if id}}
+  <div id="statsButton" class="text-right" style="padding-bottom:10px;">
+    <button type="button" name="showedit" class="btn btn-lg btn-primary-outline" >
+      <strong>Edit</strong>
+    </button>
+  </div>
+  <div id="stats" class="statcard statcard-info p-a-md m-b">
+    <h2><div class="statcard-number">STEWARD: {{stewardname}}</div></h2>
+    <div class="statcard-desc">EMAIL: <a href="mailto:{{email}}" style='color:#FFF'>{{email}}</a></div>
+  </div>
+  {{/if}}
+  <form id='stewardForm' {{#if id}}style="display: none;"{{/if}}>
+    {{#if id}}<input type="hidden" name="id" value="{{id}}" />{{/if}}
+    <div class="form-group text-left">
+      <label for="stewardname">Steward Name</label>
+      <input type="text" id="stewardname" name="stewardname" value="{{stewardname}}" placeholder="Steward Name" class="form-control" />
+    </div>
+    <div class="form-group text-right">
+      <button type="button" name="cancel" class="btn btn-lg btn-primary-outline" >Cancel</button>
+      <button type="button" name="upsert" class="btn btn-lg btn-primary-outline" >
+        <strong>{{#if id}}Edit{{else}}Add{{/if}}</strong>
+      </button>
+    </div>
+  </form>
+
+  {{#if id}}
+  <h2><strong>Accounts</strong></h2>
+  <div id="newButtonDiv" class="text-right" style="padding-bottom:10px;">
+    <button type="button" name="newAccount" class="btn btn-lg btn-success-outline" >
+      <strong>New Account</strong>
+    </button>
+  </div>
+  <div class="table-full">
+    <table class="table accounts" data-sort="table">
+      <thead>
+        <tr>
+          <th>Account</th>
+          <th>Currency</th>
+          <th>Balance</th>
+          <th>Volume</th>
+        </tr>
+      </thead>
+      <tbody class="table-rows">
+        {{#each accounts}}
+          {{#this}}
+          <tr id="{{id}}">
+            <td>{{accountName}}</td>
+            <td>{{currencyName}}</td>
+            <td>{{decimal_places balance}}</td>
+            <td>{{decimal_places volume}}</td>
+          </tr>
+          {{/this}}
+        {{/each}}
+      </tbody>
+    </table>
+  </div>
+
+  <h2><strong>Currencies</strong></h2>
+  <div id="newButtonDiv" class="text-right" style="padding-bottom:10px;">
+    <button type="button" name="newCurrency" class="btn btn-lg btn-success-outline" >
+      <strong>New Currency</strong>
+    </button>
+  </div>
+  <div class="table-full">
+    <table class="table currencies" data-sort="table">
+      <thead>
+        <tr>
+          <th>Currency</th>
+          <th>Stewards</th>
+        </tr>
+      </thead>
+      <tbody class="table-rows">
+        {{#each currencies}}
+          {{#this}}
+          <tr id="{{id}}">
+            <td>{{currencyName}}</td>
+            <td>{{#each stewards}}{{#this}}<a href='#stewards/{{stewardname}}'>{{stewardname}}</a> {{/this}}{{/each}}</td>
+          </tr>
+          {{/this}}
+        {{/each}}
+      </tbody>
+    </table>
+  </div>
+
+  <h2><strong>Namespaces</strong></h2>
+  <div id="newButtonDiv" class="text-right" style="padding-bottom:10px;">
+    <button type="button" name="newCurrency" class="btn btn-lg btn-success-outline" >
+      <strong>New Namespace</strong>
+    </button>
+  </div>
+  <div class="table-full">
+    <table class="table currencies" data-sort="table">
+      <thead>
+        <tr>
+          <th>Namespace</th>
+          <th>Stewards</th>
+        </tr>
+      </thead>
+      <tbody class="table-rows">
+        {{#each namespaces}}
+          {{#this}}
+          <tr id="{{id}}">
+            <td>{{namespace}}</td>
+            <td>{{#each stewards}}{{#this}}<a href='#stewards/{{stewardname}}'>{{stewardname}}</a> {{/this}}{{/each}}</td>
+          </tr>
+          {{/this}}
+        {{/each}}
+      </tbody>
+    </table>
+  </div>
+  {{/if}}
+</div>

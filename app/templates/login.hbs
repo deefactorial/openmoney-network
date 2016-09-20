@@ -1,0 +1,48 @@
+<style type="text/css">
+</style>
+<div id="main-content" class="main-content text-center">
+    <div id="success-notification" class="main-functions center-block alert alert-success" role="alert" style="display: none;"></div>
+    <div id="error-notification" class="main-functions center-block alert alert-danger" role="alert" style="display: none;"></div>
+    <div class="main-functions panel panel-default center-block">
+      <div class="panel-heading text-left"><strong>LOGIN</strong></div>
+      <div class="panel-body">
+        <form id="login" class="login">
+          <div class="form-group text-left">
+            <label for="stewardname">Steward Name</label>
+            <input type="text" id="stewardname" name="stewardname" value="" placeholder="Steward Name" class="form-control" />
+          </div>
+          <div class="form-group text-left">
+            <label for="password">Password</label>
+            <input type="password" id="password" name="password" value="" placeholder="Password" class="form-control"/>
+          </div>
+          <div class="form-group text-right">
+            <button type="button" name="login-button" id="login-button" class="btn btn-primary btn-lg text-uppercase">Login</button>
+          </div>
+        </form>
+        <div class="forgot">
+            <small><a href="#forgot" class="link light forgot-link">Forgot your password?</a></small>
+        </div>
+      </div>
+    </div>
+
+    <div class="fb-signin" style="display: none;">
+        <button name="fb" class="fb-button">
+            <table class="light" style="width:100%;">
+                <tr style="width:100%;">
+                    <td style="width:25%;text-align:right;">
+                        <img src="public/assets/images/login-fb-logo.png" class="fb-logo"/>
+                    </td>
+                    <td style="width:75%;text-align:left;">Sign in with Facebook
+                    </td>
+                </tr>
+            </table>
+        </button>
+    </div>
+    <div class="register">
+        <span style="color: #FFFFFF;">Don't have an namespace?<span>
+        <button type="button" name="register" id="register-button" class="btn btn-success text-uppercase">Sign up</button>
+    </div>
+    <div id="main-spacer" class="main-spacer">
+        <div style="height:100%;">&nbsp;</div>
+    </div>
+</div>

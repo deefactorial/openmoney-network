@@ -1,0 +1,253 @@
+/*
+ * Licensed to the Apache Software Foundation (ASF) under one
+ * or more contributor license agreements.  See the NOTICE file
+ * distributed with this work for additional information
+ * regarding copyright ownership.  The ASF licenses this file
+ * to you under the Apache License, Version 2.0 (the
+ * "License"); you may not use this file except in compliance
+ * with the License.  You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing,
+ * software distributed under the License is distributed on an
+ * "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+ * KIND, either express or implied.  See the License for the
+ * specific language governing permissions and limitations
+ * under the License.
+ */
+
+
+* {
+    -webkit-tap-highlight-color: rgba(0,0,0,0); /* make transparent link selection, adjust last value opacity 0 to 1.0 */
+}
+
+body {
+    -webkit-touch-callout: none;                /* prevent callout to copy image, etc when tap to hold */
+    -webkit-text-size-adjust: none;             /* prevent webkit from resizing text to fit */
+    -webkit-user-select: none;                  /* prevent copy paste, to allow, change 'none' to 'text' */
+    background-color:#202020;
+    /*background-image:linear-gradient(top, #0f1013 0%, #202020 51%);
+    background-image:-webkit-linear-gradient(top, ##0f1013 0%, #202020 51%);
+    background-image:-ms-linear-gradient(top, ##0f1013 0%, #202020 51%);
+    background-image:-webkit-gradient(
+        linear,
+        left top,
+        left bottom,
+        color-stop(0, #0f1013),
+        color-stop(0.51, #202020)
+    );
+    background-attachment:fixed;*/
+    font-family:'HelveticaNeue-Light', 'HelveticaNeue', Helvetica, Arial, sans-serif;
+    font-size:12px;
+    height:100%;
+    margin:0px;
+    padding:0px;
+    width:100%;
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+
+/* Portrait layout (default) */
+.app {
+    background:url(../img/logo.png) no-repeat center top; /* 170px x 200px */
+    position:absolute;             /* position in the center of the screen */
+    left:50%;
+    top:50%;
+    height:50px;                   /* text area height */
+    width:225px;                   /* text area width */
+    text-align:center;
+    padding:180px 0px 0px 0px;     /* image height is 200px (bottom 20px are overlapped with text) */
+    margin:-115px 0px 0px -112px;  /* offset vertical: half of image height and text area height */
+                                   /* offset horizontal: half of text area width */
+}
+
+/* Landscape layout (with min-width) */
+@media screen and (min-aspect-ratio: 1/1) and (min-width:400px) {
+    .app {
+        background-position:left center;
+        padding:75px 0px 75px 170px;  /* padding-top + padding-bottom + text area = image height */
+        margin:-90px 0px 0px -198px;  /* offset vertical: half of image height */
+                                      /* offset horizontal: half of image width and text area width */
+    }
+}
+
+.error {
+  color: #AA0000;
+}
+.main-content{
+  padding-top:30px;
+}
+.main-functions{
+  min-width: 250px;
+  max-width: 450px;
+  padding-top:10px;
+  padding-bottom:10px;
+  padding-left:10px;
+  padding-right:10px;
+}
+.ui-loader {
+  display: none;
+}
+
+.nav-padding{
+  padding: 20px !important;
+  font-size: 20px;
+  white-space: nowrap;
+}
+.icon-padding{
+  padding-right: 10px;
+}
+.notifications{
+  padding: 20px;
+}
+.btn-actions{
+  padding: 20px;
+}
+.tab-spacing{
+  margin-left: 30px !important;
+}
+.nav-font {
+  font-size: 16px;
+}
+@media (min-width: 768px) {
+  .nav-font {
+    font-size: 12px;
+  }
+}
+@media (min-width: 992px) {
+  .nav-font {
+    font-size: 17px;
+  }
+}
+@media (min-width: 1200px){
+  .nav-font {
+    font-size: 22px;
+  }
+}
+.action-spacing{
+  padding: 20px !important;
+}
+.add-color{
+  background-color: #159c6e;
+  border-radius: 35px;
+}
+li.add-color > a:hover,
+li.add-color > a:focus{
+  background-color: #117d58;
+}
+.nav-pills > li > a:hover,
+.nav-pills > li > a:focus{
+  border-radius: 35px;
+}
+.redeem-color{
+  background-color: #E64759;
+  border-radius: 35px;
+}
+li.redeem-color > a:hover,
+li.redeem-color > a:focus{
+  background-color: #bd1a2c;
+}
+.highlight {
+  color: #fff;
+  background-color: #434857;
+}
+.nav-pills > li > a.highlight{
+
+}
+.numberpad{
+
+}
+.aspect-contianer {
+    display: inline-block;
+    position: relative;
+    width: 100%;
+}
+.aspect-one-to-one {
+    margin-top: 100%; /* 4:4 aspect ratio */
+}
+.aspect-three-to-one {
+    margin-top: 33.333333333%; /* 4:4 aspect ratio */
+}
+.aspect-element {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    /*background-color: silver  show me! */
+}
+.numberpad-font {
+  font-size: 3vw;
+}
+@media (max-width: 768px) {
+  .numberpad-font {
+    font-size: 60px;
+  }
+}
+@media (max-width: 544px) {
+  .numberpad-font {
+    font-size: 40px;
+  }
+}
+.numberpad-row {
+  padding-top: 5px;
+  padding-bottom: 5px;
+  padding-left: 7px;
+  padding-right: 7px;
+}
+input.form-control{
+  font-size: 20px;
+}
+.icon-erase::before {
+  top: 5px;
+}
+.plus{
+  background-color: #117d58;
+}
+.minus{
+  background-color: #bd1a2c;
+}
+@media (min-width: 992px) {
+  .right-border{
+    border-right: 1px solid #434857;
+  }
+}
+.input-with-icon{
+  display: block;
+}
+.send-value-selected{
+  color: #fff;
+  background-color: #117d58;
+}
+.receive-value-selected{
+  color: #fff;
+  background-color: #bd1a2c;
+}
+.card-highlight{
+  background-color: #fff;
+  color: #252830;
+  box-shadow: none;
+}
+#amount.plus:focus{
+  color: #fff;
+  background-color: #159c6e;
+}
+#amount.minus:focus{
+  color: #fff;
+  background-color: #E64759;
+}
+
+.dashhead-style{
+  padding-top: 30px;
+  padding-bottom: 30px;
+  border-bottom: 1px solid #434857;
+}
+
+.dataTables_filter input {
+  width: 220px !important;
+}
+
+div.dataTables_wrapper > div.row > div.col-sm-6 {
+  width:50%;
+}

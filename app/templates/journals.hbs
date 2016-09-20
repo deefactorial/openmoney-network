@@ -1,0 +1,173 @@
+<style>
+.input-padding{
+  padding-top: 7px !important;
+  padding-right: 7px !important;
+  padding-left: 7px !important;
+  padding-bottom: 0px !important;
+}
+.p-a-md{
+  padding-top: 0px !important;
+  padding-bottom: 0px !important;
+}
+.account-buttons{
+  white-space: normal;
+}
+</style>
+<div class="col-sm-6 table-full" style="padding-top: 10px;">
+  <table class="table display" data-sort="table">
+    <thead>
+      <tr>
+        <th class="">Accounts</th>
+      </tr>
+    </thead>
+    <tbody class="table-rows">
+      {{#each accounts}}
+        {{#this}}
+          <tr><td style="border-top: none;">
+            <button type="button" id="{{accountName}}:{{currencyName}}:button" class="account-buttons btn btn-xm btn-default-outline action-spacing highlight" style="width: 100%; margin: 0;">{{accountName}} {{currencyName}}</button>
+            <div id="{{accountName}}:{{currencyName}}" class="value-buttons">
+              <button type="button" class="btn btn-xm btn-success-outline action-spacing tab-spacing send-value send-value-selected" style="width: 80%; margin: 2px;">
+                <span class="icon icon-plus icon-padding"></span>
+                SEND VALUE
+              </button>
+              <button type="button" class="btn btn-xm btn-danger-outline action-spacing tab-spacing receive-value" style="width: 80%; margin: 2px;">
+                <span class="icon icon-minus icon-padding"></span>
+                RECEIVE VALUE
+              </button>
+            </div>
+          </td></tr>
+        {{/this}}
+      {{/each}}
+    </tbody>
+  </table>
+</div>
+<div class="col-sm-6" style="padding-top: 20px;">
+  <div class="row">
+    <div class="col-xs-6" style="padding-left: 22px; padding-right: 3px;">
+      <div class="statcard statcard-success p-a-md">
+        <h2 id="balance" class="statcard-number">
+          {{decimal_places balance}}
+        </h2>
+        <span class="statcard-desc">Balance</span>
+      </div>
+    </div>
+    <div class="col-xs-6" style="padding-left: 3px;padding-right: 22px;">
+      <div class="statcard statcard-info p-a-md">
+        <h2 id="volume" class="statcard-number">
+          {{decimal_places volume}}
+        </h2>
+        <span class="statcard-desc">Volume</span>
+      </div>
+    </div>
+  </div>
+  <div id="card-div" class="input-padding">
+    <input type="text" id="toAccountName" name="toAccountName" value="{{toAccountName}}" placeholder="Trading Name" class="form-control"/>
+    <input type="hidden" name="polarity" value="send"/>
+    <input type="hidden" name="accountName" value="{{accountName}}"/>
+    <input type="hidden" name="currencyName" value="{{currencyName}}"/>
+  </div>
+  <input type="hidden" name="sign" id="sign" value="+" />
+  <div class="input-with-icon input-padding">
+    <input type="text" name="amount" id="amount" value="0.00" class="form-control text-right plus input-padding" style="font-size: 40px;height: 60px;"/>
+    <span id='plus-icon' class="icon icon-plus" style="font-size: 50px;"></span>
+    <span id='minus-icon' class="icon icon-minus" style="display: none; font-size: 50px;"></span>
+  </div>
+  <div id="numberpad" class="numberpad">
+    <div class="col-xs-4 numberpad-row">
+      <div class="aspect-contianer">
+          <div class="aspect-one-to-one"></div>
+          <div class="aspect-element">
+              <button type="button" name="1" value="1" class="btn btn-default-outline numberpad-button" style="width: 100%; height: 100%;"><span class="numberpad-font">1</span></button>
+          </div>
+      </div>
+    </div>
+    <div class="col-xs-4 numberpad-row">
+      <div class="aspect-contianer">
+          <div class="aspect-one-to-one"></div>
+          <div class="aspect-element">
+              <button type="button" name="2" value="2" class="btn btn-default-outline numberpad-button" style="width: 100%; height: 100%;"><span class="numberpad-font">2</span></button>
+          </div>
+      </div>
+    </div>
+    <div class="col-xs-4 numberpad-row">
+      <div class="aspect-contianer">
+          <div class="aspect-one-to-one"></div>
+          <div class="aspect-element">
+              <button type="button" name="3" value="3" class="btn btn-default-outline numberpad-button" style="width: 100%; height: 100%;"><span class="numberpad-font">3</span></button>
+          </div>
+      </div>
+    </div>
+    <div class="col-xs-4 numberpad-row">
+      <div class="aspect-contianer">
+          <div class="aspect-one-to-one"></div>
+          <div class="aspect-element">
+              <button type="button" name="4" value="4" class="btn btn-default-outline numberpad-button" style="width: 100%; height: 100%;"><span class="numberpad-font">4</span></button>
+          </div>
+      </div>
+    </div>
+    <div class="col-xs-4 numberpad-row">
+      <div class="aspect-contianer">
+          <div class="aspect-one-to-one"></div>
+          <div class="aspect-element">
+              <button type="button" name="5" value="5" class="btn btn-default-outline numberpad-button" style="width: 100%; height: 100%;"><span class="numberpad-font">5</span></button>
+          </div>
+      </div>
+    </div>
+    <div class="col-xs-4 numberpad-row">
+      <div class="aspect-contianer">
+          <div class="aspect-one-to-one"></div>
+          <div class="aspect-element">
+              <button type="button" name="6" value="6" class="btn btn-default-outline numberpad-button" style="width: 100%; height: 100%;"><span class="numberpad-font">6</span></button>
+          </div>
+      </div>
+    </div>
+    <div class="col-xs-4 numberpad-row">
+      <div class="aspect-contianer">
+          <div class="aspect-one-to-one"></div>
+          <div class="aspect-element">
+              <button type="button" name="7" value="7" class="btn btn-default-outline numberpad-button" style="width: 100%; height: 100%;"><span class="numberpad-font">7</span></button>
+          </div>
+      </div>
+    </div>
+    <div class="col-xs-4 numberpad-row">
+      <div class="aspect-contianer">
+          <div class="aspect-one-to-one"></div>
+          <div class="aspect-element">
+              <button type="button" name="8" value="8" class="btn btn-default-outline numberpad-button" style="width: 100%; height: 100%;"><span class="numberpad-font">8</span></button>
+          </div>
+      </div>
+    </div>
+    <div class="col-xs-4 numberpad-row">
+      <div class="aspect-contianer">
+          <div class="aspect-one-to-one"></div>
+          <div class="aspect-element">
+              <button type="button" name="9" value="9" class="btn btn-default-outline numberpad-button" style="width: 100%; height: 100%;"><span class="numberpad-font">9</span></button>
+          </div>
+      </div>
+    </div>
+    <div class="col-xs-4 numberpad-row">
+      <div class="aspect-contianer">
+          <div class="aspect-one-to-one"></div>
+          <div class="aspect-element">
+              <button type="button" name="0" value="0" class="btn btn-default-outline numberpad-button" style="width: 100%; height: 100%;"><span class="numberpad-font">0</span></button>
+          </div>
+      </div>
+    </div>
+    <div class="col-xs-4 numberpad-row">
+      <div class="aspect-contianer">
+          <div class="aspect-one-to-one"></div>
+          <div class="aspect-element">
+              <button type="button" id="del" name="del" value="del" class="btn btn-warning-outline" style="width: 100%; height: 100%;"><span class="numberpad-font"><span class="icon icon-erase"></span></span></button>
+          </div>
+      </div>
+    </div>
+    <div class="col-xs-4 numberpad-row">
+      <div class="aspect-contianer">
+          <div class="aspect-one-to-one"></div>
+          <div class="aspect-element">
+              <button type="button" id="process" name="process" value="process" class="btn btn-success-outline " style="width: 100%; height: 100%;"><span class="material-icons numberpad-font" style="padding-top: 13px;">keyboard_return</span></button>
+          </div>
+      </div>
+    </div>
+  </div>
+</div>

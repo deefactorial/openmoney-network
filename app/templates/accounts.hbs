@@ -1,0 +1,42 @@
+<style>
+[data-sort=table] > tbody > tr:hover{
+  background-color: #159c6e;
+  cursor: pointer;
+}
+</style>
+<div class="col-sm-12" style="padding-top: 10px;">
+
+  <h2><strong>Accounts</strong></h2>
+  <div id="newButtonDiv" class="text-right" style="padding-bottom:10px;">
+    <button type="button" name="csv" class="btn btn-lg btn-primary-outline" >
+      <strong>Export CSV</strong>
+    </button>
+    <button type="button" name="newAccount" class="btn btn-lg btn-success-outline" >
+      <strong>New Account</strong>
+    </button>
+  </div>
+  <div class="table-full">
+    <table class="table accounts" data-sort="table">
+      <thead>
+        <tr>
+          <th class="text-right">Account</th>
+          <th>Currency</th>
+          <th>Balance</th>
+          <th>Volume</th>
+        </tr>
+      </thead>
+      <tbody class="table-rows">
+        {{#each accounts}}
+          {{#this}}
+          <tr id="{{id}}">
+            <td class="text-right">{{accountName}}</td>
+            <td>{{currencyName}}</td>
+            <td>{{decimal_places balance}}</td>
+            <td>{{decimal_places volume}}</td>
+          </tr>
+          {{/this}}
+        {{/each}}
+      </tbody>
+    </table>
+  </div>
+</div>

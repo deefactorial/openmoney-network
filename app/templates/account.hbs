@@ -1,0 +1,110 @@
+<style>
+[data-sort=table] > tbody > tr:hover{
+  background-color: #159c6e;
+  cursor: pointer;
+}
+tr.DEBIT {
+  color: #159c6e;
+}
+tr.CREDIT {
+  color: #E64759;
+}
+</style>
+<div class="col-sm-12" style="padding-top: 10px;">
+  {{#if id}}
+  <div id="statsButton" class="text-right" style="padding-bottom:10px;">
+    <button type="button" name="showedit" class="btn btn-lg btn-primary-outline" >
+      <strong>Edit</strong>
+    </button>
+  </div>
+  <div id="stats" class="statcard statcard-success p-a-md m-b">
+    <h2><div class="statcard-number">
+        <div>ACCOUNT: {{accountName}}</div><div>CURRENCY: {{currencyName}}</div>
+      </div>
+    </h2>
+    <h3 class="statcard-number text-right">
+      BALANCE {{decimal_places balance}}
+      <!-- <small class="delta-indicator delta-positive">{{balanceDelta}}</small> -->
+    </h3>
+    <h3 class="statcard-number text-right">
+      VOLUME {{decimal_places volume}}
+      <!-- <small class="delta-indicator delta-positive">{{volumeDelta}}</small> -->
+    </h3>
+
+  </div>
+  {{/if}}
+  <form id='accountForm' {{#if id}}style="display: none;"{{/if}}>
+    {{#if id}}<input type="hidden" name="id" value="{{id}}" />{{/if}}
+    <div class="form-group text-left">
+      <label for="key">Account Name</label>
+      <input type="text" id="account" name="account" value="{{account}}" placeholder="Trading Account Name" class="form-control" />
+    </div>
+    <div class="form-group text-left">
+      <label for="type">Account Namespace</label>
+      <select class="custom-select" name="account_namespace">
+        {{#each namespaces}}
+          {{#this}}
+            <option value="{{namespace}}" {{#if_eq namespace 'cc'}}selected="selected"{{/if_eq}}>{{namespace}}</option>
+          {{/this}}
+        {{/each}}
+      </select>
+    </div>
+    <div class="form-group text-left">
+      <label for="type">Account Currency</label>
+      <select class="custom-select" name="currencyName">
+        {{#each currencies}}
+          {{#this}}
+            <option value="{{currencyName}}" {{#if_eq currency 'cc'}}selected="selected"{{/if_eq}}>{{currencyName}}</option>
+          {{/this}}
+        {{/each}}
+      </select>
+    </div>
+
+    <div class="form-group text-right">
+      <button type="button" name="cancel" class="btn btn-lg btn-primary-outline" >Cancel</button>
+      <button type="button" name="upsert" class="btn btn-lg btn-primary-outline" >
+        <strong>{{#if id}}Edit{{else}}New{{/if}}</strong>
+      </button>
+    </div>
+  </form>
+
+  {{#if id}}
+  <h2><strong>Ledger</strong></h2>
+  <div id="newButtonDiv" class="text-right" style="padding-bottom:10px;">
+    <button type="button" name="csv" class="btn btn-lg btn-primary-outline" >
+      <strong>Export CSV</strong>
+    </button>
+    <button type="button" name="newJournal" class="btn btn-lg btn-success-outline" >
+      <strong>Process Journal Entry</strong>
+    </button>
+  </div>
+  <div class="table-full">
+    <table class="table" data-sort="basic">
+      <thead>
+        <tr>
+          <th>Timestamp</th>
+          <th>With</th>
+          <th>Amount</th>
+          <th>Balance</th>
+          <th>Volume</td>
+        </tr>
+      </thead>
+      <tbody class="table-rows">
+        {{#each journals}}
+          {{#this}}
+            <tr id="{{id}}" class="{{charge}}">
+              <td>{{prettify_date_short created}}</td>
+              <td>{{#if withStewardname}}<a href="#stewards/{{withStewardname}}/accounts/{{withAccount}}/{{currencyName}}">{{withAccount}}</a>{{else}}{{withAccount}}{{/if}}</td>
+              <!-- <td>{{#if fromstewardname}}<a href="#stewards/{{fromstewardname}}/accounts/{{from_account}}.{{from_account_namespace}}/{{currencyName}}">{{from_account}}.{{from_account_namespace}}</a>{{else}}{{from_account}}.{{from_account_namespace}}{{/if}}</td>
+              <td>{{#if tostewardname}}<a href="#stewards/{{tostewardname}}/accounts/{{to_account}}.{{to_account_namespace}}/{{currencyName}}">{{to_account}}.{{to_account_namespace}}</a>{{else}}{{to_account}}.{{to_account_namespace}}{{/if}}</td> -->
+              <td>{{#if_eq charge 'CREDIT'}}-{{/if_eq}}{{decimal_places amount}}</td>
+              <td>{{decimal_places balance}}</td>
+              <td>{{decimal_places volume}}</td>
+            </tr>
+          {{/this}}
+        {{/each}}
+      </tbody>
+    </table>
+  </div>
+  {{/if}}
+</div>

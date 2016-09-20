@@ -1,0 +1,82 @@
+<style>
+@media print {
+  .receipt-buttons {
+    display: none;
+  }
+  .dashhead {
+    display: none;
+  }
+  .navigation {
+    display: none;
+  }
+  .breadcrumbs {
+    display: none;
+  }
+  .receipt {
+    border-bottom: 1px dashed black;
+    padding-left: 0;
+    padding-right: 0;
+  }
+  .content {
+    padding-left: 0;
+    padding-right: 0;
+  }
+  .container {
+    padding-left: 0;
+    padding-right: 0;
+  }
+  @page { margin: 0; }
+}
+</style>
+<div class="receipt-buttons col-sm-6 text-center">
+  <div style="padding-top: 10px; padding-bottom:10px;">
+    <button type="button" name="email" class="btn btn-lg btn-primary-outline">Email Receipt</button>
+  </div>
+  <div style="padding-top: 10px; padding-bottom:10px;">
+    <button type="button" name="print" class="btn btn-lg btn-primary-outline">Print Receipt</button>
+  </div>
+  <div style="padding-top: 10px; padding-bottom:10px;">
+    <button type="button" name="void" class="btn btn-lg btn-warning-outline">Void</button>
+  </div>
+  <div style="padding-top: 10px; padding-bottom:10px;">
+    <button type="button" name="done" class="btn btn-lg btn-success-outline">Done</button>
+  </div>
+</div>
+<div class="receipt col-sm-6">
+  <div class="statcard statcard-{{#journal}}{{#if_eq charge 'DEBIT'}}success{{/if_eq}}{{#if_eq charge 'CREDIT'}}danger{{/if_eq}}{{/journal}} p-a-md m-b text-center">
+    <div id='stewardname'>{{#steward}}{{stewardname}}{{/steward}}</div>
+    <div id='email' style="padding-bottom: 20px;">{{#steward}}{{email}}{{/steward}}</div>
+    <div id='action'>
+      <h3>{{#journal}}{{currency}}{{#if_not_eq currency_namespace ''}}.{{/if_not_eq}}{{currency_namespace}}{{/journal}}
+        {{#journal}}{{charge}}{{/journal}}</h3>
+    </div>
+    <div id='date' class='text-left'>Timestamp: <span style="float:right">{{#journal}}{{prettify_date_short created}}{{/journal}}</span></div>
+    <div id='key' class='text-left'>
+      From:
+      <span style="float:right;">{{#journal}}{{from_account}}{{#if_not_eq from_account_namespace ''}}.{{/if_not_eq}}{{from_account_namespace}}{{/journal}}</span>
+    </div>
+    <div id='key' class='text-left'>
+      To:
+      <span style="float:right;">{{#journal}}{{to_account}}{{#if_not_eq to_account_namespace ''}}.{{/if_not_eq}}{{from_account_namespace}}{{/journal}}</span>
+    </div>
+    <div id='amount' class='text-left' style="padding-top: 20px;">
+      <strong>
+        Journal Amount:
+        <span style="float:right;">
+            {{#journal}}{{decimal_places amount}}{{/journal}}
+        </span>
+      </strong>
+    </div>
+    <div id='balance' class='text-left' >
+      <strong>
+        Remaining Balance:
+        <span style="float:right;">{{#card}}{{decimal_places gift}}{{decimal_places promo}}{{decimal_places points}}{{decimal_places tab}}{{decimal_places stamp}}{{/card}}</span>
+      </strong>
+    </div>
+    <div id='volume' class='text-left' >
+      <strong>
+        Total Volume:
+        <span style="float:right;">{{#card}}{{decimal_places giftVolume}}{{decimal_places promoVolume}}{{decimal_places pointsVolume}}{{decimal_places tabVolume}}{{decimal_places stampVolume}}{{/card}}</span>
+      </strong>
+    </div>
+</div>

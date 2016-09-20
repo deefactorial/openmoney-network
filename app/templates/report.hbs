@@ -1,0 +1,335 @@
+{{#if_eq currency 'giftcard'}}
+<style>
+
+</style>
+<div id="gift" class="statcard statcard-success p-a-md m-b">
+  <h1> Gift </h1>
+  <h3 class="statcard-number text-right">
+    BALANCE {{decimal_places giftBalance}}
+
+  </h3>
+  <h3 class="statcard-number text-right">
+    VOLUME {{decimal_places giftVolume}}
+  </h3>
+</div>
+<div class="col-sm-6" style="padding-bottom: 20px;">
+  <div class="form-group text-left">
+    <label for="startDate">Start Date:</label>
+    <div class="input-with-icon">
+      <input type="text" name="startDate" value="{{startDate}}" placeholder="Start Date" class="form-control">
+      <span class="icon icon-calendar"></span>
+    </div>
+  </div>
+</div>
+<div class="col-sm-6" style="padding-bottom: 20px;">
+  <div class="form-group text-left">
+    <label for="endDate">End Date:</label>
+    <div class="input-with-icon">
+      <input type="text" name="endDate" value="{{endDate}}" placeholder="End Date" class="form-control">
+      <span class="icon icon-calendar"></span>
+    </div>
+  </div>
+</div>
+<div class="table-full">
+  <table class="table display" data-sort="table">
+    <thead>
+      <tr>
+        <th class="">Date</th>
+        <th class="">Namespace</th>
+        <th class="">Card Number</th>
+        <th class="">Load or Redeem</th>
+        <th class="">Amount</th>
+        <!-- <th class="">By Employee</th> -->
+      </tr>
+    </thead>
+    <tfoot>
+      <tr>
+        <th>&nbsp;</th>
+        <th>&nbsp;</th>
+        <th>&nbsp;</th>
+        <th style="text-align:right"><div>Balance:</div><div>Volume:</div></th>
+        <th><div>{{decimal_places giftBalance}}</div><div>{{decimal_places giftVolume}}</div></th>
+      </tr>
+    </tfoot>
+    <tbody class="table-rows">
+      {{#each giftJournals}}
+        {{#this}}
+        <tr id="{{_id}}">
+          <td>{{prettify_date_short timestamp}}</td>
+          <td><a href="#stewards/{{#steward}}{{stewardname}}{{/steward}}/namespaces/{{namespaceID}}">{{namespace}}</a></td>
+          <td><a href="#stewards/{{#steward}}{{stewardname}}{{/steward}}/namespaces/{{namespaceID}}/accounts/{{key}}">{{key}}</a></td>
+          <td>{{#load}}Load{{/load}}{{#redeem}}Redeem{{/redeem}}</td>
+          <td>{{decimal_places amount}}</td>
+          <!-- <td>{{employeeID}}</td> -->
+        </tr>
+        {{/this}}
+      {{/each}}
+    </tbody>
+  </table>
+</div>
+{{/if_eq}}
+{{#if_eq currency 'promo'}}
+<div id="gift" class="statcard statcard-primary p-a-md m-b">
+  <h1> Promotional </h1>
+  <h3 class="statcard-number text-right">
+    BALANCE {{decimal_places promoBalance}}
+
+  </h3>
+  <h3 class="statcard-number text-right">
+    VOLUME {{decimal_places promoVolume}}
+  </h3>
+</div>
+<div class="col-sm-6" style="padding-bottom: 20px;">
+  <div class="form-group text-left">
+    <label for="startDate">Start Date:</label>
+    <div class="input-with-icon">
+      <input type="text" name="startDate" value="{{startDate}}" placeholder="Start Date" class="form-control">
+      <span class="icon icon-calendar"></span>
+    </div>
+  </div>
+</div>
+<div class="col-sm-6" style="padding-bottom: 20px;">
+  <div class="form-group text-left">
+    <label for="endDate">End Date:</label>
+    <div class="input-with-icon">
+      <input type="text" name="endDate" value="{{endDate}}" placeholder="End Date" class="form-control">
+      <span class="icon icon-calendar"></span>
+    </div>
+  </div>
+</div>
+<div class="table-full">
+  <table class="table display" data-sort="table">
+    <thead>
+      <tr>
+        <th class="">Date</th>
+        <th class="">Namespace</th>
+        <th class="">Card Number</th>
+        <th class="">Load or Redeem</th>
+        <th class="">Amount</th>
+        <!-- <th class="">By Employee</th> -->
+      </tr>
+    </thead>
+    <tfoot>
+      <tr>
+        <th>&nbsp;</th>
+        <th>&nbsp;</th>
+        <th>&nbsp;</th>
+        <th style="text-align:right"><div>Balance:</div><div>Volume:</div></th>
+        <th><div>{{decimal_places promoBalance}}</div><div>{{decimal_places promoVolume}}</div></th>
+      </tr>
+    </tfoot>
+    <tbody class="table-rows">
+      {{#each promoJournals}}
+        {{#this}}
+        <tr id="{{_id}}">
+          <td>{{prettify_date_short timestamp}}</td>
+          <td><a href="#stewards/{{#steward}}{{stewardname}}{{/steward}}/namespaces/{{namespaceID}}">{{namespace}}</a></td>
+          <td><a href="#stewards/{{#steward}}{{stewardname}}{{/steward}}/namespaces/{{namespaceID}}/accounts/{{key}}">{{key}}</a></td>
+          <td>{{#load}}Load{{/load}}{{#redeem}}Redeem{{/redeem}}</td>
+          <td>{{decimal_places amount}}</td>
+          <!-- <td>{{employeeID}}</td> -->
+        </tr>
+        {{/this}}
+      {{/each}}
+    </tbody>
+  </table>
+</div>
+{{/if_eq}}
+{{#if_eq currency 'points'}}
+<div id="gift" class="statcard statcard-warning p-a-md m-b">
+  <h1> Points </h1>
+  <h3 class="statcard-number text-right">
+    BALANCE {{decimal_places pointsBalance}}
+  </h3>
+  <h3 class="statcard-number text-right">
+    VOLUME {{decimal_places pointsVolume}}
+  </h3>
+</div>
+<div class="col-sm-6" style="padding-bottom: 20px;">
+  <div class="form-group text-left">
+    <label for="startDate">Start Date:</label>
+    <div class="input-with-icon">
+      <input type="text" name="startDate" value="{{startDate}}" placeholder="Start Date" class="form-control">
+      <span class="icon icon-calendar"></span>
+    </div>
+  </div>
+</div>
+<div class="col-sm-6" style="padding-bottom: 20px;">
+  <div class="form-group text-left">
+    <label for="endDate">End Date:</label>
+    <div class="input-with-icon">
+      <input type="text" name="endDate" value="{{endDate}}" placeholder="End Date" class="form-control">
+      <span class="icon icon-calendar"></span>
+    </div>
+  </div>
+</div>
+<div class="table-full">
+  <table class="table display" data-sort="table">
+    <thead>
+      <tr>
+        <th class="">Date</th>
+        <th class="">Namespace</th>
+        <th class="">Card Number</th>
+        <th class="">Load or Redeem</th>
+        <th class="">Amount</th>
+        <!-- <th class="">By Employee</th> -->
+      </tr>
+    </thead>
+    <tfoot>
+      <tr>
+        <th>&nbsp;</th>
+        <th>&nbsp;</th>
+        <th>&nbsp;</th>
+        <th style="text-align:right"><div>Balance:</div><div>Volume:</div></th>
+        <th><div>{{decimal_places pointsBalance}}</div><div>{{decimal_places pointsVolume}}</div></th>
+      </tr>
+    </tfoot>
+    <tbody class="table-rows">
+      {{#each pointsJournals}}
+        {{#this}}
+        <tr id="{{_id}}">
+          <td>{{prettify_date_short timestamp}}</td>
+          <td><a href="#stewards/{{#steward}}{{stewardname}}{{/steward}}/namespaces/{{namespaceID}}">{{namespace}}</a></td>
+          <td><a href="#stewards/{{#steward}}{{stewardname}}{{/steward}}/namespaces/{{namespaceID}}/accounts/{{key}}">{{key}}</a></td>
+          <td>{{#load}}Load{{/load}}{{#redeem}}Redeem{{/redeem}}</td>
+          <td>{{decimal_places amount}}</td>
+          <!-- <td>{{employeeID}}</td> -->
+        </tr>
+        {{/this}}
+      {{/each}}
+    </tbody>
+  </table>
+</div>
+{{/if_eq}}
+{{#if_eq currency 'tab'}}
+<div id="gift" class="statcard statcard-danger p-a-md m-b">
+  <h1> Tab </h1>
+  <h3 class="statcard-number text-right">
+    BALANCE {{decimal_places tabBalance}}
+  </h3>
+  <h3 class="statcard-number text-right">
+    VOLUME {{decimal_places tabVolume}}
+  </h3>
+</div>
+<div class="col-sm-6" style="padding-bottom: 20px;">
+  <div class="form-group text-left">
+    <label for="startDate">Start Date:</label>
+    <div class="input-with-icon">
+      <input type="text" name="startDate" value="{{startDate}}" placeholder="Start Date" class="form-control">
+      <span class="icon icon-calendar"></span>
+    </div>
+  </div>
+</div>
+<div class="col-sm-6" style="padding-bottom: 20px;">
+  <div class="form-group text-left">
+    <label for="endDate">End Date:</label>
+    <div class="input-with-icon">
+      <input type="text" name="endDate" value="{{endDate}}" placeholder="End Date" class="form-control">
+      <span class="icon icon-calendar"></span>
+    </div>
+  </div>
+</div>
+<div class="table-full">
+  <table class="table display" data-sort="table">
+    <thead>
+      <tr>
+        <th class="">Date</th>
+        <th class="">Namespace</th>
+        <th class="">Card Number</th>
+        <th class="">Load or Redeem</th>
+        <th class="">Amount</th>
+        <!-- <th class="">By Employee</th> -->
+      </tr>
+    </thead>
+    <tfoot>
+      <tr>
+        <th>&nbsp;</th>
+        <th>&nbsp;</th>
+        <th>&nbsp;</th>
+        <th style="text-align:right"><div>Balance:</div><div>Volume:</div></th>
+        <th><div>{{decimal_places tabBalance}}</div><div>{{decimal_places tabVolume}}</div></th>
+      </tr>
+    </tfoot>
+    <tbody class="table-rows">
+      {{#each tabJournals}}
+        {{#this}}
+        <tr id="{{_id}}">
+          <td>{{prettify_date_short timestamp}}</td>
+          <td><a href="#stewards/{{#steward}}{{stewardname}}{{/steward}}/namespaces/{{namespaceID}}">{{namespace}}</a></td>
+          <td><a href="#stewards/{{#steward}}{{stewardname}}{{/steward}}/namespaces/{{namespaceID}}/accounts/{{key}}">{{key}}</a></td>
+          <td>{{#load}}Load{{/load}}{{#redeem}}Redeem{{/redeem}}</td>
+          <td>{{decimal_places amount}}</td>
+          <!-- <td>{{employeeID}}</td> -->
+        </tr>
+        {{/this}}
+      {{/each}}
+    </tbody>
+  </table>
+</div>
+{{/if_eq}}
+{{#if_eq currency 'stamp'}}
+<div id="gift" class="statcard statcard-info p-a-md m-b">
+  <h1> Stamp </h1>
+  <h3 class="statcard-number text-right">
+    BALANCE {{decimal_places stampBalance}}
+  </h3>
+  <h3 class="statcard-number text-right">
+    VOLUME {{decimal_places stampVolume}}
+  </h3>
+</div>
+<div class="col-sm-6" style="padding-bottom: 20px;">
+  <div class="form-group text-left">
+    <label for="startDate">Start Date:</label>
+    <div class="input-with-icon">
+      <input type="text" name="startDate" value="{{startDate}}" placeholder="Start Date" class="form-control">
+      <span class="icon icon-calendar"></span>
+    </div>
+  </div>
+</div>
+<div class="col-sm-6" style="padding-bottom: 20px;">
+  <div class="form-group text-left">
+    <label for="endDate">End Date:</label>
+    <div class="input-with-icon">
+      <input type="text" name="endDate" value="{{endDate}}" placeholder="End Date" class="form-control">
+      <span class="icon icon-calendar"></span>
+    </div>
+  </div>
+</div>
+<div class="table-full">
+  <table class="table display" data-sort="table">
+    <thead>
+      <tr>
+        <th class="">Date</th>
+        <th class="">Namespace</th>
+        <th class="">Card Number</th>
+        <th class="">Load or Redeem</th>
+        <th class="">Amount</th>
+        <!-- <th class="">By Employee</th> -->
+      </tr>
+    </thead>
+    <tfoot>
+      <tr>
+        <th>&nbsp;</th>
+        <th>&nbsp;</th>
+        <th>&nbsp;</th>
+        <th style="text-align:right"><div>Balance:</div><div>Volume:</div></th>
+        <th><div>{{decimal_places stampBalance}}</div><div>{{decimal_places stampVolume}}</div></th>
+      </tr>
+    </tfoot>
+    <tbody class="table-rows">
+      {{#each stampJournals}}
+        {{#this}}
+        <tr id="{{_id}}">
+          <td>{{prettify_date_short timestamp}}</td>
+          <td><a href="#stewards/{{#steward}}{{stewardname}}{{/steward}}/namespaces/{{namespaceID}}">{{namespace}}</a></td>
+          <td><a href="#stewards/{{#steward}}{{stewardname}}{{/steward}}/namespaces/{{namespaceID}}/accounts/{{key}}">{{key}}</a></td>
+          <td>{{#load}}Load{{/load}}{{#redeem}}Redeem{{/redeem}}</td>
+          <td>{{decimal_places amount}}</td>
+          <!-- <td>{{employeeID}}</td> -->
+        </tr>
+        {{/this}}
+      {{/each}}
+    </tbody>
+  </table>
+</div>
+{{/if_eq}}
