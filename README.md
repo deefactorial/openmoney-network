@@ -13,9 +13,13 @@ note you may need to update your nginx ssl certificate (goto: https://letsencryp
 ```sh
 sudo apt-get install nginx
 sudo cp openmoney-network.nginx.conf /etc/nginx/sites-available/
-sudo ln -s /etc/nginx/sites-enabled/openmoney-network.nginx.conf /etc/nginx/sites-available/openmoney-network.nginx.conf
+sudo rm /etc/nginx/sites-enabled/default
+sudo ln -s /etc/nginx/sites-available/openmoney-network.nginx.conf /etc/nginx/sites-enabled/openmoney-network.nginx.conf
+sudo service nginx stop
+sudo apt-get install letsencrypt
+sudo letsencrypt certonly --standalone -d example.com -d www.example.com
 sudo gedit /etc/nginx/sites-available/openmoney-network.nginx.conf
-sudo service nginx restart
+sudo service nginx start
 ```
 
 # Start Openmoney API
