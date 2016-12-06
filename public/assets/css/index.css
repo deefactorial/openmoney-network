@@ -26,16 +26,16 @@ body {
     -webkit-touch-callout: none;                /* prevent callout to copy image, etc when tap to hold */
     -webkit-text-size-adjust: none;             /* prevent webkit from resizing text to fit */
     -webkit-user-select: none;                  /* prevent copy paste, to allow, change 'none' to 'text' */
-    background-color:#202020;
-    /*background-image:linear-gradient(top, #0f1013 0%, #202020 51%);
-    background-image:-webkit-linear-gradient(top, ##0f1013 0%, #202020 51%);
-    background-image:-ms-linear-gradient(top, ##0f1013 0%, #202020 51%);
+    background-color:#ffffff;
+    /*background-image:linear-gradient(top, #f5f5f5 0%, #cbcbcb 51%);
+    background-image:-webkit-linear-gradient(top, #f5f5f5 0%, #cbcbcb 51%);
+    background-image:-ms-linear-gradient(top, #f5f5f5 0%, #cbcbcb 51%);
     background-image:-webkit-gradient(
         linear,
         left top,
         left bottom,
-        color-stop(0, #0f1013),
-        color-stop(0.51, #202020)
+        color-stop(0, #f5f5f5),
+        color-stop(0.51, #cbcbcb)
     );
     background-attachment:fixed;*/
     font-family:'HelveticaNeue-Light', 'HelveticaNeue', Helvetica, Arial, sans-serif;
@@ -211,6 +211,9 @@ input.form-control{
 @media (min-width: 992px) {
   .right-border{
     border-right: 1px solid #434857;
+  }
+  .left-border{
+    border-left: 1px solid #434857;
   }
 }
 .input-with-icon{

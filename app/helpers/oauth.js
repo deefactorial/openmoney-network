@@ -131,7 +131,8 @@ function RefreshToken(stewardname, refresh_token, callback){
 }//RefreshToken
 
 exports.invalidateCache = function (stewardname){
-  if(typeof cache[stewardname] != undefined){
+  console.log('in invalidateCache', stewardname);
+  if(typeof stewardname != 'undefined' && typeof cache[stewardname] != 'undefined' && typeof cache[stewardname].access_token != 'undefined'){
     delete(cache[stewardname].access_token);
     delete(cache[stewardname].refresh_token);
     delete(cache[stewardname].expires);

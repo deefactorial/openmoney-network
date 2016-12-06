@@ -33,9 +33,15 @@
   {{#if id}}
   <h2><strong>Accounts</strong></h2>
   <div id="newButtonDiv" class="text-right" style="padding-bottom:10px;">
-    <button type="button" name="newAccount" class="btn btn-lg btn-success-outline" >
+    {{#if_eq thisSteward stewardname}}
+    <button type="button" name="newAccount" class="btn btn-lg btn-success-outline" disabled="disabled">
       <strong>New Account</strong>
     </button>
+    {{else}}
+    <button type="button" name="newAccount" class="btn btn-lg btn-success-outline" disabled="disabled">
+      <strong>New Joint Account</strong>
+    </button>
+    {{/if_eq}}
   </div>
   <div class="table-full">
     <table class="table accounts" data-sort="table">
@@ -64,9 +70,15 @@
 
   <h2><strong>Currencies</strong></h2>
   <div id="newButtonDiv" class="text-right" style="padding-bottom:10px;">
-    <button type="button" name="newCurrency" class="btn btn-lg btn-success-outline" >
+    {{#if_eq thisSteward stewardname}}
+    <button type="button" name="newCurrency" class="btn btn-lg btn-success-outline" disabled="disabled">
       <strong>New Currency</strong>
     </button>
+    {{else}}
+    <button type="button" name="newCurrency" class="btn btn-lg btn-success-outline" disabled="disabled">
+      <strong>New Joint Currency</strong>
+    </button>
+    {{/if_eq}}
   </div>
   <div class="table-full">
     <table class="table currencies" data-sort="table">
@@ -91,9 +103,15 @@
 
   <h2><strong>Namespaces</strong></h2>
   <div id="newButtonDiv" class="text-right" style="padding-bottom:10px;">
-    <button type="button" name="newCurrency" class="btn btn-lg btn-success-outline" >
+    {{#if_eq thisSteward stewardname}}
+    <button type="button" name="newCurrency" class="btn btn-lg btn-success-outline" disabled="disabled">
       <strong>New Namespace</strong>
     </button>
+    {{else}}
+    <button type="button" name="newCurrency" class="btn btn-lg btn-success-outline" disabled="disabled">
+      <strong>New Joint Namespace</strong>
+    </button>
+    {{/if_eq}}
   </div>
   <div class="table-full">
     <table class="table currencies" data-sort="table">

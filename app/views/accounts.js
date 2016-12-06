@@ -57,8 +57,9 @@ module.exports = Marionette.ItemView.extend({
 
         var data = {};
 
-        data.accounts = Self.collection.toJSON();
+        data.accounts = Self.collection.getBySteward(Self.steward.get('stewardname'));
         for(var i = 0; i < data.accounts.length; i++){
+          data.accounts[i] = data.accounts[i].toJSON();
           data.accounts[i].accountName = data.accounts[i].account + (data.accounts[i].account_namespace == '' ? '' : '.' + data.accounts[i].account_namespace);
           data.accounts[i].currencyName = data.accounts[i].currency + (data.accounts[i].currency_namespace == '' ? '' : '.' + data.accounts[i].currency_namespace);
           if(typeof data.accounts[i].balance == 'undefined'){

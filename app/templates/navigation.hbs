@@ -5,39 +5,53 @@
         <span class="sr-only">Toggle nav</span>
       </button>
       <a class="sidebar-brand" href="#stewards/{{#steward}}{{stewardname}}{{/steward}}/journals">
-        <img id="logo" src="public/assets/images/openmoney-logo-vector.svg" class="svg img-responsive center-block" alt="Openmoney Logo" style="height: 75px;"/>
+        <img id="logo" src="public/assets/images/openmoney-logo-vector.svg" class="svg img-responsive center-block" alt="Openmoney Logo" style="height: 125px;"/>
       </a>
     </div>
     <div id="nav-toggleable-md" class="nav-toggleable-md collapse">
       <ul class="nav nav-bordered nav-stacked">
         <li {{#if_eq page 'journals'}}class="active"{{/if_eq}}>
           <a id="journals" href="#stewards/{{#steward}}{{stewardname}}{{/steward}}/journals" class="nav-padding">
-            <span class="icon icon-dial-pad icon-padding"></span>
-            Journal Entry
+            <div style="float: left;">
+              <span class="icon icon-dial-pad icon-padding" style="font-size: 2.5em;"></span>
+            </div>
+            <div style="margin-top: 5px;">
+              <div style="font-size: 12px;">Record</div>
+              Payments
+            </div>
           </a>
         </li>
         <li {{#if_eq page 'accounts'}}class="active"{{/if_eq}}>
           <a id="accounts" href="#stewards/{{#steward}}{{stewardname}}{{/steward}}/accounts" class="nav-padding">
-            <span class="icon icon-v-card icon-padding"></span>
-            Accounts
+            <div style="float: left;">
+              <span class="icon icon-v-card icon-padding" style="font-size: 2.5em;"></span>
+            </div>
+            <div style="margin-top: 10px;">
+              <div style="font-size: 12px;">Create &amp; Manage</div>
+              Accounts
+            </div>
           </a>
         </li>
         <li {{#if_eq page 'currencies'}}class="active"{{/if_eq}}>
           <a id="currencies" href="#stewards/{{#steward}}{{stewardname}}{{/steward}}/currencies" class="nav-padding">
-            <span class="icon icon-credit icon-padding"></span>
-            Currencies
+            <div style="float: left;">
+              <span class="icon icon-credit icon-padding" style="font-size: 2.5em;"></span>
+            </div>
+            <div style="margin-top: 10px;">
+              <div style="font-size: 12px;">Create &amp; Manage</div>
+              Currencies
+            </div>
           </a>
         </li>
-        <li {{#if_eq page 'namespaces'}}class="active"{{/if_eq}}>
-          <a id="namespaces" href="#stewards/{{#steward}}{{stewardname}}{{/steward}}/namespaces" class="nav-padding">
-            <span class="icon icon-folder icon-padding"></span>
-            Namespaces
-          </a>
-        </li>
-        <li {{#if_eq page 'stewards'}}class="active"{{/if_eq}}>
-          <a id="stewards" href="#stewards" class="nav-padding">
-            <span class="icon icon-users icon-padding"></span>
-            Stewards
+        <li {{#if_eq page 'settings'}}class="active"{{/if_eq}}>
+          <a id="stewards" href="#settings" class="nav-padding">
+            <div style="float: left;">
+              <span class="icon icon-cog icon-padding" style="font-size: 2.5em;"></span>
+            </div>
+            <div style="margin-top: 10px;">
+              <div style="font-size: 12px;">Manage</div>
+              Settings
+            </div>
           </a>
         </li>
       </ul>

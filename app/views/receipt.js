@@ -43,7 +43,7 @@ module.exports = Marionette.LayoutView.extend({
         data.journal.charge = (data.journal.from_account == data.account.get('account') && data.journal.from_account_namespace == data.account.get('account_namespace')) ? 'CREDIT' : 'DEBIT';
         _.extend(data.journal, ViewHelpers);
       }
-      data.account.toJSON();
+      data.account = data.account.toJSON();
     }
 
     _.extend(data, ViewHelpers);

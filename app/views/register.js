@@ -74,7 +74,7 @@ module.exports = Backbone.View.extend({
             messages: {
                 stewardname: {
                     required: "Steward name is required.",
-                    minlength: "At least 8 characters is required.",
+                    minlength: "At least 3 characters is required.",
                     maxlength: "Less than 35 characters is required."
                 },
                 email: {
@@ -146,7 +146,7 @@ module.exports = Backbone.View.extend({
                 done();
               }
               Backbone.history.navigate('#login',{trigger:true, replace:false});
-              $('#success-notification').html('Successfully Registered New Steward.').show();
+              $('#success-notification').html('Successfully Signed Up New Steward.').show();
               setTimeout(function(){
                 $('#success-notification').hide();
               },10000);

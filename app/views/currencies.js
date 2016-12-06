@@ -16,6 +16,7 @@ var ViewHelpers = ViewHelpers(Handlebars)
 var Common = require('../common');
 var Self;
 
+
 var FileSaver = require('file-saver');
 require('Blob');
 
@@ -87,7 +88,7 @@ module.exports = Marionette.CollectionView.extend({
         Self.$('button[name=csvcurrencies]').off('click').on('click', function(event){
           console.log('Export CSV button pressed', event);
 
-          var csv = 'Date,Time,From,To,Currency,Amount,Balance,Volume\n';
+          var csv = 'Date,Time,From,To,Description,Currency,Amount,Balance,Volume\n';
           for(var j = 0; j < data.currencies.length; j ++){
             data.balance = 0;
             data.volume = 0;
@@ -111,6 +112,7 @@ module.exports = Marionette.CollectionView.extend({
                 data.journals[i].charge = 'CREDIT';
                 data.journals[i].balance = _.clone(data.balance);
                 data.journals[i].volume = _.clone(data.volume);
+
 
                 var toAccount = Self.accounts.get('accounts~' + data.journals[i].to_account + '.' + data.journals[i].to_account_namespace + '~' + data.currencyName);
                 if(typeof toAccount != 'undefined'){
@@ -153,6 +155,11 @@ module.exports = Marionette.CollectionView.extend({
             console.log('journals', data.journals);
             for(var i = 0; i < data.journals.length; i++){
               csv += new Date(data.journals[i].created).toLocaleString() + ',' + data.journals[i].from_account  + '.' + data.journals[i].from_account_namespace + ',' + data.journals[i].to_account + '.' + data.journals[i].to_account_namespace + ','
+              if(typeof data.journals[i].payload != 'undefined' && typeof data.journals[i].payload.description != 'undefined'){
+                csv += data.journals[i].payload.description.replace(',','') + ',';
+              } else {
+                csv += ',';
+              }
               csv += data.journals[i].currencyName + ','
               csv += data.journals[i].charge == 'CREDIT' ? '-' : '';
               csv += parseFloat(Math.round(data.journals[i].amount * 100) / 100).toFixed(2) + ',' + parseFloat(Math.round(data.journals[i].balance * 100) / 100).toFixed(2) + ',' + parseFloat(Math.round(data.journals[i].volume * 100) / 100).toFixed(2) + '\n';
@@ -164,13 +171,13 @@ module.exports = Marionette.CollectionView.extend({
 
         });
 
-        this.$('[data-sort=table]').DataTable({});
-
         this.$('[data-sort=table].currencies > tbody > tr').off('click').on('click', function(event){
           event.preventDefault();
           var id = $(this).attr('id');
           console.log('clicked on currency ID:', id);
           router.navigate('stewards/' + Self.steward.get('stewardname') + '/currencies/' + id.split('~')[1] );
         })
+
+        this.$('[data-sort=table]').DataTable({});
     }
 });

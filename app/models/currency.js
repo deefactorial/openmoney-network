@@ -12,7 +12,9 @@ module.exports = Backbone.Model.extend({
         options.url = '/V2/stewards/' + model.get('steward').get('stewardname') + '/namespaces/' + model.get('currency_namespace') + '/currencies';
       } else if(method.toLowerCase() == 'update'){
         //use the id attribute for update because the id has not been modified.
-        options.url = '/V2/stewards/' + model.get('steward').get('stewardname') + '/namespaces/' + model.get('currency_namespace') + '/currencies/' + model.get('currency');
+        var currency = model.get('id').split('~')[1].substr(0,model.get('id').split('~')[1].indexOf('.'))
+        var currency_namespace = model.get('id').split('~')[1].substr(model.get('id').split('~')[1].indexOf('.')+1, model.get('id').split('~')[1].length);
+        options.url = '/V2/stewards/' + model.get('steward').get('stewardname') + '/namespaces/' + currency_namespace + '/currencies/' + currency;
       } else {
         options.url = '/V2/stewards/' + model.get('steward').get('stewardname') + '/namespaces/' + model.get('currency_namespace') + '/currencies/' + model.get('currency');
       }

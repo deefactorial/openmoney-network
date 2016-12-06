@@ -91,7 +91,7 @@ module.exports = Backbone.View.extend({
 
     register: function( event ) {
         console.log('register event called');
-        Backbone.history.navigate('#register',{trigger:true, replace:false});
+        Backbone.history.navigate('#signup',{trigger:true, replace:false});
     },
 
     login: function( event, done ) {
@@ -129,6 +129,16 @@ module.exports = Backbone.View.extend({
             } else {
               // delete(steward.rev);
               Self.steward = steward;
+              Self.steward.credentials = {};
+              Self.steward.credentials.token = Self.steward.get('access_token');
+              Self.steward.fetch({
+                success: function(model, res){
+                  console.log('successfully got steward', model);
+                },
+                error: function(err){
+                  console.log('could not get stewards', err);
+                }
+              });
               //update the persistent steward credentials
               var db = new PouchDB('openmoney');
               db.get('config~credentials', function(err, doc){

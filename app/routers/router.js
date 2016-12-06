@@ -48,6 +48,7 @@ console.log("set viewport scale:" + viewPortScale);
  var CurrenciesView = require('../views/currencies');
  var StewardsView = require('../views/stewards');
  var StewardView = require('../views/steward');
+ var SettingsView = require('../views/settings');
 
 //models
 var Steward = require('../models/steward');
@@ -95,6 +96,9 @@ module.exports = Marionette.AppRouter.extend({
 
     Self.initializeData(function(err, data){
       console.log('initializeData', err, data);
+      if(typeof Self.steward.get('theme') != 'undefined' && Self.steward.get('theme') == 'dark'){
+        Self.darkTheme();
+      }
       Self.layout.getRegion('navigation').show(new NavigationView({model: Self.page, steward: Self.steward}));
       Self.dashhead = new DashheadView({model: Self.page, steward: Self.steward});
       Self.layout.getRegion('dashhead').show(Self.dashhead);
@@ -105,10 +109,11 @@ module.exports = Marionette.AppRouter.extend({
 		'':'welcome',
 		'login':'login',
     'logout':'logout',
-		'register':'register',
+		'signup':'register',
 		'forgot':'forgot',
     'forgot/:stewardname/:forgot_token':'reset',
     'stewards':'stewards',
+    'settings':'settings',
     'stewards/:stewardname':'stewardRoute',
     'stewards/:stewardname/accounts': 'accounts',
     'stewards/:stewardname/accounts/:accountName/:currencyName': 'account',
@@ -123,9 +128,21 @@ module.exports = Marionette.AppRouter.extend({
     'stewards/:stewardname/journals/:accountName/:currencyName/receipt/:created':'receipt',
 		'stewards/:stewardname/reports':'reports',
     'stewards/:stewardname/reports/:currency':'report',
-    'stewards/:stewardname/loginSuccess':'loginSuccess'
+    'stewards/:stewardname/loginSuccess':'loginSuccess',
+    '*notFound':'welcome'
 	},
 
+  lightTheme: function(){
+    $('.darktheme').prop('disabled', true);
+    $('.lighttheme').prop('disabled', false);
+    $('body').css('background-color', '#ffffff');
+  },
+
+  darkTheme: function(){
+    $('.lighttheme').prop('disabled', true);
+    $('.darktheme').prop('disabled', false);
+    $('body').css('background-color', '#202020');
+  },
   /*
   *Override navigate function
   *@param {String} route The route hash
@@ -188,7 +205,7 @@ module.exports = Marionette.AppRouter.extend({
         Self.page.set('currentPage', 'welcome');
         Self.changePage(new WelcomeView(),{changeHash:false, transition: "none"});
       } else {
-        Self.navigate('stewards/' + Self.steward.get('stewardname') + '/namespaces', true);
+        Self.navigate('stewards/' + Self.steward.get('stewardname') + '/journals', true);
       }
     });
 	},
@@ -199,7 +216,7 @@ module.exports = Marionette.AppRouter.extend({
         Self.page.set('currentPage', 'login');
         Self.changePage(new LoginView( { steward: Self.steward } ), {changeHash:false, transition: "none"});
       } else {
-        Self.navigate('stewards/' + Self.steward.get('stewardname') + '/namespaces', true);
+        Self.navigate('stewards/' + Self.steward.get('stewardname') + '/journals', true);
       }
     })
 	},
@@ -210,7 +227,7 @@ module.exports = Marionette.AppRouter.extend({
       Self.layout.getRegion('navigation').show(new NavigationView({model: Self.page, steward: Self.steward}));
       Self.dashhead = new DashheadView({model: Self.page, steward: Self.steward});
       Self.layout.getRegion('dashhead').show(Self.dashhead);
-      Self.navigate('stewards/' + Self.steward.get('stewardname') + '/namespaces',{trigger:true, replace:true})
+      Self.navigate('stewards/' + Self.steward.get('stewardname') + '/journals',{trigger:true, replace:true})
     });
   },
   logout: function() {
@@ -245,14 +262,28 @@ module.exports = Marionette.AppRouter.extend({
           console.log(res);
           db.compact().then(function(result){
             console.log('destoryed local db!');
+            console.log('Self.steward', Self.steward.toJSON());
             oauth.invalidateCache(Self.steward.get('stewardname'));
-            delete Self.steward;
-            delete Self.accountsCollection;
-            delete Self.namespacesCollection;
-            delete Self.currenciesCollection;
-            delete Self.journalsCollection;
-            delete Self.stewardsCollection;
-
+            console.log('delete local memory');
+            if(typeof Self.steward != 'undefined'){
+              delete Self.steward;
+            }
+            if(typeof Self.accountsCollection != 'undefined'){
+              delete Self.accountsCollection;
+            }
+            if(typeof Self.namespacesCollection != 'undefined'){
+              delete Self.namespacesCollection;
+            }
+            if(typeof Self.currenciesCollection != 'undefined'){
+              delete Self.currenciesCollection;
+            }
+            if(typeof Self.journalsCollection != 'undefined'){
+              delete Self.journalsCollection;
+            }
+            if(typeof Self.stewardsCollection != 'undefined'){
+              delete Self.stewardsCollection;
+            }
+            Self.lightTheme();
             Self.page = new Page();
             Self.layout = new LayoutView();
             app.getRegion('mainContainer').show(Self.layout);
@@ -281,7 +312,7 @@ module.exports = Marionette.AppRouter.extend({
         Self.page.set('currentPage', 'register');
         Self.changePage(new RegisterView( { steward: Self.steward } ), {changeHash:false, transition: "none"});
       } else {
-        Self.navigate('stewards/' + Self.steward.get('stewardname') + '/namespaces', true);
+        Self.navigate('stewards/' + Self.steward.get('stewardname') + '/journals', true);
       }
     })
 	},
@@ -292,7 +323,7 @@ module.exports = Marionette.AppRouter.extend({
         Self.page.set('currentPage', 'forgot');
         Self.changePage(new ForgotView( { steward: Self.steward } ), {changeHash:false, transition: "none"});
       } else {
-        Self.navigate('stewards/' + Self.steward.get('stewardname') + '/namespaces', true);
+        Self.navigate('stewards/' + Self.steward.get('stewardname') + '/journals', true);
       }
     })
 	},
@@ -303,7 +334,7 @@ module.exports = Marionette.AppRouter.extend({
         Self.page.set('currentPage', 'reset');
         Self.changePage(new ResetView( { steward: Self.steward, stewardname: stewardname, forgot_token: forgot_token } ), {changeHash:false, transition: "none"});
       } else {
-        Self.navigate('stewards/' + Self.steward.get('stewardname') + '/namespaces', true);
+        Self.navigate('stewards/' + Self.steward.get('stewardname') + '/journals', true);
       }
     })
 	},
@@ -311,17 +342,16 @@ module.exports = Marionette.AppRouter.extend({
 		console.log('Goto: JournalsView', stewardname, accountName, currencyName);
     Self.initializeData(function(err, res){
       Self.page.set('currentPage', 'journals');
-      Self.page.set('title', 'Process Journal Entry');
+      Self.page.set('title', 'Process Payment');
       var account = Self.accountsCollection.get('accounts~' + accountName + '~' + currencyName);
       console.log('account', account);
       if(typeof account != 'undefined'){
-        var breadcrumbs = [{linkText: 'Process Journal Entry'},
+        var breadcrumbs = [{linkText: 'Process Payment'},
                         {active: true, linkText: accountName + ' ' + currencyName}];
       } else {
-        var breadcrumbs = [{linkText: 'Process Journal Entry'},
+        var breadcrumbs = [{linkText: 'Process Payment'},
                         {active: true, linkText: 'From Trading Name'}];
       }
-
       var breadcrumbsCollection = new Breadcrumbs(breadcrumbs);
       var breadcrumbRegion = Self.dashhead.getRegion('breadcrumbs');
       if(typeof breadcrumbRegion != 'undefined'){
@@ -390,17 +420,17 @@ module.exports = Marionette.AppRouter.extend({
   namespace: function(stewardname, namespace) {
     console.log('goto: namespace', stewardname, namespace);
     Self.initializeData(function(err, results){
-      Self.page.set('currentPage', 'namespaces');
+      Self.page.set('currentPage', 'settings');
       Self.page.set('title', 'Namespace');
       var namespaceObject = Self.namespacesCollection.get('namespaces~' + namespace);
       if(typeof namespaceObject == 'undefined'){
-        var breadcrumbs = [{ link: '#stewards/' + stewardname + '/namespaces', linkText: 'NAMESPACES'},
+        var breadcrumbs = [{ link: '#settings', linkText: 'SETTINGS'},
                            { active:true, linkText: 'NAMESPACE: ' + namespace}];
         var breadcrumbsCollection = new Breadcrumbs(breadcrumbs);
         Self.dashhead.getRegion('breadcrumbs').reset();
         Self.dashhead.getRegion('breadcrumbs').show(new BreadcrumbsView( {collection: breadcrumbsCollection }));
       } else {
-        var breadcrumbs = [{ link: '#stewards/' + stewardname + '/namespaces', linkText: 'NAMESPACES'},
+        var breadcrumbs = [{ link: '#settings', linkText: 'SETTINGS'},
                            { active:true, linkText: 'NAMESPACE: ' + namespaceObject.get('namespace')}];
         var breadcrumbsCollection = new Breadcrumbs(breadcrumbs);
         Self.dashhead.getRegion('breadcrumbs').reset();
@@ -454,7 +484,7 @@ module.exports = Marionette.AppRouter.extend({
       var breadcrumbsCollection = new Breadcrumbs(breadcrumbs);
       Self.dashhead.getRegion('breadcrumbs').reset();
       Self.dashhead.getRegion('breadcrumbs').show(new BreadcrumbsView( {collection: breadcrumbsCollection }));
-      Self.changePage(new AccountView( { collection: Self.accountsCollection, namespaces: Self.namespacesCollection, currencies: Self.currenciesCollection, journals: Self.journalsCollection, steward: Self.steward, accountName: accountName, currencyName: currencyName, namespace: namespace} ), {});
+      Self.changePage(new AccountView( { collection: Self.accountsCollection, namespaces: Self.namespacesCollection, currencies: Self.currenciesCollection, journals: Self.journalsCollection, steward: Self.steward, stewards: Self.stewardsCollection, accountName: accountName, currencyName: currencyName, namespace: namespace} ), {});
     })
   },
   currencies: function(stewardname) {
@@ -468,7 +498,7 @@ module.exports = Marionette.AppRouter.extend({
         Self.dashhead.getRegion('breadcrumbs').reset();
         Self.dashhead.getRegion('breadcrumbs').show(new BreadcrumbsView( {collection: breadcrumbsCollection }));
 
-      Self.changePage(new CurrenciesView( { collection: Self.currenciesCollection, accounts: Self.accountsCollection, journals: Self.journalsCollection, steward: Self.steward, stewards: Self.stewardsCollection}), {changeHash:false, transition: "none"});
+      Self.changePage(new CurrenciesView( { collection: Self.currenciesCollection, accounts: Self.accountsCollection, namespaces: Self.namespacesCollection, journals: Self.journalsCollection, steward: Self.steward, stewards: Self.stewardsCollection}), {changeHash:false, transition: "none"});
     });
   },
   currency: function(stewardname, namespace, currencyName){
@@ -520,16 +550,28 @@ module.exports = Marionette.AppRouter.extend({
   stewardRoute: function(stewardname) {
     console.log('goto: steward', stewardname);
     Self.initializeData(function(err, results){
-      Self.page.set('currentPage', 'stewards');
+      Self.page.set('currentPage', 'settings');
       Self.page.set('title', 'Steward');
-      var breadcrumbs = [{ link: '#stewards', linkText: 'STEWARDS'},
+      var breadcrumbs = [{ link: '#settings', linkText: 'SETTINGS'},
                          { active:true, linkText: 'STEWARD: ' + stewardname}];
       var breadcrumbsCollection = new Breadcrumbs(breadcrumbs);
       Self.dashhead.getRegion('breadcrumbs').reset();
       Self.dashhead.getRegion('breadcrumbs').show(new BreadcrumbsView( {collection: breadcrumbsCollection }));
 
-      Self.changePage(new StewardView( { model: Self.stewardsCollection.get('stewards~' + stewardname), collection: Self.stewardsCollection, accounts: Self.accountsCollection, currencies: Self.currenciesCollection, namespaces: Self.namespacesCollection, steward: Self.steward, stewardname: stewardname}), {changeHash:false, transition: "none"});
+      Self.changePage(new StewardView( { model: Self.stewardsCollection.get('stewards~' + stewardname), stewards: Self.stewardsCollection, accounts: Self.accountsCollection, currencies: Self.currenciesCollection, namespaces: Self.namespacesCollection, steward: Self.steward, stewardname: stewardname}), {changeHash:false, transition: "none"});
     });
+  },
+  settings: function() {
+    console.log('Goto: Settings');
+    Self.page.set('currentPage', 'settings');
+    Self.page.set('title', 'Settings');
+    Self.initializeData(function(err, res){
+      var breadcrumbs = [{active:true, linkText: 'SETTINGS'}];
+      var breadcrumbsCollection = new Breadcrumbs(breadcrumbs);
+      Self.dashhead.getRegion('breadcrumbs').reset();
+      Self.dashhead.getRegion('breadcrumbs').show(new BreadcrumbsView( {collection: breadcrumbsCollection }));
+      Self.changePage(new SettingsView( { steward: Self.steward, currencies: Self.currenciesCollection, accounts: Self.accountsCollection, stewards: Self.stewardsCollection, namespaces: Self.namespacesCollection, journals: Self.journalsCollection}), {});
+    })
   },
   initializeData: function(done){
     console.log('initializeData');
@@ -540,15 +582,15 @@ module.exports = Marionette.AppRouter.extend({
         callback(null, Self.steward);
       } else {
         db.get('config~credentials', function(error, doc){
-          console.log('config', error, doc)
-          var steward = new Steward();
+          console.log('config~credentials:', error, doc)
           if(error){
             console.log('error getting steward from pouchdb',error);
+            Self.steward = new Steward();
           } else {
-            steward = new Steward(doc.steward);
-            steward.credentials = {};
-            steward.credentials.token = steward.get('access_token');
-            steward.fetch({
+            Self.steward = new Steward(doc.steward);
+            Self.steward.credentials = {};
+            Self.steward.credentials.token = Self.steward.get('access_token');
+            Self.steward.fetch({
               success: function(model, res){
                 console.log('successfully got steward', model);
               },
@@ -557,8 +599,7 @@ module.exports = Marionette.AppRouter.extend({
               }
             });
           }
-          Self.steward = steward;
-          callback(error, steward);
+          callback(error, Self.steward);
         });
       }
     };

@@ -11,17 +11,94 @@
       <strong>Edit</strong>
     </button>
   </div>
-  <div id="stats" class="statcard statcard-info p-a-md m-b">
-    <h2><div class="statcard-number">NAMESPACE: {{namespace}}</div></h2>
+  <div id="stats" class="statcard statcard-{{#disabled}}danger{{else}}info{{/disabled}} p-a-md m-b">
+    <h2>
+      <div class="statcard-number">{{#private}}PRIVATE{{else}}PUBLIC{{/private}} NAMESPACE: {{namespace}}</div>
+      <div class="statcard-number">PAYMENT STATUS: {{#disabled}}disabled{{else}}enabled{{/disabled}}</div>
+    </h2>
     {{#each stewards}}{{#this}}<div class="statcard-desc">STEWARD: <a href="#stewards/{{stewardname}}" style='color:#FFF'>{{stewardname}}</a></div>{{/this}}{{/each}}
   </div>
   {{/if}}
   <form id='namespaceForm' {{#if id}}style="display: none;"{{/if}}>
     {{#if id}}<input type="hidden" name="id" value="{{id}}" />{{/if}}
+    {{#if isEditable}}
     <div class="form-group text-left">
       <label for="namespace">Namespace</label>
       <input type="text" id="namespace" name="namespace" value="{{#if id}}{{namespace}}{{/if}}" placeholder="Namespace" class="form-control" />
     </div>
+    {{/if}}
+    {{#if isSteward}}
+    <div style="padding-top:10px;padding-bottom: 10px;">
+      <div style="padding-bottom: 10px;">
+        <strong>Join Status:</strong>
+      </div>
+      <div class="radio-inline custom-control custom-radio">
+        <label>
+          <input type="radio" id="public" name="private" value="false" {{#if_eq private false}}checked="checked"{{/if_eq}}>
+          <span class="custom-control-indicator"></span>
+          <strong>Public</strong>
+        </label>
+      </div>
+      <div class="radio-inline custom-control custom-radio">
+        <label>
+          <input type="radio" id="private" name="private" value="true" {{#if_eq private true}}checked="checked"{{/if_eq}}>
+          <span class="custom-control-indicator"></span>
+          <strong>Private</strong>
+        </label>
+      </div>
+      <div style="padding-top:5px; font-size: 12px;"><i>Public means other stewards can create accounts and currencies in this namespace.</i></div>
+      <div style="padding-bottom:5px; font-size: 12px;"><i>Private means only you can create accounts and currencies in this namespace.</i></div>
+    </div>
+    <div style="padding-top:10px;padding-bottom: 10px;">
+      <div style="padding-bottom: 10px;">
+        <strong>Payment Status:</strong>
+      </div>
+      <div class="radio-inline custom-control custom-radio">
+        <label>
+          <input type="radio" id="private" name="disabled" value="false" {{#if_eq disabled false}}checked="checked"{{/if_eq}}>
+          <span class="custom-control-indicator"></span>
+          <strong>Enabled</strong>
+        </label>
+      </div>
+      <div class="radio-inline custom-control custom-radio">
+        <label>
+          <input type="radio" id="public" name="disabled" value="true" {{#if_eq disabled true}}checked="checked"{{/if_eq}}>
+          <span class="custom-control-indicator"></span>
+          <strong>Disabled</strong>
+        </label>
+      </div>
+      <div style="padding-top:5px; font-size: 12px;"><i>Enabled means payments can be processed on accounts and currencies in this namespace.</i></div>
+      <div style="padding-bottom:5px; font-size: 12px;"><i>Disabled means payments can not be processed on accounts and currencies in this namespace.</i></div>
+    </div>
+    <div class="form-group text-left">
+      <label for="stewards[]">Namespace Stewards</label>
+      <div id="addButtonDiv" class="text-right" style="padding-bottom:10px;">
+        <button type="button" name="addSteward" class="btn btn-success-outline">
+          Add Stewards
+          <span class="icon icon-add-to-list"></span>
+        </button>
+      </div>
+      <ul id="stewards" class="list-group">
+        {{#stewards}}
+          <div class="flextable" style="padding-bottom: 10px;">
+            <div class="flextable-item flextable-primary">
+              <li class="list-group-item">
+              {{stewardname}}
+              <input type="hidden" name="stewards[]" value="stewards~{{stewardname}}" />
+              </li>
+            </div>
+            <div class="flextable-item">
+              <div class="btn-group">
+                <button type="button" name="remove" value="stewards~{{stewardname}}" class="btn btn-danger-outline">
+                  <span class="icon icon-cross" style="font-size: 1.2em"></span>
+                </button>
+              </div>
+            </div>
+          </div>
+        {{/stewards}}
+      </ul>
+    </div>
+    {{/if}}
     <div class="form-group text-right">
       <button type="button" name="cancel" class="btn btn-lg btn-primary-outline" >Cancel</button>
       <button type="button" name="upsert" class="btn btn-lg btn-primary-outline" >
@@ -29,6 +106,64 @@
       </button>
     </div>
   </form>
+
+  <div id="stewardsModal" class="modal" style="display: none;">
+    <div class="modal-dialog modal-sm">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title">Add Stewards</h4>
+        </div>
+        <div class="modal-body">
+          <div class="flextable">
+            <div class="flextable-item flextable-primary">
+              <div id="addStewardForm" class="form-group" style="margin-bottom: 0;">
+                <input type="text" id="stewardname" name="stewardname" value="{{stewardname}}" placeholder="Steward Name" class="form-control" aria-describedby="helpBlock"/>
+                <span id="helpBlock" class="help-block" style="margin: 0;"></span>
+              </div>
+            </div>
+            <div class="flextable-item">
+              <div class="btn-group">
+                <button type="button" name="addStewardToList" class="btn btn-primary-outline">
+                  <span class="icon icon-add-to-list"></span>
+                </button>
+              </div>
+            </div>
+          </div>
+          <div class="table-full">
+            <table class="table accounts" data-sort="checkbox-table">
+              <thead>
+                <tr>
+                  <th class="text-left">Stewards</th>
+                </tr>
+              </thead>
+              <tbody id="modalList" class="table-rows">
+                {{#stewardsCollection}}
+                  <tr id="{{id}}">
+                    <td>
+                      <div class="checkbox custom-control custom-checkbox">
+                      <label>
+                        <input type="checkbox" id="stewardsCheckbox" name="stewardsCheckbox[]" value="stewards~{{stewardname}}">
+                        <span class="custom-control-indicator"></span>
+                        &nbsp;&nbsp;&nbsp;&nbsp;{{stewardname}}
+                      </label>
+                    </div>
+                    </td>
+                  </tr>
+                {{/stewardsCollection}}
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <div class="modal-actions">
+          <button type="button" class="btn-link modal-action cancel" data-dismiss="modal">Cancel</button>
+          <button type="button" class="btn-link modal-action add" data-dismiss="modal">
+            <strong>Add Stewards</strong>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
 
   {{#if id}}
   <h2><strong>Accounts</strong></h2>

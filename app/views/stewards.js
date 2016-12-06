@@ -65,9 +65,9 @@ module.exports = Marionette.CollectionView.extend({
           router.navigate('stewards/' + id);
         })
 
-        this.$('button[name=newNamespace]').off('click').on('click', function(event){
+        this.$('button[name=addSteward]').off('click').on('click', function(event){
           event.preventDefault();
-          router.navigate('stewards/new');
+          router.navigate('stewards/add');
         })
     }
 });

@@ -18,7 +18,6 @@ global.app = new Marionette.Application({
   initialize: function(options){
     console.log('Marionette Application Initialize', options);
     Self = this;
-
   },
   onStart: function(options){
     console.log('Marionette Application onStart', options);

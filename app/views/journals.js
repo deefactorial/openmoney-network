@@ -97,15 +97,12 @@ var hasSoftKeyboard = function(){
 
 module.exports = Backbone.View.extend({
 
-    //el: "#body",
-
     template: Templates['journals'],
 
     initialize: function (options) {
         console.log("initialize journals view", options);
         Self = this;
         Self.steward = options.steward;
-
         Self.journals = options.journals;
         Self.accountName = options.accountName;
         Self.currencyName = options.currencyName;
@@ -114,6 +111,443 @@ module.exports = Backbone.View.extend({
     },
 
     activeInput : 'amount',
+
+    render: function(){
+        console.log("render journals view", Self.collection.toJSON());
+
+        var data = {};
+        data.accounts = Self.collection.getBySteward(Self.steward.get('stewardname'));
+
+        if((typeof Self.accountName == 'undefined' || Self.accountName == null)&&(typeof data.accounts[0] != 'undefined')){
+          var first = data.accounts[0].toJSON();
+          data.accountName = first.account_namespace == '' ? first.account : first.account + '.' + first.account_namespace;
+          data.currencyName = first.currency_namespace == '' ? first.currency : first.currency + '.' + first.currency_namespace;
+          //hack to finish rendering first before navigating
+          setTimeout(function(){
+            router.navigate('#stewards/' + Self.steward.get('stewardname') + '/journals/' + data.accountName + '/' + data.currencyName);
+          }, 1);
+        } else {
+
+          for(var i = 0; i < data.accounts.length; i++){
+            data.accounts[i] = data.accounts[i].toJSON();
+            data.accounts[i].accountName = data.accounts[i].account_namespace == '' ? data.accounts[i].account : data.accounts[i].account + '.' + data.accounts[i].account_namespace;
+            data.accounts[i].currencyName = data.accounts[i].currency_namespace == '' ? data.accounts[i].currency : data.accounts[i].currency + '.' + data.accounts[i].currency_namespace;
+            _.extend(data.accounts[i], ViewHelpers);
+          }
+          _.extend(data, ViewHelpers);
+
+          data.page = 0;
+          if(typeof Self.accountName != 'undefined' && Self.accountName != null){
+            data.accountName = Self.accountName;
+            data.currencyName = Self.currencyName;
+            var account = Self.collection.get('accounts~' + Self.accountName + '~' + Self.currencyName);
+            if(typeof account != 'undefined' && account != null){
+              data.balance = account.get('balance');
+              data.volume = account.get('volume');
+              //if there is more than a page of data
+              if(data.accounts.length > 4){
+                for(var i = 0; i < data.accounts.length; i++){
+                  if(data.accounts[i].accountName == data.accountName && data.accounts[i].currencyName == data.currencyName){
+                    console.log('account found at ' + i + ' in total number of results of :', (data.accounts.length + 1));
+                    data.page = Math.ceil((i + 1) / 5) - 1;
+                  }
+                }
+              }
+            }
+          }
+          if(typeof data.balance == 'undefined'){
+            data.balance = '0.00';
+          }
+          if(typeof data.volume == 'undefined'){
+            data.volume = '0.00';
+          }
+
+          console.log('Process Journal Entry data:', data);
+          //console.log('Self.template(data)', Self.template(data))
+          //console.log('Self.$el',Self.$el)
+          //$('#pageContainer').html(Self.template(data));
+          Self.$el.html(Self.template(data));
+
+          //set the tradding name button.
+          if(typeof data.accountName != 'undefined' && data.accountName != null){
+            var account = Self.collection.get('accounts~' + data.accountName + '~' + data.currencyName);
+            if(typeof account != 'undefined'){
+              var isSteward = false;
+              account.get('stewards').forEach(function(steward){
+                if(steward == Self.steward.get('id')){
+                  isSteward = true;
+                }
+              })
+              if(isSteward){
+                Self.tradingNameButton(data.accountName, data.currencyName);
+              } else {
+                Self.$('#toAccountName').val(data.accountName);
+                var fromAccountName = '';
+                var currencyAccounts = Self.collection.getByCurrency(data.currencyName.substr(0,data.currencyName.indexOf('.')), data.currencyName.substr(data.currencyName.indexOf('.') + 1, data.currencyName.length));
+                console.log('currencyAccounts', currencyAccounts);
+                currencyAccounts.forEach(function(account){
+                  var isAccountSteward = false;
+                  account.get('stewards').forEach(function(steward){
+                    if(steward == Self.steward.get('id')){
+                      isAccountSteward = true;
+                    }
+                  })
+                  if(isAccountSteward){
+                    fromAccountName = account.get('account') + '.' + account.get('account_namespace');
+                  }
+                })
+                Self.tradingNameButton(fromAccountName, data.currencyName);
+              }
+            } else {
+              Self.tradingNameButton('','');
+            }
+          } else {
+            Self.tradingNameButton('','');
+          }
+
+          Self.initializeButtons();
+
+          var table = Self.$('[data-sort=table]').DataTable({
+            "paging": true,
+            "info": false,
+            "sDom": '<"top"i>rt<"bottom"p><"clear">',
+            "lengthMenu": [[5, 10, 15, -1], [5, 10, 15, "All"]]
+          });
+
+          table.on( 'page.dt', function () {
+              // var info = table.page.info();
+              console.log( 'onpage handler called' );
+              if(typeof data.accountName != 'undefined' && data.accountName != null){
+                Self.tradingNameButton(data.accountName, data.currencyName);
+              }
+
+          });
+
+          console.log('set data.page to ', data.page)
+          if(data.page > 0){
+            table.page( data.page ).draw( 'page' );
+          }
+
+
+
+          this.$('.numberpad-button').off('click').on('click', function(event){
+            event.preventDefault();
+            var number = this.value;
+            //console.log('button ' + number + ' pressed');
+            //console.log('active input ' + Self.activeInput);
+            if(Self.activeInput == 'amount') {
+              var val = $('#amount').val();
+              var position = val.length;
+              if(!hasSoftKeyboard()){
+                position = $('#' + Self.activeInput).getCursorPosition();
+              }
+              console.log('cursor position ' + position);
+              val = val.slice(0, position) + number + val.slice(position);
+              val = val.replace('.','');
+              val = val.slice(0, val.length-2) + '.' + val.slice(val.length-2);
+              if(val.substr(0,1) == '0'){
+                if(val.substr(1,2)!='.'){
+                  val = val.substr(1,val.length);
+                  position = position - 1;
+                }
+              }
+              if(hasSoftKeyboard()){
+                $('#amount').val(val);
+              } else {
+                $('#amount').val(val).setCursorPosition(position+1);
+                $('#amount').focus();
+              }
+            } else {
+              //Active input is card
+              //$('#card').val($('#card').val() + number).focus();
+              var val = $('#card').val();
+              var position = val.length;
+              if(hasSoftKeyboard()){
+                $('#card').val(val.slice(0, position) + number + val.slice(position));
+              } else {
+                position = $('#' + Self.activeInput).getCursorPosition();
+                $('#card').val(val.slice(0, position) + number + val.slice(position)).setCursorPosition(position+1);
+                $('#card').focus();
+              }
+
+            }
+          });
+
+          this.$('#del').off('click').on('click', function(event){
+              event.preventDefault();
+              //console.log('Delete button pressed');
+              if(Self.activeInput == 'amount'){
+                var val = $('#amount').val();
+                var position = val.length;
+                if(!hasSoftKeyboard()){
+                  var position = $('#' + Self.activeInput).getCursorPosition()
+                  //console.log('cursor position ' + position);
+                }
+                if(position > 0){
+                  val = val.slice(0, position-1) + val.slice(position);
+                  //remove dot
+                  val = val.replace('.','');
+                  //add dot
+                  val = val.slice(0, val.length-2) + '.' + val.slice(val.length-2);
+                  //add zero to begining if less than three characters
+                  if(val.length == 3 || (val.substr(0,1) == '+' && val.length == 4 ) || (val.substr(0,1) == '-' && val.length == 4 )){
+                    val = val.slice(0, val.length-3) + '0' + val.slice(val.length-3);
+                  }
+                  if(val.length > 4){
+                    position--;
+                  }
+                  if(hasSoftKeyboard()){
+                    $('#amount').val(val);
+                  } else {
+                    $('#amount').val(val).setCursorPosition(position);
+                    $('#amount').focus();
+                  }
+                } else {
+                  $('#amount').setCursorPosition(position).focus();
+                }
+
+              } else {
+                var val = $('#card').val();
+                var position = val.length;
+                if(!hasSoftKeyboard()){
+                  position = $('#card').getCursorPosition();
+                }
+                //console.log('cursor position ' + position);
+                //Active input is card
+                if(position > 0){
+                  val = val.slice(0, position-1) + val.slice(position);
+                  if(hasSoftKeyboard()){
+                    $('#card').val(val).blur();
+                  } else {
+                    $('#card').val(val).setCursorPosition(position-1)
+                    $('#card').focus();
+                  }
+                } else {
+                  if(!hasSoftKeyboard()){
+                    $('#card').setCursorPosition(position);
+                    $('#card').focus();
+                  }
+                }
+              }
+          });
+
+          this.$('#process').off('click').on('click', function(event){
+              event.preventDefault();
+              Self.processJournalEntry();
+          });
+
+          this.$('#card').off('click').on('click', function(event){
+            event.preventDefault();
+            console.log('clicked on card input');
+            $('#card').addClass('card-highlight');
+            Self.activeInput = 'card';
+            if(hasSoftKeyboard()){
+              $('#card').blur();
+            } else {
+              $('#card').focus();
+            }
+          })
+
+          Self.$('#card').off('change').on('change', function(event){
+            //check if card number exists in card database
+            var val = Self.$('#card').val();
+            var card = Self.collection.get('accounts~' + Self.steward.get('stewardname') + '~' + val);
+            if(typeof card != 'undefined'){
+              router.navigate('#stewards/' + Self.steward.get('stewardname') + '/transactions/' + val, true);
+            }
+          });
+
+          this.$('#amount').off('click').on('click', function(event){
+            event.preventDefault();
+            console.log('clicked on amount input');
+            $('#card').removeClass('card-highlight');
+            Self.activeInput = 'amount';
+            if(hasSoftKeyboard()){
+              $('#amount').blur();
+            } else {
+              $('#amount').focus();
+            }
+          })
+
+          this.$('#amount').keypress(function(event){
+            event.preventDefault();
+            console.log('which event :' + event.which);
+            var number = 'undefined';
+            if(event.which == 49){
+              number = 1;
+            } else if(event.which == 50){
+              number = 2;
+            } else if(event.which == 51){
+              number = 3;
+            } else if(event.which == 52){
+              number = 4;
+            } else if(event.which == 53){
+              number = 5;
+            } else if(event.which == 54){
+              number = 6;
+            } else if(event.which == 55){
+              number = 7;
+            } else if(event.which == 56){
+              number = 8;
+            } else if(event.which == 57){
+              number = 9;
+            } else if(event.which == 48){
+              number = 0;
+            } else if(event.which == 13){
+              Self.processJournalEntry();
+            }
+
+
+
+            if(number != 'undefined'){
+              console.log('number:' + number);
+              console.log('active input ' + Self.activeInput);
+              var position = $('#' + Self.activeInput).getCursorPosition()
+              console.log('cursor position ' + position);
+              if(Self.activeInput == 'amount') {
+                var val = $('#amount').val();
+                val = val.slice(0, position) + number + val.slice(position);
+                val = val.replace('.','');
+                val = val.slice(0, val.length-2) + '.' + val.slice(val.length-2);
+                if(val.substr(0,1) == '0'){
+                  if(val.substr(1,2)!='.'){
+                    val = val.substr(1,val.length);
+                    position = position - 1;
+                  }
+                }
+                $('#amount').val(val).setCursorPosition(position+1);
+                if(hasSoftKeyboard()){
+                  $('#amount').blur();
+                } else {
+                  $('#amount').focus();
+                }
+              } else {
+                //Active input is card
+                $('#card').val($('#card').val().slice(0, position) + number + $('#card').val().slice(position)).setCursorPosition(position+1);
+                if(hasSoftKeyboard()){
+                  $('#card').blur();
+                } else {
+                  $('#card').focus();
+                }
+              }
+            }
+
+            if(event.which == '46'){
+              console.log('Delete key pressed.');
+              var position = $('#' + Self.activeInput).getCursorPosition()
+              console.log('cursor position ' + position);
+              if(Self.activeInput == 'amount'){
+                var val = $('#amount').val();
+                if(position < val.length){
+                  var characterAt = val.substr(position, 1);
+                  console.log('characterAt:' + characterAt);
+                  var lastChar = position == val.length-1;
+                  //remove character at position
+                  val = val.slice(0, position) + val.slice(position+1);
+                  //remove dot
+                  val = val.replace('.','');
+                  //add dot
+                  val = val.slice(0, val.length-2) + '.' + val.slice(val.length-2);
+                  //add zero to begining if less than three characters
+                  if(val.length == 3 || (val.substr(0,1) == '+' && val.length == 4 ) || (val.substr(0,1) == '-' && val.length == 4 )){
+                    val = val.slice(0, val.length-3) + '0' + val.slice(val.length-3);
+                  }
+                  //if it's the dot character increment the cursor position.
+                  if(characterAt == '.' || (val.length == 4 && characterAt == '0') || lastChar){
+                    position++;
+                  }
+                  $('#amount').val(val).setCursorPosition(position);
+                } else {
+                  $('#amount').setCursorPosition(position);
+                }
+                if(hasSoftKeyboard()){
+                  $('#amount').blur();
+                } else {
+                  $('#amount').focus();
+                }
+              }
+            }
+          })
+
+          this.$('#amount').keydown(function(e){
+              if(e.keyCode == 8) {
+                  e.preventDefault();
+                  console.log('Backspace Key Pressed');
+                  var position = $('#' + Self.activeInput).getCursorPosition()
+                  console.log('cursor position ' + position);
+                  if(Self.activeInput == 'amount'){
+                    var val = $('#amount').val();
+                    if(position > 0){
+                      val = val.slice(0, position-1) + val.slice(position);
+                      //remove dot
+                      val = val.replace('.','');
+                      //add dot
+                      val = val.slice(0, val.length-2) + '.' + val.slice(val.length-2);
+                      //add zero to begining if less than three characters
+                      if(val.length == 3 || (val.substr(0,1) == '+' && val.length == 4 ) || (val.substr(0,1) == '-' && val.length == 4 )){
+                        val = val.slice(0, val.length-3) + '0' + val.slice(val.length-3);
+                      }
+                      $('#amount').val(val).setCursorPosition(position);
+                    } else {
+                      $('#amount').setCursorPosition(position);
+                    }
+                    if(hasSoftKeyboard()){
+                      $('#amount').blur();
+                    } else {
+                      $('#amount').focus();
+                    }
+                  }
+              } else if(e.keyCode == 46){
+                e.preventDefault();
+                console.log('Delete key pressed.');
+                var position = $('#' + Self.activeInput).getCursorPosition()
+                console.log('cursor position ' + position);
+                if(Self.activeInput == 'amount'){
+                  var val = $('#amount').val();
+                  if(position < val.length){
+                    var characterAt = val.substr(position, 1);
+                    console.log('characterAt:' + characterAt);
+                    var lastChar = position == val.length-1;
+                    //remove character at position
+                    val = val.slice(0, position) + val.slice(position+1);
+                    //remove dot
+                    val = val.replace('.','');
+                    //add dot
+                    val = val.slice(0, val.length-2) + '.' + val.slice(val.length-2);
+                    //add zero to begining if less than three characters
+                    if(val.length == 3 || (val.substr(0,1) == '+' && val.length == 4 ) || (val.substr(0,1) == '-' && val.length == 4 )){
+                      val = val.slice(0, val.length-3) + '0' + val.slice(val.length-3);
+                    }
+                    //if it's the dot character increment the cursor position.
+                    if(characterAt == '.' || (val.length == 4 && characterAt == '0') || lastChar){
+                      position++;
+                    }
+
+                    $('#amount').val(val).setCursorPosition(position);
+                  } else {
+                    $('#amount').setCursorPosition(position);
+                  }
+                  if(hasSoftKeyboard()){
+                    $('#amount').blur();
+                  } else {
+                    $('#amount').focus();
+                  }
+                }
+              } else {
+                console.log(e.keyCode);
+              }
+          });
+
+          setTimeout(function(){
+            $('#amount').setCursorPosition($('#amount').val().length);
+            if(hasSoftKeyboard()){
+              $('#amount').blur();
+            } else {
+              $('#amount').focus();
+            }
+          },500);
+        }
+    },
 
     tradingNameButton: function(accountName, currencyName){
       console.log('tradingName toggle triggered for:', accountName, currencyName);
@@ -125,7 +559,8 @@ module.exports = Backbone.View.extend({
       currencyName = currencyName.replace(/\./g,'\\.');
       Self.$('.value-buttons').hide();
       Self.$('.account-buttons').removeClass('highlight');
-      Self.$('#' + accountName + '\\:' + currencyName + '').show();
+      //hide send/recieve buttons because recieve doesn't work
+      //Self.$('#' + accountName + '\\:' + currencyName + '').show();
       Self.$('#' + accountName + '\\:' + currencyName + '\\:button').addClass('highlight');
       Self.$('#amount').setCursorPosition(Self.$('#amount').val().length);
       if(hasSoftKeyboard()){
@@ -146,6 +581,7 @@ module.exports = Backbone.View.extend({
     processJournalEntry: function(){
       console.log('process journal entry event');
       var toAccountName = Self.$('#toAccountName').val();
+      var description = Self.$('#description').val();
       var amount = Self.$('#amount').val();
       var accountName = Self.$('input[name=accountName]').val();
       var currencyName = Self.$('input[name=currencyName]').val();
@@ -196,6 +632,7 @@ module.exports = Backbone.View.extend({
       }
       journal.set('amount', parseFloat(amount));
       journal.set('steward', Self.steward);
+      journal.set('payload', { description: description} );
 
       journal.credentials = {};
       journal.credentials.token = Self.steward.get('access_token');
@@ -275,394 +712,5 @@ module.exports = Backbone.View.extend({
         }
         Self.$('input[name=polarity]').val('receive');
       });
-    },
-
-    render: function(){
-        console.log("render journals view", Self.collection.toJSON());
-
-        var data = {};
-        data.accounts = Self.collection.toJSON();
-        for(var i = 0; i < data.accounts.length; i++){
-          data.accounts[i].accountName = data.accounts[i].account_namespace == '' ? data.accounts[i].account : data.accounts[i].account + '.' + data.accounts[i].account_namespace;
-          data.accounts[i].currencyName = data.accounts[i].currency_namespace == '' ? data.accounts[i].currency : data.accounts[i].currency + '.' + data.accounts[i].currency_namespace;
-          _.extend(data.accounts[i], ViewHelpers);
-        }
-        _.extend(data, ViewHelpers);
-        data.balance = '0.00';
-        data.volume = '0.00';
-        data.page = 0;
-        if(typeof Self.accountName != 'undefined'){
-          data.accountName = Self.accountName;
-          data.currencyName = Self.currencyName;
-          var account = Self.collection.get('accounts~' + Self.accountName + '~' + Self.currencyName);
-          if(typeof account != 'undefined'){
-            data.balance = account.get('balance');
-            data.volume = account.get('volume');
-            //if there is more than a page of data
-            if(data.accounts.length > 4){
-              for(var i = 0; i < data.accounts.length; i++){
-                if(data.accounts[i].accountName == data.accountName && data.accounts[i].currencyName == data.currencyName){
-                  console.log('account found at ' + i + ' in total number of results of :', (data.accounts.length + 1));
-                  data.page = Math.ceil((i + 1) / 5) - 1;
-                }
-              }
-            }
-          }
-        }
-
-
-
-        console.log('data', data);
-        Self.$el.html(Self.template(data));
-
-
-        //set the tradding name button.
-        if(typeof data.accountName != 'undefined' && data.accountName != null){
-          Self.tradingNameButton(data.accountName, data.currencyName);
-        } else {
-          Self.tradingNameButton('','');
-        }
-
-        Self.initializeButtons();
-
-        var table = Self.$('[data-sort=table]').DataTable({
-          "paging": true,
-          "info": false,
-          "sDom": '<"top"i>rt<"bottom"p><"clear">',
-          "lengthMenu": [[5, 10, 15, -1], [5, 10, 15, "All"]]
-        });
-
-        table.on( 'page.dt', function () {
-            // var info = table.page.info();
-            console.log( 'onpage handler called' );
-            if(typeof data.accountName != 'undefined' && data.accountName != null){
-              Self.tradingNameButton(data.accountName, data.currencyName);
-            }
-
-        });
-
-        console.log('set data.page to ', data.page)
-        if(data.page > 0){
-          table.page( data.page ).draw( 'page' );
-        }
-
-
-
-        this.$('.numberpad-button').off('click').on('click', function(event){
-          event.preventDefault();
-          var number = this.value;
-          //console.log('button ' + number + ' pressed');
-          //console.log('active input ' + Self.activeInput);
-          if(Self.activeInput == 'amount') {
-            var val = $('#amount').val();
-            var position = val.length;
-            if(!hasSoftKeyboard()){
-              position = $('#' + Self.activeInput).getCursorPosition();
-            }
-            console.log('cursor position ' + position);
-            val = val.slice(0, position) + number + val.slice(position);
-            val = val.replace('.','');
-            val = val.slice(0, val.length-2) + '.' + val.slice(val.length-2);
-            if(val.substr(0,1) == '0'){
-              if(val.substr(1,2)!='.'){
-                val = val.substr(1,val.length);
-                position = position - 1;
-              }
-            }
-            if(hasSoftKeyboard()){
-              $('#amount').val(val);
-            } else {
-              $('#amount').val(val).setCursorPosition(position+1);
-              $('#amount').focus();
-            }
-          } else {
-            //Active input is card
-            //$('#card').val($('#card').val() + number).focus();
-            var val = $('#card').val();
-            var position = val.length;
-            if(hasSoftKeyboard()){
-              $('#card').val(val.slice(0, position) + number + val.slice(position));
-            } else {
-              position = $('#' + Self.activeInput).getCursorPosition();
-              $('#card').val(val.slice(0, position) + number + val.slice(position)).setCursorPosition(position+1);
-              $('#card').focus();
-            }
-
-          }
-        });
-
-        this.$('#del').off('click').on('click', function(event){
-            event.preventDefault();
-            //console.log('Delete button pressed');
-            if(Self.activeInput == 'amount'){
-              var val = $('#amount').val();
-              var position = val.length;
-              if(!hasSoftKeyboard()){
-                var position = $('#' + Self.activeInput).getCursorPosition()
-                //console.log('cursor position ' + position);
-              }
-              if(position > 0){
-                val = val.slice(0, position-1) + val.slice(position);
-                //remove dot
-                val = val.replace('.','');
-                //add dot
-                val = val.slice(0, val.length-2) + '.' + val.slice(val.length-2);
-                //add zero to begining if less than three characters
-                if(val.length == 3 || (val.substr(0,1) == '+' && val.length == 4 ) || (val.substr(0,1) == '-' && val.length == 4 )){
-                  val = val.slice(0, val.length-3) + '0' + val.slice(val.length-3);
-                }
-                if(val.length > 4){
-                  position--;
-                }
-                if(hasSoftKeyboard()){
-                  $('#amount').val(val);
-                } else {
-                  $('#amount').val(val).setCursorPosition(position);
-                  $('#amount').focus();
-                }
-              } else {
-                $('#amount').setCursorPosition(position).focus();
-              }
-
-            } else {
-              var val = $('#card').val();
-              var position = val.length;
-              if(!hasSoftKeyboard()){
-                position = $('#card').getCursorPosition();
-              }
-              //console.log('cursor position ' + position);
-              //Active input is card
-              if(position > 0){
-                val = val.slice(0, position-1) + val.slice(position);
-                if(hasSoftKeyboard()){
-                  $('#card').val(val).blur();
-                } else {
-                  $('#card').val(val).setCursorPosition(position-1)
-                  $('#card').focus();
-                }
-              } else {
-                if(!hasSoftKeyboard()){
-                  $('#card').setCursorPosition(position);
-                  $('#card').focus();
-                }
-              }
-            }
-        });
-
-        this.$('#process').off('click').on('click', function(event){
-            event.preventDefault();
-            Self.processJournalEntry();
-        });
-
-        this.$('#card').off('click').on('click', function(event){
-          event.preventDefault();
-          console.log('clicked on card input');
-          $('#card').addClass('card-highlight');
-          Self.activeInput = 'card';
-          if(hasSoftKeyboard()){
-            $('#card').blur();
-          } else {
-            $('#card').focus();
-          }
-        })
-
-        Self.$('#card').off('change').on('change', function(event){
-          //check if card number exists in card database
-          var val = Self.$('#card').val();
-          var card = Self.collection.get('accounts~' + Self.steward.get('stewardname') + '~' + val);
-          if(typeof card != 'undefined'){
-            router.navigate('#stewards/' + Self.steward.get('stewardname') + '/transactions/' + val, true);
-          }
-        });
-
-        this.$('#amount').off('click').on('click', function(event){
-          event.preventDefault();
-          console.log('clicked on amount input');
-          $('#card').removeClass('card-highlight');
-          Self.activeInput = 'amount';
-          if(hasSoftKeyboard()){
-            $('#amount').blur();
-          } else {
-            $('#amount').focus();
-          }
-        })
-
-        this.$('#amount').keypress(function(event){
-          event.preventDefault();
-          console.log('which event :' + event.which);
-          var number = 'undefined';
-          if(event.which == 49){
-            number = 1;
-          } else if(event.which == 50){
-            number = 2;
-          } else if(event.which == 51){
-            number = 3;
-          } else if(event.which == 52){
-            number = 4;
-          } else if(event.which == 53){
-            number = 5;
-          } else if(event.which == 54){
-            number = 6;
-          } else if(event.which == 55){
-            number = 7;
-          } else if(event.which == 56){
-            number = 8;
-          } else if(event.which == 57){
-            number = 9;
-          } else if(event.which == 48){
-            number = 0;
-          } else if(event.which == 13){
-            Self.processJournalEntry();
-          }
-
-
-
-          if(number != 'undefined'){
-            console.log('number:' + number);
-            console.log('active input ' + Self.activeInput);
-            var position = $('#' + Self.activeInput).getCursorPosition()
-            console.log('cursor position ' + position);
-            if(Self.activeInput == 'amount') {
-              var val = $('#amount').val();
-              val = val.slice(0, position) + number + val.slice(position);
-              val = val.replace('.','');
-              val = val.slice(0, val.length-2) + '.' + val.slice(val.length-2);
-              if(val.substr(0,1) == '0'){
-                if(val.substr(1,2)!='.'){
-                  val = val.substr(1,val.length);
-                  position = position - 1;
-                }
-              }
-              $('#amount').val(val).setCursorPosition(position+1);
-              if(hasSoftKeyboard()){
-                $('#amount').blur();
-              } else {
-                $('#amount').focus();
-              }
-            } else {
-              //Active input is card
-              $('#card').val($('#card').val().slice(0, position) + number + $('#card').val().slice(position)).setCursorPosition(position+1);
-              if(hasSoftKeyboard()){
-                $('#card').blur();
-              } else {
-                $('#card').focus();
-              }
-            }
-          }
-
-          if(event.which == '46'){
-            console.log('Delete key pressed.');
-            var position = $('#' + Self.activeInput).getCursorPosition()
-            console.log('cursor position ' + position);
-            if(Self.activeInput == 'amount'){
-              var val = $('#amount').val();
-              if(position < val.length){
-                var characterAt = val.substr(position, 1);
-                console.log('characterAt:' + characterAt);
-                var lastChar = position == val.length-1;
-                //remove character at position
-                val = val.slice(0, position) + val.slice(position+1);
-                //remove dot
-                val = val.replace('.','');
-                //add dot
-                val = val.slice(0, val.length-2) + '.' + val.slice(val.length-2);
-                //add zero to begining if less than three characters
-                if(val.length == 3 || (val.substr(0,1) == '+' && val.length == 4 ) || (val.substr(0,1) == '-' && val.length == 4 )){
-                  val = val.slice(0, val.length-3) + '0' + val.slice(val.length-3);
-                }
-                //if it's the dot character increment the cursor position.
-                if(characterAt == '.' || (val.length == 4 && characterAt == '0') || lastChar){
-                  position++;
-                }
-                $('#amount').val(val).setCursorPosition(position);
-              } else {
-                $('#amount').setCursorPosition(position);
-              }
-              if(hasSoftKeyboard()){
-                $('#amount').blur();
-              } else {
-                $('#amount').focus();
-              }
-            }
-          }
-        })
-
-        this.$('#amount').keydown(function(e){
-            if(e.keyCode == 8) {
-                e.preventDefault();
-                console.log('Backspace Key Pressed');
-                var position = $('#' + Self.activeInput).getCursorPosition()
-                console.log('cursor position ' + position);
-                if(Self.activeInput == 'amount'){
-                  var val = $('#amount').val();
-                  if(position > 0){
-                    val = val.slice(0, position-1) + val.slice(position);
-                    //remove dot
-                    val = val.replace('.','');
-                    //add dot
-                    val = val.slice(0, val.length-2) + '.' + val.slice(val.length-2);
-                    //add zero to begining if less than three characters
-                    if(val.length == 3 || (val.substr(0,1) == '+' && val.length == 4 ) || (val.substr(0,1) == '-' && val.length == 4 )){
-                      val = val.slice(0, val.length-3) + '0' + val.slice(val.length-3);
-                    }
-                    $('#amount').val(val).setCursorPosition(position);
-                  } else {
-                    $('#amount').setCursorPosition(position);
-                  }
-                  if(hasSoftKeyboard()){
-                    $('#amount').blur();
-                  } else {
-                    $('#amount').focus();
-                  }
-                }
-            } else if(e.keyCode == 46){
-              e.preventDefault();
-              console.log('Delete key pressed.');
-              var position = $('#' + Self.activeInput).getCursorPosition()
-              console.log('cursor position ' + position);
-              if(Self.activeInput == 'amount'){
-                var val = $('#amount').val();
-                if(position < val.length){
-                  var characterAt = val.substr(position, 1);
-                  console.log('characterAt:' + characterAt);
-                  var lastChar = position == val.length-1;
-                  //remove character at position
-                  val = val.slice(0, position) + val.slice(position+1);
-                  //remove dot
-                  val = val.replace('.','');
-                  //add dot
-                  val = val.slice(0, val.length-2) + '.' + val.slice(val.length-2);
-                  //add zero to begining if less than three characters
-                  if(val.length == 3 || (val.substr(0,1) == '+' && val.length == 4 ) || (val.substr(0,1) == '-' && val.length == 4 )){
-                    val = val.slice(0, val.length-3) + '0' + val.slice(val.length-3);
-                  }
-                  //if it's the dot character increment the cursor position.
-                  if(characterAt == '.' || (val.length == 4 && characterAt == '0') || lastChar){
-                    position++;
-                  }
-
-                  $('#amount').val(val).setCursorPosition(position);
-                } else {
-                  $('#amount').setCursorPosition(position);
-                }
-                if(hasSoftKeyboard()){
-                  $('#amount').blur();
-                } else {
-                  $('#amount').focus();
-                }
-              }
-            } else {
-              console.log(e.keyCode);
-            }
-        });
-
-        setTimeout(function(){
-          $('#amount').setCursorPosition($('#amount').val().length);
-          if(hasSoftKeyboard()){
-            $('#amount').blur();
-          } else {
-            $('#amount').focus();
-          }
-        },100);
     }
 });

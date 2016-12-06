@@ -1,0 +1,108 @@
+
+<div class="col-sm-12" style="padding-top: 10px; padding-bottom: 20px;">
+  <h2><strong>Settings</strong></h2>
+  <div class="radio-inline custom-control custom-radio">
+    <label>
+      <input type="radio" id="lighttheme" name="theme" value="light" {{#if_eq theme 'light'}}checked="checked"{{/if_eq}}>
+      <span class="custom-control-indicator"></span>
+      Light Theme
+    </label>
+  </div>
+  <div class="radio-inline custom-control custom-radio">
+    <label>
+      <input type="radio" id="darktheme" name="theme" value="dark" {{#if_eq theme 'dark'}}checked="checked"{{/if_eq}}>
+      <span class="custom-control-indicator"></span>
+      Dark Theme
+    </label>
+  </div>
+</div>
+<div style="padding-bottom: 10px;">
+  <button type="button" name="csvimport" class="btn btn-lg btn-primary-outline" >
+    <strong>Import CSV Ledger</strong>
+  </button>
+</div>
+<div id="csvmodal" class="modal" style="display: none;">
+  <div class="modal-dialog modal-sm">
+    <div class="modal-content">
+      <div class="modal-header text-left">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title">Import CSV Ledger</h4>
+      </div>
+      <div class="modal-body">
+        <div class="form-group text-left">
+          <label class="btn btn-default btn-file">
+              Browse CSV File <input type="file" id="csv" name="csv" style="display: none;">
+          </label>
+        </div>
+      </div>
+      <div class="modal-actions">
+        <button type="button" class="cancel btn-link modal-action" data-dismiss="modal">Cancel</button>
+        <button type="button" class="import btn-link modal-action" data-dismiss="modal">
+          <strong>Import</strong>
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+<style>
+[data-sort=namespaces] > tbody > tr:hover{
+  background-color: #159c6e;
+  cursor: pointer;
+}
+[data-sort=stewards] > tbody > tr:hover{
+  background-color: #159c6e;
+  cursor: pointer;
+}
+</style>
+<div class="col-sm-12" style="padding-top: 10px; padding-bottom: 20px;">
+  <h2><strong>Namespaces</strong></h2>
+  <h6>Namespaces are globally unique identifiers for accounts and currencies to live in.</h6>
+  <div class="row text-right" style="padding-top: 20px;padding-bottom: 20px;">
+    <button type="button" name="newNamespace" class="btn btn-lg btn-success-outline">New Namespace</button>
+  </div>
+  <div class="row text-right" style="padding-bottom: 20px;">
+    <button type="button" name="addNamespace" class="btn btn-lg btn-success-outline">Add Existing Namespace</button>
+  </div>
+  <div class="table-full">
+    <table class="table display" data-sort="namespaces">
+      <thead>
+        <tr>
+          <th class="">Namespace</th>
+          <th class="">Stewards</th>
+        </tr>
+      </thead>
+      <tbody class="table-rows">
+        {{#each namespaces}}
+          <tr id="{{namespace}}">
+            <td>{{namespace}}</td>
+            <td>{{#each stewards}}{{#this}}<a href="#stewards/{{stewardname}}">{{stewardname}}</a> {{/this}}{{/each}}</td>
+          </tr>
+        {{/each}}
+      </tbody>
+    </table>
+  </div>
+</div>
+<div class="col-sm-12" style="padding-top: 10px;">
+  <h2><strong>Stewards</strong></h2>
+  <div class="row text-right" style="padding-top: 20px;padding-bottom: 20px;">
+    <button type="button" name="addSteward" class="btn btn-lg btn-success-outline">Add Existing Steward</button>
+  </div>
+  <div class="table-full">
+    <table class="table display" data-sort="stewards">
+      <thead>
+        <tr>
+          <th class="">Steward Name</th>
+          <th class="">Email</th>
+        </tr>
+      </thead>
+      <tbody class="table-rows">
+        {{#each stewards}}
+          <tr id="{{stewardname}}">
+            <td>{{stewardname}}</td>
+            <td>{{email}}</td>
+          </tr>
+        {{/each}}
+      </tbody>
+    </table>
+  </div>
+</div>

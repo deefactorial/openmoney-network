@@ -28,30 +28,26 @@ module.exports = Marionette.ItemView.extend({
         console.log(options);
         Self = this;
         Self.steward = options.steward;
-        Self.stewards = options.stewards;
+        Self.stewardsCollection = options.stewards;
         Self.namespace = options.namespace;
         Self.page = options.page;
         Self.accounts = options.accounts;
         Self.currencies = options.currencies;
         Self.listenTo(Self.accounts, 'sync add remove reset', Self.render);
         Self.listenTo(Self.currencies, 'sync add remove reset', Self.render);
-        Self.listenTo(Self.stewards, 'sync add remove reset', Self.render);
-        if(typeof Self.model != 'undefined'){
-          this.render();
-        }
+        Self.listenTo(Self.stewardsCollection, 'sync add remove reset', Self.render);
+        Self.listenTo(Self.steward, 'sync reset', Self.render);
         console.log('namespaceview model', Self.model);
     },
 
-    ui: {
-      newAccount: 'button[name=newAccount]'
-    },
-
     events: {
-      'click button[name=newAccount]': 'createAccount'
+      'click button[name=newAccount]': 'createAccount',
+      'click button[name=newCurrency]': 'createCurrency',
+      'click button[name=addSteward]': 'addSteward',
     },
 
     collectionEvents: {
-      'sync': 'render'
+      'sync add remove reset': 'render'
     },
 
     createAccount: function(event){
@@ -60,16 +56,180 @@ module.exports = Marionette.ItemView.extend({
       router.navigate('stewards/' + Self.steward.get('stewardname') + '/namespaces/' + Self.model.get('namespace') + '/accounts/new/cc');
     },
 
+    createCurrency: function(event){
+      console.log('create currency event fired', event);
+      event.preventDefault();
+      router.navigate('stewards/' + Self.steward.get('stewardname') + '/namespaces/' + Self.model.get('namespace') + '/currencies/new');
+    },
+
+    addSteward: function(event){
+      console.log('add stewards to stewards', event);
+      event.preventDefault();
+      Self.$('#stewardsModal').show();
+
+      Self.$('button.close').off('click').on('click', function(event){
+        event.preventDefault();
+        console.log('close modal');
+        Self.$('#stewardsModal').hide();
+      });
+
+      Self.$('button.cancel').off('click').on('click', function(event){
+        event.preventDefault();
+        console.log('cancel modal');
+        Self.$('#stewardsModal').hide();
+      });
+
+      Self.$('button.add').off('click').on('click', function(event){
+        event.preventDefault();
+        console.log('add button pressed');
+        //get list of checked checkboxes
+
+        var selected = [];
+        $('#stewardsCheckbox:checked').each(function() {
+            selected.push(Self.stewardsCollection.get($(this).val()).toJSON());
+        });
+        console.log('selected', selected);
+        selected.forEach(function(select){
+          var exists = false;
+          Self.stewards.forEach(function(steward){
+            if(steward.stewardname == select.stewardname){
+              exists = true;
+            }
+          })
+          if(!exists){
+            Self.stewards.push(select);
+          }
+        })
+        console.log('Self.stewards', Self.stewards);
+
+        //render new list of stewards
+        Self.$('#stewards').html(Templates['stewardList']({ stewards: Self.stewards }));
+        Self.$('#stewardsModal').hide();
+
+        Self.registerRemove();
+      });
+
+      Self.$('button[name=addStewardToList]').off('click').on('click', function(event){
+        event.preventDefault();
+        console.log('addSteward button pressed');
+
+        var stewardname = Self.$('input[name=stewardname]').val();
+
+        if(stewardname == ''){
+          Self.$('#addStewardForm').addClass('has-error');
+          Self.$('#helpBlock').html('Steward name is required.');
+          setTimeout(function(){
+            Self.$('#addStewardForm').removeClass('has-error');
+            Self.$('#helpBlock').html('');
+          },10000);
+        } else {
+          var addSteward = new Steward();
+          addSteward.set('steward', Self.steward);
+          addSteward.set('stewardname', stewardname);
+
+          addSteward.credentials = {};
+          addSteward.credentials.token = Self.steward.get('access_token');
+          addSteward.fetch({
+            success: function(model, response){
+              console.log('successfully fetched model', model, response);
+
+              //this will re-render the page because it's listening to changes on the collection.
+              Self.stewardsCollection.fetch({
+                success: function(model, response){
+                  console.log('fetched stewards collection', model, response, Self.stewardsCollection.toJSON());
+                  Self.modalTable.destroy();
+                  Self.$('#modalList').html(Templates['stewardModalList']({ stewards: Self.stewardsCollection.toJSON() }));
+                  Self.modalTable = Self.$('[data-sort=checkbox-table]').DataTable({
+                    "paging": true,
+                    "info": false,
+                    "sDom": '<"top"i>rt<"bottom"p><"clear">',
+                    "lengthMenu": [[5, 10, 15, -1], [5, 10, 15, "All"]]
+                  });
+                },
+                error: function(model, error){
+                  console.log('error getting stewards collection', model, error);
+                }
+              })
+              //re-render the modal list
+              // $('#success-notification').html('Successfully added steward.').show();
+              // setTimeout(function(){
+              //   $('#success-notification').hide();
+              // },10000);
+
+              Self.$('#addStewardForm').addClass('has-success');
+              Self.$('#helpBlock').html('Successfully added steward.');
+              Self.$('input[name=stewardname]').val('')
+              setTimeout(function(){
+                Self.$('#addStewardForm').removeClass('has-success');
+                Self.$('#helpBlock').html('');
+              },10000);
+            },
+            error: function(model, error){
+              console.log('failed to fetch model', model, error);
+              if(typeof error.responseJSON != 'undefined' && typeof error.responseJSON.message != 'undefined' ){
+                console.info(error.responseJSON.message);
+                Self.$('#addStewardForm').addClass('has-error');
+                Self.$('#helpBlock').html(error.responseJSON.message);
+                setTimeout(function(){
+                  Self.$('#addStewardForm').removeClass('has-error');
+                  Self.$('#helpBlock').html('');
+                },10000);
+              } else {
+                Self.$('#addStewardForm').addClass('has-error');
+                Self.$('#helpBlock').html('Error');
+                setTimeout(function(){
+                  Self.$('#addStewardForm').removeClass('has-error');
+                  Self.$('#helpBlock').html('');
+                },10000);
+              }
+            }
+          })
+        }
+      });
+    },
+
+    registerRemove: function(){
+        Self.$('button[name=remove]').off('click').on('click', Self.removeSteward);
+    },
+
+    removeSteward: function(event){
+      event.preventDefault();
+      console.log('remove event triggered', this.value);
+      var stewardId = this.value;
+
+      var newStewards = []
+      Self.stewards.forEach(function(steward){
+        if(steward.id != stewardId){
+          newStewards.push(steward);
+        }
+      })
+      Self.stewards = newStewards;
+      //render new list of stewards
+      Self.$('#stewards').html(Templates['stewardList']({ stewards: Self.stewards }));
+      Self.registerRemove();
+    },
+
     render: function(){
 
         Self.model = Self.collection.get('namespaces~' + Self.namespace);
         console.log("render namespace view", Self.model);
         var data = {};
         data.namespace = Self.namespace;
+        data.isEditable = true;
+        data.private = false;
+        data.disabled = false;
         if(typeof Self.model != 'undefined'){
           data = Self.model.toJSON();
+          if(typeof data.disabled == 'undefined'){
+            data.disabled = false;
+          }
+          if(typeof data.private == 'undefined'){
+            data.private = false;
+          }
+          data.namespace = Self.namespace;
+          data.isEditable = true;
           for(var i = 0; i < data.stewards.length; i++){
-            data.stewards[i] = Self.stewards.get(data.stewards[i]);
+            data.stewards[i] = Self.stewardsCollection.get(data.stewards[i]);
             if(typeof data.stewards[i] != 'undefined'){
               data.stewards[i] = data.stewards[i].toJSON();
             }
@@ -79,6 +239,15 @@ module.exports = Marionette.ItemView.extend({
             data.accounts[i] = data.accounts[i].toJSON();
             data.accounts[i].accountName = data.accounts[i].account + (data.accounts[i].account_namespace == '' ? '' : '.' + data.accounts[i].account_namespace);
             data.accounts[i].currencyName = data.accounts[i].currency + (data.accounts[i].currency_namespace == '' ? '' : '.' + data.accounts[i].currency_namespace);
+            if(typeof data.accounts[i].balance == 'undefined'){
+              data.accounts[i].balance = 0.00;
+            }
+            if(typeof data.accounts[i].volume == 'undefined'){
+              data.accounts[i].volume = 0.00;
+            }
+            if(data.accounts[i].volume > 0){
+              data.isEditable = false;
+            }
             _.extend(data.accounts[i], ViewHelpers);
           }
           data.currencies = Self.currencies.getByNamespace(Self.model.get('namespace'));
@@ -87,10 +256,7 @@ module.exports = Marionette.ItemView.extend({
             data.currencies[i].currencyName = data.currencies[i].currency + (data.currencies[i].currency_namespace == '' ? '' : '.' + data.currencies[i].currency_namespace);
             for(var j = 0; j < data.currencies[i].stewards.length; j++){
               console.log('lookup currency steward:', data.currencies[i].stewards[j]);
-              // if(typeof data.currencies[i].stewardsObject == 'undefined'){
-              //   data.currencies[i].stewardsObject = [];
-              // }
-              data.currencies[i].stewards[j] = Self.stewards.get(data.currencies[i].stewards[j]);
+              data.currencies[i].stewards[j] = Self.stewardsCollection.get(data.currencies[i].stewards[j]);
               if(typeof data.currencies[i].stewards[j] != 'undefined'){
                 data.currencies[i].stewards[j] = data.currencies[i].stewards[j].toJSON();
               }
@@ -99,14 +265,39 @@ module.exports = Marionette.ItemView.extend({
             _.extend(data.currencies[i], ViewHelpers);
           }
         }
+
+        data.isSteward = true;
+        data.stewards = Self.stewards = [ Self.steward.toJSON() ];
+        if(typeof Self.model != 'undefined'){
+          data.isSteward = false;
+          var stewardsArray = [];
+          Self.model.get('stewards').forEach(function(steward){
+            console.log('steward', steward);
+            if(typeof steward != 'undefined'){
+              stewardsArray.push(Self.stewardsCollection.get(steward).toJSON());
+              if(steward.id == Self.steward.get('id')){
+                data.isSteward = true;
+              }
+            }
+
+          })
+          data.stewards = Self.stewards = stewardsArray;
+          if(!data.isSteward){
+            data.isEditable = false;
+          }
+        }
+
+        if(Self.namespace == 'add'){
+          data.isSteward = false;
+        }
+
+        data.stewardsCollection = Self.stewardsCollection.toJSON();
+
         console.log('Namespace Data:', data);
         _.extend(data, ViewHelpers);
         this.$el.html(this.template(data));
 
-
-        this.$('[data-sort=table]').DataTable({
-          "order": [[ 0, "desc" ], [1, "desc"]],
-        });
+        Self.registerRemove();
 
         $.validator.addMethod(
           "regex",
@@ -160,9 +351,13 @@ module.exports = Marionette.ItemView.extend({
         this.$('button[name=cancel]').off('click').on('click', function(e){
           e.preventDefault();
           console.log('cancel button pressed!');
-          Self.$('#namespaceForm').hide();
-          Self.$('#statsButton').show();
-          Self.$('#stats').show();
+          if(Self.namespace == 'add' || Self.namespace == 'new'){
+            router.navigate('#settings');
+          } else {
+            Self.$('#namespaceForm').hide();
+            Self.$('#statsButton').show();
+            Self.$('#stats').show();
+          }
         });
 
         this.$('button[name=upsert]').off('click').on('click', function(e){
@@ -177,14 +372,22 @@ module.exports = Marionette.ItemView.extend({
               Self.model = new Namespace();
             }
             Self.model.set('steward', Self.steward);
-            Self.model.set('stewards', [ Self.steward.get('id') ] );
-            Self.model.set('namespace', Self.$('input[name=namespace]').val());
+            var stewardsArray = [];
+            Self.stewards.forEach(function(steward){
+              stewardsArray.push(steward.id);
+            });
+            Self.model.set('stewards', stewardsArray );
+            if(typeof Self.$('input[name=namespace]').val() != 'undefined' && Self.$('input[name=namespace]').val() != ''){
+              Self.model.set('namespace', Self.$('input[name=namespace]').val());
+            }
             if(Self.model.get('namespace').indexOf('.') !== -1){
               Self.model.set('parent_namespace', Self.model.get('namespace').substr(Self.model.get('namespace').indexOf('.') + 1, Self.model.get('namespace').length));
             } else {
               Self.model.set('parent_namespace', '');
             }
 
+            Self.model.set('private', Self.$('input[name=private]:checked').val() === 'true');
+            Self.model.set('disabled', Self.$('input[name=disabled]:checked').val() === 'true');
 
             //console.log('namespace save', Self.model.toJSON());
             Self.model.credentials = {};
@@ -195,9 +398,10 @@ module.exports = Marionette.ItemView.extend({
                 success: function(model, response){
                   console.log('successfully added model', model, response);
                   Self.model.set('id', 'namespaces~' + Self.model.get('namespace') );
-                  Self.collection.set(model, {remove: false});
+
+                  Self.collection.fetch();
                   router.navigate('stewards/' + Self.steward.get('stewardname') + '/namespaces/' + Self.model.get('namespace'));
-                  Self.stewards.fetch();
+
                   //Backbone.history.navigate('#namespaces/namespaces~' + Self.steward.get('stewardname') + '~' + Self.model.get('firstname') + '~' + Self.model.get('lastname'),{trigger:true, replace:true});
                   $('#success-notification').html('Successfully added namespace.').show();
                   setTimeout(function(){
@@ -225,9 +429,11 @@ module.exports = Marionette.ItemView.extend({
                 success: function(model, response){
                   console.log('successfully saved model', model, response);
                   Self.model.set('id', 'namespaces~' + Self.model.get('namespace') );
-                  Self.collection.set(model, {remove: false});
+                  //Self.collection.set(model, {remove: false});
+                  Self.collection.fetch();
+
                   router.navigate('stewards/' + Self.steward.get('stewardname') + '/namespaces/' + Self.model.get('namespace'));
-                  Self.render();
+                  //Self.render();
                   //Backbone.history.navigate('#namespaces/namespaces~' + Self.steward.get('stewardname') + '~' + Self.model.get('firstname') + '~' + Self.model.get('lastname'),{trigger:true, replace:true});
                   $('#success-notification').html('Successfully saved namespace.').show();
                   setTimeout(function(){
@@ -267,5 +473,16 @@ module.exports = Marionette.ItemView.extend({
           console.log('clicked on currency ID:', id);
           router.navigate('stewards/' + Self.steward.get('stewardname') + '/namespaces/' + Self.namespace + '/currencies/' + id.split('~')[1] );
         })
+
+        this.$('[data-sort=table]').DataTable({
+          "order": [[ 0, "desc" ], [1, "desc"]],
+        });
+
+        Self.modalTable = Self.$('[data-sort=checkbox-table]').DataTable({
+          "paging": true,
+          "info": false,
+          "sDom": '<"top"i>rt<"bottom"p><"clear">',
+          "lengthMenu": [[5, 10, 15, -1], [5, 10, 15, "All"]]
+        });
     }
 });
