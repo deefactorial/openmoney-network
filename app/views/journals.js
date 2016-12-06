@@ -128,10 +128,15 @@ module.exports = Backbone.View.extend({
           }, 1);
         } else {
 
+          data.toAccounts = [];
           for(var i = 0; i < data.accounts.length; i++){
+
             data.accounts[i] = data.accounts[i].toJSON();
             data.accounts[i].accountName = data.accounts[i].account_namespace == '' ? data.accounts[i].account : data.accounts[i].account + '.' + data.accounts[i].account_namespace;
             data.accounts[i].currencyName = data.accounts[i].currency_namespace == '' ? data.accounts[i].currency : data.accounts[i].currency + '.' + data.accounts[i].currency_namespace;
+            if(data.toAccounts.indexOf(data.accounts[i].accountName) === -1){
+              data.toAccounts.push(data.accounts[i].accountName);
+            }
             _.extend(data.accounts[i], ViewHelpers);
           }
           _.extend(data, ViewHelpers);

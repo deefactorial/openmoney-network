@@ -624,10 +624,13 @@ this["openmoney"]["journals"] = Handlebars.template({"1":function(container,dept
     + ":"
     + alias4(((helper = (helper = helpers.currencyName || (depth0 != null ? depth0.currencyName : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"currencyName","hash":{},"data":data}) : helper)))
     + "\" class=\"value-buttons\">\n              <button type=\"button\" class=\"btn btn-xm btn-success-outline action-spacing tab-spacing send-value send-value-selected\" style=\"width: 80%; margin: 2px;\">\n                <span class=\"icon icon-plus icon-padding\"></span>\n                SEND VALUE\n              </button>\n              <button type=\"button\" class=\"btn btn-xm btn-danger-outline action-spacing tab-spacing receive-value\" style=\"width: 80%; margin: 2px;\">\n                <span class=\"icon icon-minus icon-padding\"></span>\n                RECEIVE VALUE\n              </button>\n            </div>\n          </td></tr>\n";
+},"4":function(container,depth0,helpers,partials,data) {
+    return "        <option value=\""
+    + container.escapeExpression(container.lambda(depth0, depth0))
+    + "\">\n";
 },"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
-    var stack1, helper, alias1=depth0 != null ? depth0 : {}, alias2=helpers.helperMissing, alias3=container.escapeExpression, alias4="function";
-
-  return "<style>\n.input-padding{\n  padding-top: 7px !important;\n  padding-right: 7px !important;\n  padding-left: 7px !important;\n  padding-bottom: 0px !important;\n}\n.p-a-md{\n  padding-top: 0px !important;\n  padding-bottom: 0px !important;\n}\n.account-buttons{\n  white-space: normal;\n}\n</style>\n<div class=\"col-sm-6 table-full\" style=\"padding-top: 10px;\">\n  <table class=\"table display\" data-sort=\"table\">\n    <thead>\n      <tr>\n        <th class=\"\">Accounts</th>\n      </tr>\n    </thead>\n    <tbody class=\"table-rows\">\n"
+    var stack1, helper, options, alias1=depth0 != null ? depth0 : {}, alias2=helpers.helperMissing, alias3=container.escapeExpression, alias4="function", buffer = 
+  "<style>\n.input-padding{\n  padding-top: 7px !important;\n  padding-right: 7px !important;\n  padding-left: 7px !important;\n  padding-bottom: 0px !important;\n}\n.p-a-md{\n  padding-top: 0px !important;\n  padding-bottom: 0px !important;\n}\n.account-buttons{\n  white-space: normal;\n}\n</style>\n<div class=\"col-sm-6 table-full\" style=\"padding-top: 10px;\">\n  <table class=\"table display\" data-sort=\"table\">\n    <thead>\n      <tr>\n        <th class=\"\">Accounts</th>\n      </tr>\n    </thead>\n    <tbody class=\"table-rows\">\n"
     + ((stack1 = helpers.each.call(alias1,(depth0 != null ? depth0.accounts : depth0),{"name":"each","hash":{},"fn":container.program(1, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
     + "    </tbody>\n  </table>\n</div>\n<div class=\"col-sm-6\" style=\"padding-top: 20px;\">\n  <div class=\"row\">\n    <div class=\"col-xs-6\" style=\"padding-left: 22px; padding-right: 3px;\">\n      <div class=\"statcard statcard-success p-a-md\">\n        <h2 id=\"balance\" class=\"statcard-number\">\n          "
     + alias3((helpers.decimal_places || (depth0 && depth0.decimal_places) || alias2).call(alias1,(depth0 != null ? depth0.balance : depth0),{"name":"decimal_places","hash":{},"data":data}))
@@ -635,7 +638,11 @@ this["openmoney"]["journals"] = Handlebars.template({"1":function(container,dept
     + alias3((helpers.decimal_places || (depth0 && depth0.decimal_places) || alias2).call(alias1,(depth0 != null ? depth0.volume : depth0),{"name":"decimal_places","hash":{},"data":data}))
     + "\n        </h2>\n        <span class=\"statcard-desc\">Volume</span>\n      </div>\n    </div>\n  </div>\n  <div id=\"card-div\" class=\"input-padding\">\n    <input type=\"text\" id=\"toAccountName\" name=\"toAccountName\" value=\""
     + alias3(((helper = (helper = helpers.toAccountName || (depth0 != null ? depth0.toAccountName : depth0)) != null ? helper : alias2),(typeof helper === alias4 ? helper.call(alias1,{"name":"toAccountName","hash":{},"data":data}) : helper)))
-    + "\" placeholder=\"Trading Name\" class=\"form-control\"/>\n    <input type=\"text\" id=\"description\" name=\"description\" value=\"\" placeholder=\"Description\" class=\"form-control\" style=\"margin-top:7px;\"/>\n    <input type=\"hidden\" name=\"polarity\" value=\"send\"/>\n    <input type=\"hidden\" name=\"accountName\" value=\""
+    + "\" placeholder=\"To Account\" list=\"toAccounts\" class=\"form-control\"/>\n    <datalist id=\"toAccounts\">\n";
+  stack1 = ((helper = (helper = helpers.toAccounts || (depth0 != null ? depth0.toAccounts : depth0)) != null ? helper : alias2),(options={"name":"toAccounts","hash":{},"fn":container.program(4, data, 0),"inverse":container.noop,"data":data}),(typeof helper === alias4 ? helper.call(alias1,options) : helper));
+  if (!helpers.toAccounts) { stack1 = helpers.blockHelperMissing.call(depth0,stack1,options)}
+  if (stack1 != null) { buffer += stack1; }
+  return buffer + "    </datalist>\n    <input type=\"text\" id=\"description\" name=\"description\" value=\"\" placeholder=\"Description\" class=\"form-control\" style=\"margin-top:7px;\"/>\n    <input type=\"hidden\" name=\"polarity\" value=\"send\"/>\n    <input type=\"hidden\" name=\"accountName\" value=\""
     + alias3(((helper = (helper = helpers.accountName || (depth0 != null ? depth0.accountName : depth0)) != null ? helper : alias2),(typeof helper === alias4 ? helper.call(alias1,{"name":"accountName","hash":{},"data":data}) : helper)))
     + "\"/>\n    <input type=\"hidden\" name=\"currencyName\" value=\""
     + alias3(((helper = (helper = helpers.currencyName || (depth0 != null ? depth0.currencyName : depth0)) != null ? helper : alias2),(typeof helper === alias4 ? helper.call(alias1,{"name":"currencyName","hash":{},"data":data}) : helper)))
