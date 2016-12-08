@@ -20,6 +20,8 @@ npm install
 
 #Local Hosting
 
+You must have the [openmoney-api](https://github.com/deefactorial/openmoney-api) installed and running on port 8080.
+
 ```sh
 sudo apt-get install nginx
 cp openmoney-network.nginx.conf /etc/nginx/sites-available/
