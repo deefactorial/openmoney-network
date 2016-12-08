@@ -6,10 +6,10 @@ This is the client side application that accesses the [openmoney-api](https://gi
 
 `npm install`
 
-#build
+#Build
 
 `grunt`
 
-#public instance
+#Public Instance
 
 [openmoney.network](https://openmoney.network) or [net.openmoney.gift](https://net.openmoney.gift)
