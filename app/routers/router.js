@@ -350,7 +350,7 @@ module.exports = Marionette.AppRouter.extend({
                         {active: true, linkText: accountName + ' ' + currencyName}];
       } else {
         var breadcrumbs = [{linkText: 'Process Payment'},
-                        {active: true, linkText: 'From Trading Name'}];
+                        {active: true, linkText: 'From Account'}];
       }
       var breadcrumbsCollection = new Breadcrumbs(breadcrumbs);
       var breadcrumbRegion = Self.dashhead.getRegion('breadcrumbs');

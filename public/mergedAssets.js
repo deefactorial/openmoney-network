@@ -1234,7 +1234,7 @@ module.exports = Marionette.AppRouter.extend({
                         {active: true, linkText: accountName + ' ' + currencyName}];
       } else {
         var breadcrumbs = [{linkText: 'Process Payment'},
-                        {active: true, linkText: 'From Trading Name'}];
+                        {active: true, linkText: 'From Account'}];
       }
       var breadcrumbsCollection = new Breadcrumbs(breadcrumbs);
       var breadcrumbRegion = Self.dashhead.getRegion('breadcrumbs');
@@ -5573,10 +5573,18 @@ module.exports = Backbone.View.extend({
         error: function(model, res){
           if(typeof res.responseJSON != 'undefined' && typeof res.responseJSON.message != 'undefined' ){
             console.info(res.responseJSON.message);
-            $('#error-notification').html(res.responseJSON.message).show();
-            setTimeout(function(){
-              $('#error-notification').hide();
-            },10000);
+            if(res.responseJSON.code === 1007){
+              $('#error-notification').html("To account does only allows alpha numberic, dot, underscore and hyphen characters.").show();
+              setTimeout(function(){
+                $('#error-notification').hide();
+              },10000);
+            } else {
+              $('#error-notification').html(res.responseJSON.message).show();
+              setTimeout(function(){
+                $('#error-notification').hide();
+              },10000);
+            }
+
           } else {
             $('#error-notification').html('Error').show();
             setTimeout(function(){
