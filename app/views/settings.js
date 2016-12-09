@@ -731,7 +731,7 @@ module.exports = Marionette.CollectionView.extend({
           });
         });
 
-        this.$('[data-sort=namespaces]').DataTable();
+
 
         this.$('[data-sort=namespaces] > tbody > tr').off('click').on('click', function(event){
           event.preventDefault();
@@ -750,8 +750,6 @@ module.exports = Marionette.CollectionView.extend({
           router.navigate('stewards/' + Self.steward.get('stewardname') + '/namespaces/add');
         })
 
-        this.$('[data-sort=stewards]').DataTable();
-
         this.$('[data-sort=stewards] > tbody > tr').off('click').on('click', function(event){
           event.preventDefault();
           var id = $(this).attr('id');
@@ -763,5 +761,8 @@ module.exports = Marionette.CollectionView.extend({
           event.preventDefault();
           router.navigate('stewards/add');
         })
+
+        this.$('[data-sort=namespaces]').DataTable();
+        this.$('[data-sort=stewards]').DataTable();
     }
 });
