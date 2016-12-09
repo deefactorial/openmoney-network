@@ -111,7 +111,7 @@ module.exports = Marionette.AppRouter.extend({
     'logout':'logout',
 		'signup':'register',
 		'forgot':'forgot',
-    'forgot/:stewardname/:forgot_token':'reset',
+    'stewards/:stewardname/reset/:forgot_token':'reset',
     'stewards':'stewards',
     'settings':'settings',
     'stewards/:stewardname':'stewardRoute',

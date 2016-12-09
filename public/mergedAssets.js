@@ -995,7 +995,7 @@ module.exports = Marionette.AppRouter.extend({
     'logout':'logout',
 		'signup':'register',
 		'forgot':'forgot',
-    'forgot/:stewardname/:forgot_token':'reset',
+    'stewards/:stewardname/reset/:forgot_token':'reset',
     'stewards':'stewards',
     'settings':'settings',
     'stewards/:stewardname':'stewardRoute',
@@ -4877,7 +4877,7 @@ module.exports = Backbone.View.extend({
       options.data = JSON.stringify(user);
       options.dataType = 'json';
       options.contentType = "application/json";
-      options.url = '/V1/stewards/forgot';
+      options.url = '/V2/stewards/forgot';
       options.success = function(model){
         console.info('Successfully Sent Forgot Password Request.');
         router.navigate('#login',{trigger:true, replace:false});
@@ -7381,7 +7381,7 @@ module.exports = Backbone.View.extend({
             options.data = JSON.stringify(user);
             options.dataType = 'json';
             options.contentType = "application/json";
-            options.url = '/V1/stewards/reset';
+            options.url = '/V2/stewards/' + Self.stewardname + '/reset';
             options.success = function(model){
               console.info('Successfully Sent Reset Password Request.');
               router.navigate('#login',{trigger:true, replace:false});

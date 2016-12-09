@@ -103,7 +103,7 @@ module.exports = Backbone.View.extend({
             options.data = JSON.stringify(user);
             options.dataType = 'json';
             options.contentType = "application/json";
-            options.url = '/V1/stewards/reset';
+            options.url = '/V2/stewards/' + Self.stewardname + '/reset';
             options.success = function(model){
               console.info('Successfully Sent Reset Password Request.');
               router.navigate('#login',{trigger:true, replace:false});

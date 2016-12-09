@@ -93,7 +93,7 @@ module.exports = Backbone.View.extend({
       options.data = JSON.stringify(user);
       options.dataType = 'json';
       options.contentType = "application/json";
-      options.url = '/V1/stewards/forgot';
+      options.url = '/V2/stewards/forgot';
       options.success = function(model){
         console.info('Successfully Sent Forgot Password Request.');
         router.navigate('#login',{trigger:true, replace:false});
