@@ -7648,7 +7648,13 @@ module.exports = Marionette.CollectionView.extend({
                       //console.log(csvPosition);
                       //console.log(csvPosition['From']);
                       var from = elements[csvPosition['From']];
+                      if(from.indexOf('.') === -1){
+                        from = from + '.' + Self.steward.get('stewardname') + '.cc';
+                      }
                       var to = elements[csvPosition['To']];
+                      if(to.indexOf('.') === -1){
+                        to = to + '.' + Self.steward.get('stewardname') + '.cc';
+                      }
                       var description = elements[csvPosition['Description']];
                       var currency = elements[csvPosition['Currency']];
                       var amount = elements[csvPosition['Amount']];
@@ -7876,7 +7882,13 @@ module.exports = Marionette.CollectionView.extend({
                       if(row > 0 && elements.length > 1) {
 
                         var from = elements[csvPosition['From']];
+                        if(from.indexOf('.') === -1){
+                          from = from + '.' + Self.steward.get('stewardname') + '.cc';
+                        }
                         var to = elements[csvPosition['To']];
+                        if(to.indexOf('.') === -1){
+                          to = to + '.' + Self.steward.get('stewardname') + '.cc';
+                        }
                         var description = elements[csvPosition['Description']];
                         var currency = elements[csvPosition['Currency']];
                         var amount = elements[csvPosition['Amount']];
@@ -8061,7 +8073,13 @@ module.exports = Marionette.CollectionView.extend({
                           if(row > 0 && elements.length > 1) {
 
                             var from = elements[csvPosition['From']];
+                            if(from.indexOf('.') === -1){
+                              from = from + '.' + Self.steward.get('stewardname') + '.cc';
+                            }
                             var to = elements[csvPosition['To']];
+                            if(to.indexOf('.') === -1){
+                              to = to + '.' + Self.steward.get('stewardname') + '.cc';
+                            }
                             var description = elements[csvPosition['Description']];
                             var currency = elements[csvPosition['Currency']];
                             var amount = elements[csvPosition['Amount']];
