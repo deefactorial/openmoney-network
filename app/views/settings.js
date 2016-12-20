@@ -451,6 +451,8 @@ module.exports = Marionette.CollectionView.extend({
                     setTimeout(function(){
                       $('#error-notification').hide();
                     },10000);
+                    Self.namespaces.fetch();
+                    Self.currencies.fetch();
                   } else {
                     console.log(response);
                     //ok got namespaces and currencies
@@ -644,6 +646,7 @@ module.exports = Marionette.CollectionView.extend({
                         setTimeout(function(){
                           $('#error-notification').hide();
                         },10000);
+                        Self.accounts.fetch();
                       } else {
                         console.log(results);
                         //accounts exist make journal entry
@@ -708,10 +711,16 @@ module.exports = Marionette.CollectionView.extend({
                                     console.log('successfully saved journal', model, res);
                                     Self.journals.fetch();
                                     Self.accounts.fetch();
+                                    Self.namespaces.fetch();
+                                    Self.currencies.fetch();
                                     callback(null, 'Successfully Processed Journal Entry.');
                                   },
                                   error: function(model, res){
                                     console.log('failed to saved journal', model, res);
+                                    Self.journals.fetch();
+                                    Self.accounts.fetch();
+                                    Self.namespaces.fetch();
+                                    Self.currencies.fetch();
                                     if(typeof res.responseJSON != 'undefined' && typeof res.responseJSON.message != 'undefined' ){
                                       console.info(res.responseJSON.message);
                                       callback('journal: from:' + from + ' to:' + to + ' error: ' + res.responseJSON.message);
