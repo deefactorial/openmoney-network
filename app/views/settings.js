@@ -313,7 +313,7 @@ module.exports = Marionette.CollectionView.extend({
                       }
 
 
-                      tasks['namespaces~' + to.substr(to.indexOf('.') + 1, to.length] = function(callback){
+                      tasks['namespaces~' + to.substr(to.indexOf('.') + 1, to.length)] = function(callback){
                         var namespaceString = to.substr(to.indexOf('.') + 1, to.length);
                         if(to.indexOf('.') === -1){
                           callback('To account (' + to + ') must have a namespace');
@@ -325,7 +325,7 @@ module.exports = Marionette.CollectionView.extend({
                             var namespace = Self.namespaces.get("namespaces~" + namespaceString)
                             console.log(namespaceString, namespace)
                             if(typeof namespace != 'undefined'){
-                              console.log('to account namespace found.'e);
+                              console.log('to account namespace found.');
                               callback(null, 'successfully fetched namespace');
                             } else {
                               console.log('to account namespace not found.');
