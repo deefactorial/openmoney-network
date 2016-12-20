@@ -1108,9 +1108,9 @@ module.exports = Marionette.AppRouter.extend({
     console.log('Goto: LoginSuccessView');
     Self.initializeData(function(err, data){
       console.log('initializeData', err, data);
-      Self.layout.getRegion('navigation').show(new NavigationView({model: Self.page, steward: Self.steward}));
-      Self.dashhead = new DashheadView({model: Self.page, steward: Self.steward});
-      Self.layout.getRegion('dashhead').show(Self.dashhead);
+      // Self.layout.getRegion('navigation').show(new NavigationView({model: Self.page, steward: Self.steward}));
+      // Self.dashhead = new DashheadView({model: Self.page, steward: Self.steward});
+      // Self.layout.getRegion('dashhead').show(Self.dashhead);
       Self.navigate('stewards/' + Self.steward.get('stewardname') + '/journals',{trigger:true, replace:true})
     });
   },
@@ -5802,6 +5802,7 @@ module.exports = Backbone.View.extend({
               }
             } else {
               // delete(steward.rev);
+              console.log('authenticated steward:',authSteward);
               Self.steward = authSteward;
               Self.steward.credentials = {};
               Self.steward.credentials.token = Self.steward.get('access_token');
@@ -5847,7 +5848,7 @@ module.exports = Backbone.View.extend({
               if(_.isFunction(done)){
                 done();
               }
-              router.navigate('#stewards/' + Self.steward.get('stewardname') + '/loginSuccess',{trigger:true, replace:true});
+              router.navigate('#stewards/' + Self.steward.get('stewardname') + '/journals',{trigger:true, replace:true});
               $('#success-notification').html('Successfully Logged In.').show();
               setTimeout(function(){
                 $('#success-notification').hide();
