@@ -136,6 +136,7 @@ module.exports = Backbone.View.extend({
               Self.steward.set('stewardname', $('#stewardname').val());
               Self.steward.set('password', $('#password').val());
               Self.steward.set('type', 'stewards~');
+              Self.steward.set('access_token', authSteward.get('access_token'))
               Self.steward.credentials = {};
               Self.steward.credentials.token = Self.steward.get('access_token');
               Self.steward.fetch({
