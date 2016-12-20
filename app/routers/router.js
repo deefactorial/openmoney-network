@@ -578,7 +578,7 @@ module.exports = Marionette.AppRouter.extend({
     var series = {};
     var parallel = {};
     series.steward = function(callback){
-      if(typeof Self.steward != 'undefined'){
+      if(typeof Self.steward != 'undefined' && Self.steward.get('stewardname') != ''){
         callback(null, Self.steward);
       } else {
         db.get('config~credentials', function(error, doc){
