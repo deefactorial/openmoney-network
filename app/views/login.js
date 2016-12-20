@@ -100,15 +100,17 @@ module.exports = Backbone.View.extend({
 
         if ( $('#login').valid() ) {
 
-          Self.steward.set('_id', 'stewards~' + $('#stewardname').val());
-          Self.steward.set('stewardname', $('#stewardname').val());
-          Self.steward.set('password', $('#password').val());
-          Self.steward.set('type', 'stewards~');
+          var steward = new Steward();
+
+          steward.set('_id', 'stewards~' + $('#stewardname').val());
+          steward.set('stewardname', $('#stewardname').val());
+          steward.set('password', $('#password').val());
+          steward.set('type', 'stewards~');
           //var steward = new Steward({_id: , stewardname: $('#stewardname').val(), password: $('#password').val(), type: 'stewards~'});
           //Self.steward.save();
 
-          oauth.authenticate(Self.steward, function(error, steward){
-            console.log('oauth.authenticate results', error, steward);
+          oauth.authenticate(steward, function(error, authSteward){
+            console.log('oauth.authenticate results', error, authSteward);
             if(error){
               console.log(JSON.stringify(error));
               if(typeof error.responseJSON != 'undefined' && typeof error.responseJSON.message != 'undefined' ){
@@ -128,7 +130,7 @@ module.exports = Backbone.View.extend({
               }
             } else {
               // delete(steward.rev);
-              Self.steward = steward;
+              Self.steward = authSteward;
               Self.steward.credentials = {};
               Self.steward.credentials.token = Self.steward.get('access_token');
               Self.steward.fetch({
@@ -146,7 +148,7 @@ module.exports = Backbone.View.extend({
                 if(err && err.status == 404){
                   db.put({
                     _id: 'config~credentials',
-                    steward: steward.toJSON()
+                    steward: authSteward.toJSON()
                   }, function(err, res){
                     console.log('config~credentials.put'. err, res);
                   });
@@ -154,8 +156,8 @@ module.exports = Backbone.View.extend({
                   if(err){
                     console.log('config~credentials error not 404', err);
                   } else {
-                    console.log('config~credentials successfully inserted steward into ', steward)
-                    doc.steward = steward;
+                    console.log('config~credentials successfully inserted steward into ', authSteward)
+                    doc.steward = authSteward;
                     db.put(doc);
                   }
                 }
