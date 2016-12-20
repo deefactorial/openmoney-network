@@ -323,7 +323,7 @@ module.exports = Marionette.CollectionView.extend({
                             var namespace = Self.namespaces.get("namespaces~" + namespaceString)
                             console.log(namespace)
                             if(typeof namespace != 'undefined'){
-                              console.log('to account namespace found.');
+                              console.log('to account namespace found.', namespace);
                               callback(null, 'successfully fetched namespace');
                             } else {
                               console.log('to account namespace not found.');
