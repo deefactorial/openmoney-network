@@ -242,8 +242,9 @@ module.exports = Marionette.CollectionView.extend({
                       //var volume = elements[8];
                       console.log('entry:', from, to, description, currency, amount);
 
-                      var namespaceString = from.substr(from.indexOf('.') + 1, from.length);
-                      tasks['namespaces~' + namespaceString] = function(callback){
+
+                      tasks['namespaces~' + from.substr(from.indexOf('.') + 1, from.length)] = function(callback){
+                        var namespaceString = from.substr(from.indexOf('.') + 1, from.length);
                         if(from.indexOf('.') === -1){
                           callback('From account (' + from + ') must have a namespace');
                         } else {
@@ -311,8 +312,9 @@ module.exports = Marionette.CollectionView.extend({
                         }
                       }
 
-                      var namespaceString = to.substr(to.indexOf('.') + 1, to.length);
-                      tasks['namespaces~' + namespaceString] = function(callback){
+
+                      tasks['namespaces~' + to.substr(to.indexOf('.') + 1, to.length] = function(callback){
+                        var namespaceString = to.substr(to.indexOf('.') + 1, to.length);
                         if(to.indexOf('.') === -1){
                           callback('To account (' + to + ') must have a namespace');
                         } else {
