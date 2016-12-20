@@ -180,7 +180,7 @@ module.exports = Backbone.View.extend({
               if(_.isFunction(done)){
                 done();
               }
-              router.navigate('#stewards/' + Self.steward.get('stewardname') + '/journals',{trigger:true, replace:true});
+              router.navigate('#stewards/' + Self.steward.get('stewardname') + '/loginSuccess',{trigger:true, replace:true});
               $('#success-notification').html('Successfully Logged In.').show();
               setTimeout(function(){
                 $('#success-notification').hide();
