@@ -224,9 +224,10 @@ module.exports = Marionette.AppRouter.extend({
     console.log('Goto: LoginSuccessView');
     Self.initializeData(function(err, data){
       console.log('initializeData', err, data);
-      // Self.layout.getRegion('navigation').show(new NavigationView({model: Self.page, steward: Self.steward}));
-      // Self.dashhead = new DashheadView({model: Self.page, steward: Self.steward});
-      // Self.layout.getRegion('dashhead').show(Self.dashhead);
+      //reset the navigation 
+      Self.layout.getRegion('navigation').show(new NavigationView({model: Self.page, steward: Self.steward}));
+      Self.dashhead = new DashheadView({model: Self.page, steward: Self.steward});
+      Self.layout.getRegion('dashhead').show(Self.dashhead);
       Self.navigate('stewards/' + Self.steward.get('stewardname') + '/journals',{trigger:true, replace:true})
     });
   },
