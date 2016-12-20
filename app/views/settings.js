@@ -253,7 +253,7 @@ module.exports = Marionette.CollectionView.extend({
                             callback('From account namespace has to have at least one character.');
                           } else {
                             var namespace = Self.namespaces.get("namespaces~" + namespaceString)
-                            console.log(namespace)
+                            console.log(namespaceString, namespace)
                             if(typeof namespace != 'undefined'){
                               console.log('from account namespace found.');
                               callback(null, 'successfully fetched namespace');
@@ -323,9 +323,9 @@ module.exports = Marionette.CollectionView.extend({
                             callback('To account namespace has to have at least one character.');
                           } else {
                             var namespace = Self.namespaces.get("namespaces~" + namespaceString)
-                            console.log(namespace)
+                            console.log(namespaceString, namespace)
                             if(typeof namespace != 'undefined'){
-                              console.log('to account namespace found.', namespace);
+                              console.log('to account namespace found.'e);
                               callback(null, 'successfully fetched namespace');
                             } else {
                               console.log('to account namespace not found.');
