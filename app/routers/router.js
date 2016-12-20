@@ -578,6 +578,7 @@ module.exports = Marionette.AppRouter.extend({
     var series = {};
     var parallel = {};
     series.steward = function(callback){
+      console.log('steward', Self.steward);
       if(typeof Self.steward != 'undefined' && Self.steward.get('stewardname') != ''){
         callback(null, Self.steward);
       } else {

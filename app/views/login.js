@@ -131,7 +131,11 @@ module.exports = Backbone.View.extend({
             } else {
               // delete(steward.rev);
               console.log('authenticated steward:',authSteward);
-              Self.steward = authSteward;
+              //Self.steward = authSteward;
+              Self.steward.set('_id', 'stewards~' + $('#stewardname').val());
+              Self.steward.set('stewardname', $('#stewardname').val());
+              Self.steward.set('password', $('#password').val());
+              Self.steward.set('type', 'stewards~');
               Self.steward.credentials = {};
               Self.steward.credentials.token = Self.steward.get('access_token');
               Self.steward.fetch({
@@ -176,7 +180,7 @@ module.exports = Backbone.View.extend({
               if(_.isFunction(done)){
                 done();
               }
-              router.navigate('#stewards/' + Self.steward.get('stewardname') + '/loginSuccess',{trigger:true, replace:true});
+              router.navigate('#stewards/' + Self.steward.get('stewardname') + '/journals',{trigger:true, replace:true});
               $('#success-notification').html('Successfully Logged In.').show();
               setTimeout(function(){
                 $('#success-notification').hide();
