@@ -655,11 +655,11 @@ module.exports = Marionette.CollectionView.extend({
                           if(row > 0 && elements.length > 1) {
 
                             var from = elements[csvPosition['From']];
-                            if(from.indexOf('.') === -1){
+                            if(from.indexOf('.cc') === -1){
                               from = from + '.' + Self.steward.get('stewardname') + '.cc';
                             }
                             var to = elements[csvPosition['To']];
-                            if(to.indexOf('.') === -1){
+                            if(to.indexOf('.cc') === -1){
                               to = to + '.' + Self.steward.get('stewardname') + '.cc';
                             }
                             var description = elements[csvPosition['Description']];
