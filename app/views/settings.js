@@ -81,6 +81,10 @@ module.exports = Marionette.CollectionView.extend({
           //data.stewardsCollection = Self.stewardsCollection.toJSON():
         }
 
+        if(typeof data.theme == 'undefined'){
+          data.theme = 'light';
+        }
+
         console.log('settings view data:', data);
         _.extend(data, ViewHelpers);
         Self.$el.html(Self.template(data));

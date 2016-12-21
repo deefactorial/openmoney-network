@@ -254,3 +254,7 @@ input.form-control{
 div.dataTables_wrapper > div.row > div.col-sm-6 {
   width:50%;
 }
+
+.sidebar-nav {
+  margin-right: 0;
+}
