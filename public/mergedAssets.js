@@ -1864,7 +1864,7 @@ this["openmoney"]["account"] = Handlebars.template({"1":function(container,depth
     + ((stack1 = helpers["if"].call(alias1,(depth0 != null ? depth0.id : depth0),{"name":"if","hash":{},"fn":container.program(14, data, 0, blockParams, depths),"inverse":container.noop,"data":data})) != null ? stack1 : "")
     + "\n"
     + ((stack1 = helpers["if"].call(alias1,(depth0 != null ? depth0.isEditable : depth0),{"name":"if","hash":{},"fn":container.program(16, data, 0, blockParams, depths),"inverse":container.noop,"data":data})) != null ? stack1 : "")
-    + ((stack1 = helpers["if"].call(alias1,(depth0 != null ? depth0.isSteward : depth0),{"name":"if","hash":{},"fn":container.program(24, data, 0, blockParams, depths),"inverse":container.noop,"data":data})) != null ? stack1 : "")
+    + ((stack1 = helpers["if"].call(alias1,(depth0 != null ? depth0.isStewardOrCurrencySteward : depth0),{"name":"if","hash":{},"fn":container.program(24, data, 0, blockParams, depths),"inverse":container.noop,"data":data})) != null ? stack1 : "")
     + "    <div class=\"form-group text-right\">\n      <button type=\"button\" name=\"cancel\" class=\"btn btn-lg btn-primary-outline\" >Cancel</button>\n      <button type=\"button\" name=\"upsert\" class=\"btn btn-lg btn-primary-outline\" >\n        <strong>"
     + ((stack1 = helpers["if"].call(alias1,(depth0 != null ? depth0.id : depth0),{"name":"if","hash":{},"fn":container.program(29, data, 0, blockParams, depths),"inverse":container.program(29, data, 0, blockParams, depths),"data":data})) != null ? stack1 : "")
     + "</strong>\n      </button>\n    </div>\n  </form>\n\n  <div id=\"stewardsModal\" class=\"modal\" style=\"display: none;\">\n    <div class=\"modal-dialog modal-sm\">\n      <div class=\"modal-content\">\n        <div class=\"modal-header\">\n          <button type=\"button\" class=\"close\" data-dismiss=\"modal\" aria-label=\"Close\"><span aria-hidden=\"true\">&times;</span></button>\n          <h4 class=\"modal-title\">Add Stewards</h4>\n        </div>\n        <div class=\"modal-body\">\n          <div class=\"flextable\">\n            <div class=\"flextable-item flextable-primary\">\n              <div id=\"addStewardForm\" class=\"form-group\" style=\"margin-bottom: 0;\">\n                <input type=\"text\" id=\"stewardname\" name=\"stewardname\" value=\""
@@ -3343,7 +3343,22 @@ module.exports = Marionette.ItemView.extend({
 
         data.accountName = Self.accountName;
         data.currencyName = Self.currencyName;
+        console.log('currencyName = ', Self.currencyName);
+        data.currency = Self.currencies.get('currencies~' + Self.currencyName);
+        data.isCurrencySteward = false;
+        if(typeof data.currency != 'undefined'){
+          data.currency = data.currency.toJSON();
+          data.currency.stewards.forEach(function(steward){
+            if(steward == Self.steward.get('id')){
+              data.isCurrencySteward = true;
+            }
+          })
+        }
+
+
+
         data.isSteward = true;
+
         if(typeof Self.model != 'undefined'){
           data.isSteward = false;
           var stewardsArray = [];
@@ -3379,6 +3394,8 @@ module.exports = Marionette.ItemView.extend({
         if(!data.isSteward){
           data.isEditable = false;
         }
+
+        data.isStewardOrCurrencySteward = data.isSteward || data.isCurrencySteward;
 
         _.extend(data, ViewHelpers);
         console.log('account view data:', data);

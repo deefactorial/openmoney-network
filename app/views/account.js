@@ -288,7 +288,22 @@ module.exports = Marionette.ItemView.extend({
 
         data.accountName = Self.accountName;
         data.currencyName = Self.currencyName;
+        console.log('currencyName = ', Self.currencyName);
+        data.currency = Self.currencies.get('currencies~' + Self.currencyName);
+        data.isCurrencySteward = false;
+        if(typeof data.currency != 'undefined'){
+          data.currency = data.currency.toJSON();
+          data.currency.stewards.forEach(function(steward){
+            if(steward == Self.steward.get('id')){
+              data.isCurrencySteward = true;
+            }
+          })
+        }
+
+
+
         data.isSteward = true;
+
         if(typeof Self.model != 'undefined'){
           data.isSteward = false;
           var stewardsArray = [];
@@ -324,6 +339,8 @@ module.exports = Marionette.ItemView.extend({
         if(!data.isSteward){
           data.isEditable = false;
         }
+
+        data.isStewardOrCurrencySteward = data.isSteward || data.isCurrencySteward;
 
         _.extend(data, ViewHelpers);
         console.log('account view data:', data);
