@@ -883,21 +883,21 @@ this["openmoney"]["navigation"] = Handlebars.template({"1":function(container,de
   stack1 = ((helper = (helper = helpers.steward || (depth0 != null ? depth0.steward : depth0)) != null ? helper : alias2),(options={"name":"steward","hash":{},"fn":container.program(1, data, 0),"inverse":container.noop,"data":data}),(typeof helper === alias3 ? helper.call(alias1,options) : helper));
   if (!helpers.steward) { stack1 = alias4.call(depth0,stack1,options)}
   if (stack1 != null) { buffer += stack1; }
-  buffer += "/journals\" class=\"nav-padding\">\n            <div style=\"float: left;\">\n              <span class=\"icon icon-dial-pad icon-padding\" style=\"font-size: 3.5em;\"></span>\n            </div>\n            <div style=\"margin-top: 5px; font-size: 32px;\">\n              <div style=\"font-size: 18px;\">Record</div>\n              Payments\n            </div>\n          </a>\n        </li>\n        <li "
+  buffer += "/journals\" class=\"nav-padding\">\n            <div style=\"float: left;\">\n              <span class=\"icon icon-dial-pad icon-padding\" style=\"font-size: 3.5em;\"></span>\n            </div>\n            <div style=\"margin-top: 5px; font-size: 28px;\">\n              <div style=\"font-size: 16px;\">Record</div>\n              Payments\n            </div>\n          </a>\n        </li>\n        <li "
     + ((stack1 = (helpers.if_eq || (depth0 && depth0.if_eq) || alias2).call(alias1,(depth0 != null ? depth0.page : depth0),"accounts",{"name":"if_eq","hash":{},"fn":container.program(3, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
     + ">\n          <a id=\"accounts\" href=\"#stewards/";
   stack1 = ((helper = (helper = helpers.steward || (depth0 != null ? depth0.steward : depth0)) != null ? helper : alias2),(options={"name":"steward","hash":{},"fn":container.program(1, data, 0),"inverse":container.noop,"data":data}),(typeof helper === alias3 ? helper.call(alias1,options) : helper));
   if (!helpers.steward) { stack1 = alias4.call(depth0,stack1,options)}
   if (stack1 != null) { buffer += stack1; }
-  buffer += "/accounts\" class=\"nav-padding\">\n            <div style=\"float: left;\">\n              <span class=\"icon icon-v-card icon-padding\" style=\"font-size: 3.5em;\"></span>\n            </div>\n            <div style=\"margin-top: 10px; font-size: 32px;\">\n              <div style=\"font-size: 18px;\">Create &amp; Manage</div>\n              Accounts\n            </div>\n          </a>\n        </li>\n        <li "
+  buffer += "/accounts\" class=\"nav-padding\">\n            <div style=\"float: left;\">\n              <span class=\"icon icon-v-card icon-padding\" style=\"font-size: 3.5em;\"></span>\n            </div>\n            <div style=\"margin-top: 10px; font-size: 28px;\">\n              <div style=\"font-size: 16px;\">Create &amp; Manage</div>\n              Accounts\n            </div>\n          </a>\n        </li>\n        <li "
     + ((stack1 = (helpers.if_eq || (depth0 && depth0.if_eq) || alias2).call(alias1,(depth0 != null ? depth0.page : depth0),"currencies",{"name":"if_eq","hash":{},"fn":container.program(3, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
     + ">\n          <a id=\"currencies\" href=\"#stewards/";
   stack1 = ((helper = (helper = helpers.steward || (depth0 != null ? depth0.steward : depth0)) != null ? helper : alias2),(options={"name":"steward","hash":{},"fn":container.program(1, data, 0),"inverse":container.noop,"data":data}),(typeof helper === alias3 ? helper.call(alias1,options) : helper));
   if (!helpers.steward) { stack1 = alias4.call(depth0,stack1,options)}
   if (stack1 != null) { buffer += stack1; }
-  return buffer + "/currencies\" class=\"nav-padding\">\n            <div style=\"float: left;\">\n              <span class=\"icon icon-credit icon-padding\" style=\"font-size: 3.5em;\"></span>\n            </div>\n            <div style=\"margin-top: 10px; font-size: 32px;\">\n              <div style=\"font-size: 18px;\">Create &amp; Manage</div>\n              Currencies\n            </div>\n          </a>\n        </li>\n        <li "
+  return buffer + "/currencies\" class=\"nav-padding\">\n            <div style=\"float: left;\">\n              <span class=\"icon icon-credit icon-padding\" style=\"font-size: 3.5em;\"></span>\n            </div>\n            <div style=\"margin-top: 10px; font-size: 28px;\">\n              <div style=\"font-size: 16px;\">Create &amp; Manage</div>\n              Currencies\n            </div>\n          </a>\n        </li>\n        <li "
     + ((stack1 = (helpers.if_eq || (depth0 && depth0.if_eq) || alias2).call(alias1,(depth0 != null ? depth0.page : depth0),"settings",{"name":"if_eq","hash":{},"fn":container.program(3, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
-    + ">\n          <a id=\"stewards\" href=\"#settings\" class=\"nav-padding\">\n            <div style=\"float: left;\">\n              <span class=\"icon icon-cog icon-padding\" style=\"font-size: 3.5em;\"></span>\n            </div>\n            <div style=\"margin-top: 10px; font-size: 32px;\">\n              <div style=\"font-size: 18px;\">Manage</div>\n              Settings\n            </div>\n          </a>\n        </li>\n      </ul>\n    </div>\n  </nav>\n</div>\n";
+    + ">\n          <a id=\"stewards\" href=\"#settings\" class=\"nav-padding\">\n            <div style=\"float: left;\">\n              <span class=\"icon icon-cog icon-padding\" style=\"font-size: 3.5em;\"></span>\n            </div>\n            <div style=\"margin-top: 10px; font-size: 28px;\">\n              <div style=\"font-size: 16px;\">Manage</div>\n              Settings\n            </div>\n          </a>\n        </li>\n      </ul>\n    </div>\n  </nav>\n</div>\n";
 },"useData":true});
 
 this["openmoney"]["receipt"] = Handlebars.template({"1":function(container,depth0,helpers,partials,data) {
@@ -1179,8 +1179,18 @@ this["openmoney"]["reset"] = Handlebars.template({"compiler":[7,">= 4.0.0"],"mai
 },"useData":true});
 
 this["openmoney"]["settings"] = Handlebars.template({"1":function(container,depth0,helpers,partials,data) {
-    return "checked=\"checked\"";
+    return "danger";
 },"3":function(container,depth0,helpers,partials,data) {
+    return "primary";
+},"5":function(container,depth0,helpers,partials,data) {
+    return "ON";
+},"7":function(container,depth0,helpers,partials,data) {
+    return "OFF";
+},"9":function(container,depth0,helpers,partials,data) {
+    return "checked=\"checked\"";
+},"11":function(container,depth0,helpers,partials,data) {
+    return "";
+},"13":function(container,depth0,helpers,partials,data) {
     var stack1, helper, alias1=depth0 != null ? depth0 : {}, alias2=helpers.helperMissing, alias3="function", alias4=container.escapeExpression;
 
   return "          <tr id=\""
@@ -1188,13 +1198,13 @@ this["openmoney"]["settings"] = Handlebars.template({"1":function(container,dept
     + "\">\n            <td>"
     + alias4(((helper = (helper = helpers.namespace || (depth0 != null ? depth0.namespace : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"namespace","hash":{},"data":data}) : helper)))
     + "</td>\n            <td>"
-    + ((stack1 = helpers.each.call(alias1,(depth0 != null ? depth0.stewards : depth0),{"name":"each","hash":{},"fn":container.program(4, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
+    + ((stack1 = helpers.each.call(alias1,(depth0 != null ? depth0.stewards : depth0),{"name":"each","hash":{},"fn":container.program(14, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
     + "</td>\n          </tr>\n";
-},"4":function(container,depth0,helpers,partials,data) {
+},"14":function(container,depth0,helpers,partials,data) {
     var stack1;
 
-  return ((stack1 = helpers.blockHelperMissing.call(depth0,container.lambda(depth0, depth0),{"name":"this","hash":{},"fn":container.program(5, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "");
-},"5":function(container,depth0,helpers,partials,data) {
+  return ((stack1 = helpers.blockHelperMissing.call(depth0,container.lambda(depth0, depth0),{"name":"this","hash":{},"fn":container.program(15, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "");
+},"15":function(container,depth0,helpers,partials,data) {
     var helper, alias1=depth0 != null ? depth0 : {}, alias2=helpers.helperMissing, alias3="function", alias4=container.escapeExpression;
 
   return "<a href=\"#stewards/"
@@ -1202,7 +1212,7 @@ this["openmoney"]["settings"] = Handlebars.template({"1":function(container,dept
     + "\">"
     + alias4(((helper = (helper = helpers.stewardname || (depth0 != null ? depth0.stewardname : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"stewardname","hash":{},"data":data}) : helper)))
     + "</a> ";
-},"7":function(container,depth0,helpers,partials,data) {
+},"17":function(container,depth0,helpers,partials,data) {
     var helper, alias1=depth0 != null ? depth0 : {}, alias2=helpers.helperMissing, alias3="function", alias4=container.escapeExpression;
 
   return "          <tr id=\""
@@ -1213,16 +1223,39 @@ this["openmoney"]["settings"] = Handlebars.template({"1":function(container,dept
     + alias4(((helper = (helper = helpers.email || (depth0 != null ? depth0.email : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"email","hash":{},"data":data}) : helper)))
     + "</td>\n          </tr>\n";
 },"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
-    var stack1, alias1=depth0 != null ? depth0 : {}, alias2=helpers.helperMissing;
-
-  return "\n<div class=\"col-sm-12\" style=\"padding-top: 10px; padding-bottom: 20px;\">\n  <h2><strong>Settings</strong></h2>\n  <div class=\"radio-inline custom-control custom-radio\">\n    <label>\n      <input type=\"radio\" id=\"lighttheme\" name=\"theme\" value=\"light\" "
-    + ((stack1 = (helpers.if_eq || (depth0 && depth0.if_eq) || alias2).call(alias1,(depth0 != null ? depth0.theme : depth0),"light",{"name":"if_eq","hash":{},"fn":container.program(1, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
-    + ">\n      <span class=\"custom-control-indicator\"></span>\n      Light Theme\n    </label>\n  </div>\n  <div class=\"radio-inline custom-control custom-radio\">\n    <label>\n      <input type=\"radio\" id=\"darktheme\" name=\"theme\" value=\"dark\" "
-    + ((stack1 = (helpers.if_eq || (depth0 && depth0.if_eq) || alias2).call(alias1,(depth0 != null ? depth0.theme : depth0),"dark",{"name":"if_eq","hash":{},"fn":container.program(1, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
-    + ">\n      <span class=\"custom-control-indicator\"></span>\n      Dark Theme\n    </label>\n  </div>\n</div>\n<div class=\"text-right\" style=\"padding-bottom: 10px;\">\n  <button type=\"button\" name=\"csvimport\" class=\"btn btn-lg btn-primary-outline\" >\n    <strong>Import CSV Ledger</strong>\n  </button>\n</div>\n<div id=\"csvmodal\" class=\"modal\" style=\"display: none;\">\n  <div class=\"modal-dialog modal-sm\">\n    <div class=\"modal-content\">\n      <div class=\"modal-header text-left\">\n        <button type=\"button\" class=\"close\" data-dismiss=\"modal\" aria-label=\"Close\"><span aria-hidden=\"true\">&times;</span></button>\n        <h4 class=\"modal-title\">Import CSV Ledger</h4>\n      </div>\n      <div class=\"modal-body\">\n        <div class=\"form-group text-left\">\n          <label class=\"btn btn-default btn-file\">\n              Browse CSV File <input type=\"file\" id=\"csv\" name=\"csv\" style=\"display: none;\">\n          </label>\n        </div>\n      </div>\n      <div class=\"modal-actions\">\n        <button type=\"button\" class=\"cancel btn-link modal-action\" data-dismiss=\"modal\">Cancel</button>\n        <button type=\"button\" class=\"import btn-link modal-action\" data-dismiss=\"modal\">\n          <strong>Import</strong>\n        </button>\n      </div>\n    </div>\n  </div>\n</div>\n<style>\n[data-sort=namespaces] > tbody > tr:hover{\n  background-color: #159c6e;\n  cursor: pointer;\n}\n[data-sort=stewards] > tbody > tr:hover{\n  background-color: #159c6e;\n  cursor: pointer;\n}\n</style>\n<div class=\"col-sm-12\" style=\"padding-top: 10px; padding-bottom: 20px;\">\n  <h2><strong>Namespaces</strong></h2>\n  <h6>Namespaces are globally unique identifiers for accounts and currencies to live in.</h6>\n  <div class=\"row text-right\" style=\"padding-top: 20px;padding-bottom: 20px;\">\n    <button type=\"button\" name=\"newNamespace\" class=\"btn btn-lg btn-success-outline\">New Namespace</button>\n  </div>\n  <div class=\"row text-right\" style=\"padding-bottom: 20px;\">\n    <button type=\"button\" name=\"addNamespace\" class=\"btn btn-lg btn-success-outline\">Add Existing Namespace</button>\n  </div>\n  <div class=\"table-full\">\n    <table class=\"table display\" data-sort=\"namespaces\">\n      <thead>\n        <tr>\n          <th class=\"\">Namespace</th>\n          <th class=\"\">Stewards</th>\n        </tr>\n      </thead>\n      <tbody class=\"table-rows\">\n"
-    + ((stack1 = helpers.each.call(alias1,(depth0 != null ? depth0.namespaces : depth0),{"name":"each","hash":{},"fn":container.program(3, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
+    var stack1, helper, options, alias1=depth0 != null ? depth0 : {}, alias2=helpers.helperMissing, alias3="function", alias4=helpers.blockHelperMissing, alias5=container.escapeExpression, buffer = 
+  "\n<div class=\"col-sm-12\" style=\"padding-top: 10px; padding-bottom: 20px;\">\n  <h2><strong>Settings</strong></h2>\n  <div id=\"statsButton\" class=\"text-right\" style=\"padding-bottom:10px;\">\n    <button type=\"button\" name=\"showedit\" class=\"btn btn-lg btn-primary-outline\" >\n      <strong>Edit</strong>\n    </button>\n  </div>\n  <div id=\"stats\" class=\"statcard statcard-";
+  stack1 = ((helper = (helper = helpers.disabled || (depth0 != null ? depth0.disabled : depth0)) != null ? helper : alias2),(options={"name":"disabled","hash":{},"fn":container.program(1, data, 0),"inverse":container.program(3, data, 0),"data":data}),(typeof helper === alias3 ? helper.call(alias1,options) : helper));
+  if (!helpers.disabled) { stack1 = alias4.call(depth0,stack1,options)}
+  if (stack1 != null) { buffer += stack1; }
+  buffer += " p-a-md m-b\">\n    <h3>\n      <div class=\"statcard-number\">\n        \""
+    + alias5(((helper = (helper = helpers.stewardname || (depth0 != null ? depth0.stewardname : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"stewardname","hash":{},"data":data}) : helper)))
+    + "\" &lt;"
+    + alias5(((helper = (helper = helpers.email || (depth0 != null ? depth0.email : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"email","hash":{},"data":data}) : helper)))
+    + "&gt;\n      </div>\n      <div class=\"statcard-number\">\n        Notifications: ";
+  stack1 = ((helper = (helper = helpers.email_notifications || (depth0 != null ? depth0.email_notifications : depth0)) != null ? helper : alias2),(options={"name":"email_notifications","hash":{},"fn":container.program(5, data, 0),"inverse":container.program(7, data, 0),"data":data}),(typeof helper === alias3 ? helper.call(alias1,options) : helper));
+  if (!helpers.email_notifications) { stack1 = alias4.call(depth0,stack1,options)}
+  if (stack1 != null) { buffer += stack1; }
+  buffer += "\n      </div>\n      <div class=\"statcard-number\">\n        Theme: <span class=\"text-uppercase\">"
+    + alias5(((helper = (helper = helpers.theme || (depth0 != null ? depth0.theme : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"theme","hash":{},"data":data}) : helper)))
+    + "</span>\n      </div>\n    </h3>\n  </div>\n  <form id='stewardForm' style=\"display: none;\">\n    <div class=\"form-group text-left\">\n      <label for=\"email\">Email</label>\n      <input type=\"email\" id=\"email\" name=\"email\" value=\""
+    + alias5(((helper = (helper = helpers.email || (depth0 != null ? depth0.email : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"email","hash":{},"data":data}) : helper)))
+    + "\" placeholder=\"Email\" class=\"form-control\"/>\n    </div>\n    <div style=\"padding-bottom: 10px;\">\n      <strong>Email Notifications:</strong>\n    </div>\n    <div class=\"radio-inline custom-control custom-radio\" style=\"padding-bottom: 10px;\">\n      <label>\n        <input type=\"radio\" id=\"email_notifications_on\" name=\"email_notifications\" value=\"true\" ";
+  stack1 = ((helper = (helper = helpers.email_notifications || (depth0 != null ? depth0.email_notifications : depth0)) != null ? helper : alias2),(options={"name":"email_notifications","hash":{},"fn":container.program(9, data, 0),"inverse":container.noop,"data":data}),(typeof helper === alias3 ? helper.call(alias1,options) : helper));
+  if (!helpers.email_notifications) { stack1 = alias4.call(depth0,stack1,options)}
+  if (stack1 != null) { buffer += stack1; }
+  buffer += ">\n        <span class=\"custom-control-indicator\"></span>\n        ON\n      </label>\n    </div>\n    <div class=\"radio-inline custom-control custom-radio\" style=\"padding-bottom: 10px;\">\n      <label>\n        <input type=\"radio\" id=\"email_notifications_off\" name=\"email_notifications\" value=\"false\" ";
+  stack1 = ((helper = (helper = helpers.email_notifications || (depth0 != null ? depth0.email_notifications : depth0)) != null ? helper : alias2),(options={"name":"email_notifications","hash":{},"fn":container.program(11, data, 0),"inverse":container.program(9, data, 0),"data":data}),(typeof helper === alias3 ? helper.call(alias1,options) : helper));
+  if (!helpers.email_notifications) { stack1 = alias4.call(depth0,stack1,options)}
+  if (stack1 != null) { buffer += stack1; }
+  return buffer + ">\n        <span class=\"custom-control-indicator\"></span>\n        OFF\n      </label>\n    </div>\n    <div style=\"padding-bottom: 10px;\">\n      <strong>Theme:</strong>\n    </div>\n    <div class=\"radio-inline custom-control custom-radio\" style=\"padding-bottom: 10px;\">\n      <label>\n        <input type=\"radio\" id=\"lighttheme\" name=\"theme\" value=\"light\" "
+    + ((stack1 = (helpers.if_eq || (depth0 && depth0.if_eq) || alias2).call(alias1,(depth0 != null ? depth0.theme : depth0),"light",{"name":"if_eq","hash":{},"fn":container.program(9, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
+    + ">\n        <span class=\"custom-control-indicator\"></span>\n        Light\n      </label>\n    </div>\n    <div class=\"radio-inline custom-control custom-radio\" style=\"padding-bottom: 10px;\">\n      <label>\n        <input type=\"radio\" id=\"darktheme\" name=\"theme\" value=\"dark\" "
+    + ((stack1 = (helpers.if_eq || (depth0 && depth0.if_eq) || alias2).call(alias1,(depth0 != null ? depth0.theme : depth0),"dark",{"name":"if_eq","hash":{},"fn":container.program(9, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
+    + ">\n        <span class=\"custom-control-indicator\"></span>\n        Dark\n      </label>\n    </div>\n    <div class=\"form-group text-right\">\n      <button type=\"button\" name=\"cancel\" class=\"btn btn-lg btn-primary-outline\" >Cancel</button>\n      <button type=\"button\" name=\"save\" class=\"btn btn-lg btn-primary-outline\" >\n        <strong>Save</strong>\n      </button>\n    </div>\n  </form>\n</div>\n<div class=\"text-right\" style=\"padding-bottom: 10px;\">\n  <button type=\"button\" name=\"csvimport\" class=\"btn btn-lg btn-primary-outline\" >\n    <strong>Import CSV Ledger</strong>\n  </button>\n</div>\n<div id=\"csvmodal\" class=\"modal\" style=\"display: none;\">\n  <div class=\"modal-dialog modal-sm\">\n    <div class=\"modal-content\">\n      <div class=\"modal-header text-left\">\n        <button type=\"button\" class=\"close\" data-dismiss=\"modal\" aria-label=\"Close\"><span aria-hidden=\"true\">&times;</span></button>\n        <h4 class=\"modal-title\">Import CSV Ledger</h4>\n      </div>\n      <div class=\"modal-body\">\n        <div class=\"form-group text-left\">\n          <label class=\"btn btn-default btn-file\">\n              Browse CSV File <input type=\"file\" id=\"csv\" name=\"csv\" style=\"display: none;\">\n          </label>\n        </div>\n      </div>\n      <div class=\"modal-actions\">\n        <button type=\"button\" class=\"cancel btn-link modal-action\" data-dismiss=\"modal\">Cancel</button>\n        <button type=\"button\" class=\"import btn-link modal-action\" data-dismiss=\"modal\">\n          <strong>Import</strong>\n        </button>\n      </div>\n    </div>\n  </div>\n</div>\n<style>\n[data-sort=namespaces] > tbody > tr:hover{\n  background-color: #159c6e;\n  cursor: pointer;\n}\n[data-sort=stewards] > tbody > tr:hover{\n  background-color: #159c6e;\n  cursor: pointer;\n}\n</style>\n<div class=\"col-sm-12\" style=\"padding-top: 10px; padding-bottom: 20px;\">\n  <h2><strong>Namespaces</strong></h2>\n  <h6>Namespaces are globally unique identifiers for accounts and currencies to live in.</h6>\n  <div class=\"row text-right\" style=\"padding-top: 20px;padding-bottom: 20px;\">\n    <button type=\"button\" name=\"newNamespace\" class=\"btn btn-lg btn-success-outline\">New Namespace</button>\n  </div>\n  <div class=\"row text-right\" style=\"padding-bottom: 20px;\">\n    <button type=\"button\" name=\"addNamespace\" class=\"btn btn-lg btn-success-outline\">Add Existing Namespace</button>\n  </div>\n  <div class=\"table-full\">\n    <table class=\"table display\" data-sort=\"namespaces\">\n      <thead>\n        <tr>\n          <th class=\"\">Namespace</th>\n          <th class=\"\">Stewards</th>\n        </tr>\n      </thead>\n      <tbody class=\"table-rows\">\n"
+    + ((stack1 = helpers.each.call(alias1,(depth0 != null ? depth0.namespaces : depth0),{"name":"each","hash":{},"fn":container.program(13, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
     + "      </tbody>\n    </table>\n  </div>\n</div>\n<div class=\"col-sm-12\" style=\"padding-top: 10px;\">\n  <h2><strong>Stewards</strong></h2>\n  <div class=\"row text-right\" style=\"padding-top: 20px;padding-bottom: 20px;\">\n    <button type=\"button\" name=\"addSteward\" class=\"btn btn-lg btn-success-outline\">Add Existing Steward</button>\n  </div>\n  <div class=\"table-full\">\n    <table class=\"table display\" data-sort=\"stewards\">\n      <thead>\n        <tr>\n          <th class=\"\">Steward Name</th>\n          <th class=\"\">Email</th>\n        </tr>\n      </thead>\n      <tbody class=\"table-rows\">\n"
-    + ((stack1 = helpers.each.call(alias1,(depth0 != null ? depth0.stewards : depth0),{"name":"each","hash":{},"fn":container.program(7, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
+    + ((stack1 = helpers.each.call(alias1,(depth0 != null ? depth0.stewards : depth0),{"name":"each","hash":{},"fn":container.program(17, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
     + "      </tbody>\n    </table>\n  </div>\n</div>\n";
 },"useData":true});
 

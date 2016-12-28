@@ -45,6 +45,7 @@ module.exports = Marionette.CollectionView.extend({
         Self.journals = options.journals;
         Self.stewardsCollection = options.stewards;
 
+        Self.listenTo(Self.steward, 'sync add remove reset', Self.render);
         Self.listenTo(Self.namespaces, 'sync add remove reset', Self.render);
         Self.listenTo(Self.stewardsCollection, 'sync add remove reset', Self.render);
     },
@@ -61,7 +62,16 @@ module.exports = Marionette.CollectionView.extend({
         console.log("render settings view");
 
         var data = {};
-        data = Self.steward.toJSON();
+        //data = Self.steward.toJSON();
+        console.log('Self.steward',Self.steward.toJSON());
+        data = Self.stewardsCollection.get(Self.steward.get('_id'));
+        if(typeof data != 'undefined'){
+          data = data.toJSON();
+        } else {
+          data = {};
+        }
+        console.log('data:', data);
+
 
         if(typeof Self.namespaces != 'undefined'){
           data.namespaces = Self.namespaces.toJSON();
@@ -88,6 +98,102 @@ module.exports = Marionette.CollectionView.extend({
         console.log('settings view data:', data);
         _.extend(data, ViewHelpers);
         Self.$el.html(Self.template(data));
+
+        this.$('button[name=showedit]').off('click').on('click', function(e){
+          e.preventDefault();
+          console.log('showedit button pressed!');
+          Self.$('#stewardForm').show();
+          Self.$('#statsButton').hide();
+          Self.$('#stats').hide();
+        });
+
+        this.$('button[name=cancel]').off('click').on('click', function(e){
+          e.preventDefault();
+          console.log('cancel button pressed!');
+
+          Self.$('#stewardForm').hide();
+          Self.$('#statsButton').show();
+          Self.$('#stats').show();
+        });
+
+        $('#stewardForm').validate({
+            onkeyup: false,
+            rules: {
+                email: {
+                  required: true,
+                  email: true,
+                  minlength: 3,
+                  maxlength: 128
+                }
+            },
+            messages: {
+                email: {
+                  required: "Email is required.",
+                  email: "Valid email is required.",
+                  minlength: "At least 3 characters is required.",
+                  maxlength: "Less than 127 characters is required."
+                }
+            },
+            submitHandler: function(form) {
+                console.log("submit form");
+                form.submit();
+            },
+            errorPlacement: function(error, element) {
+                var placement = $(element.parent()).data('error');
+                if (placement) {
+                    $(placement).append(error)
+                } else {
+                    error.insertAfter(element.parent());
+                }
+            }
+        });
+
+        this.$('button[name=save]').off('click').on('click', function(e){
+          e.preventDefault();
+          var isValid = $('#stewardForm').valid();
+          console.log("steward save button pressed! form valid:" + isValid);
+          if( isValid ) {
+            var steward = new Steward();
+            steward.set('id', Self.steward.get('_id'));
+            steward.set('stewardname', Self.steward.get('stewardname'));
+            steward.set('email', Self.$('#email').val());
+            steward.set('email_notifications', Self.$('#email_notifications_on').prop('checked'));
+            if(Self.$('#lighttheme').prop('checked')){
+              steward.set('theme', 'light');
+            } else {
+              steward.set('theme', 'dark');
+            }
+            steward.credentials = {};
+            steward.credentials.token = Self.steward.get('access_token');
+            steward.save({},{
+              success: function(model, response){
+                Self.$('#stewardForm').hide();
+                Self.$('#statsButton').show();
+                Self.$('#stats').show();
+                Self.stewardsCollection.fetch();
+                $('#success-notification').html('Successfully saved steward.').show();
+                setTimeout(function(){
+                  $('#success-notification').hide();
+                },10000);
+              },
+              error: function(model, error){
+                console.log('failed to saved model', model, error);
+                if(typeof error.responseJSON != 'undefined' && typeof error.responseJSON.message != 'undefined' ){
+                  console.info(error.responseJSON.message);
+                  $('#error-notification').html(error.responseJSON.message).show();
+                  setTimeout(function(){
+                    $('#error-notification').hide();
+                  },10000);
+                } else {
+                  $('#error-notification').html('Error').show();
+                  setTimeout(function(){
+                    $('#error-notification').hide();
+                  },10000);
+                }
+              }
+            })
+          }
+        });
 
         Self.$('#lighttheme').off('click').on('click', function(event){
           $('.darktheme').prop('disabled', true);

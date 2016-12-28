@@ -141,6 +141,11 @@ module.exports = Backbone.View.extend({
               Self.steward.credentials.token = Self.steward.get('access_token');
               Self.steward.fetch({
                 success: function(model, res){
+                  if(typeof Self.steward.get('theme') != 'undefined' && Self.steward.get('theme') == 'dark'){
+                    router.darkTheme();
+                  } else {
+                    router.lightTheme();
+                  }
                   console.log('successfully got steward', model);
                 },
                 error: function(err){

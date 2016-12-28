@@ -1,20 +1,70 @@
 
 <div class="col-sm-12" style="padding-top: 10px; padding-bottom: 20px;">
   <h2><strong>Settings</strong></h2>
-  <div class="radio-inline custom-control custom-radio">
-    <label>
-      <input type="radio" id="lighttheme" name="theme" value="light" {{#if_eq theme 'light'}}checked="checked"{{/if_eq}}>
-      <span class="custom-control-indicator"></span>
-      Light Theme
-    </label>
+  <div id="statsButton" class="text-right" style="padding-bottom:10px;">
+    <button type="button" name="showedit" class="btn btn-lg btn-primary-outline" >
+      <strong>Edit</strong>
+    </button>
   </div>
-  <div class="radio-inline custom-control custom-radio">
-    <label>
-      <input type="radio" id="darktheme" name="theme" value="dark" {{#if_eq theme 'dark'}}checked="checked"{{/if_eq}}>
-      <span class="custom-control-indicator"></span>
-      Dark Theme
-    </label>
+  <div id="stats" class="statcard statcard-{{#disabled}}danger{{else}}primary{{/disabled}} p-a-md m-b">
+    <h3>
+      <div class="statcard-number">
+        "{{stewardname}}" &lt;{{email}}&gt;
+      </div>
+      <div class="statcard-number">
+        Notifications: {{#email_notifications}}ON{{else}}OFF{{/email_notifications}}
+      </div>
+      <div class="statcard-number">
+        Theme: <span class="text-uppercase">{{theme}}</span>
+      </div>
+    </h3>
   </div>
+  <form id='stewardForm' style="display: none;">
+    <div class="form-group text-left">
+      <label for="email">Email</label>
+      <input type="email" id="email" name="email" value="{{email}}" placeholder="Email" class="form-control"/>
+    </div>
+    <div style="padding-bottom: 10px;">
+      <strong>Email Notifications:</strong>
+    </div>
+    <div class="radio-inline custom-control custom-radio" style="padding-bottom: 10px;">
+      <label>
+        <input type="radio" id="email_notifications_on" name="email_notifications" value="true" {{#email_notifications}}checked="checked"{{/email_notifications}}>
+        <span class="custom-control-indicator"></span>
+        ON
+      </label>
+    </div>
+    <div class="radio-inline custom-control custom-radio" style="padding-bottom: 10px;">
+      <label>
+        <input type="radio" id="email_notifications_off" name="email_notifications" value="false" {{#email_notifications}}{{else}}checked="checked"{{/email_notifications}}>
+        <span class="custom-control-indicator"></span>
+        OFF
+      </label>
+    </div>
+    <div style="padding-bottom: 10px;">
+      <strong>Theme:</strong>
+    </div>
+    <div class="radio-inline custom-control custom-radio" style="padding-bottom: 10px;">
+      <label>
+        <input type="radio" id="lighttheme" name="theme" value="light" {{#if_eq theme 'light'}}checked="checked"{{/if_eq}}>
+        <span class="custom-control-indicator"></span>
+        Light
+      </label>
+    </div>
+    <div class="radio-inline custom-control custom-radio" style="padding-bottom: 10px;">
+      <label>
+        <input type="radio" id="darktheme" name="theme" value="dark" {{#if_eq theme 'dark'}}checked="checked"{{/if_eq}}>
+        <span class="custom-control-indicator"></span>
+        Dark
+      </label>
+    </div>
+    <div class="form-group text-right">
+      <button type="button" name="cancel" class="btn btn-lg btn-primary-outline" >Cancel</button>
+      <button type="button" name="save" class="btn btn-lg btn-primary-outline" >
+        <strong>Save</strong>
+      </button>
+    </div>
+  </form>
 </div>
 <div class="text-right" style="padding-bottom: 10px;">
   <button type="button" name="csvimport" class="btn btn-lg btn-primary-outline" >

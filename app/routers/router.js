@@ -98,6 +98,8 @@ module.exports = Marionette.AppRouter.extend({
       console.log('initializeData', err, data);
       if(typeof Self.steward.get('theme') != 'undefined' && Self.steward.get('theme') == 'dark'){
         Self.darkTheme();
+      } else {
+        Self.lightTheme();
       }
       Self.layout.getRegion('navigation').show(new NavigationView({model: Self.page, steward: Self.steward}));
       Self.dashhead = new DashheadView({model: Self.page, steward: Self.steward});
@@ -224,7 +226,7 @@ module.exports = Marionette.AppRouter.extend({
     console.log('Goto: LoginSuccessView');
     Self.initializeData(function(err, data){
       console.log('initializeData', err, data);
-      //reset the navigation 
+      //reset the navigation
       Self.layout.getRegion('navigation').show(new NavigationView({model: Self.page, steward: Self.steward}));
       Self.dashhead = new DashheadView({model: Self.page, steward: Self.steward});
       Self.layout.getRegion('dashhead').show(Self.dashhead);
@@ -594,6 +596,11 @@ module.exports = Marionette.AppRouter.extend({
             Self.steward.credentials.token = Self.steward.get('access_token');
             Self.steward.fetch({
               success: function(model, res){
+                if(typeof Self.steward.get('theme') != 'undefined' && Self.steward.get('theme') == 'dark'){
+                  Self.darkTheme();
+                } else {
+                  Self.lightTheme();
+                }
                 console.log('successfully got steward', model);
               },
               error: function(err){
