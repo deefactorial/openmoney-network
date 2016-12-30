@@ -24,7 +24,6 @@ module.exports = Marionette.LayoutView.extend({
     if(typeof options.steward != 'undefined'){
       Self.steward = options.steward;
     }
-    Self.render();
   },
   render: function(options){
     console.log('render dashhead view', options)

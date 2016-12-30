@@ -91,7 +91,7 @@ module.exports = Backbone.View.extend({
 
     register: function( event ) {
         console.log('register event called');
-        Backbone.history.navigate('#signup',{trigger:true, replace:false});
+        router.navigate('#signup',{trigger:true, replace:false});
     },
 
     login: function( event, done ) {
@@ -280,7 +280,7 @@ module.exports = Backbone.View.extend({
 
     forgot: function( event ) {
         console.log('forgot password event called');
-        Backbone.history.navigate('#forgot',{trigger:true, replace:false});
+        router.navigate('#forgot',{trigger:true, replace:false});
     }
 
 });

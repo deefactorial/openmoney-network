@@ -39,18 +39,12 @@ module.exports = Backbone.View.extend({
 
     render: function(){
         console.log("render register view");
-        //this.$title.html("");
-        //console.log("typeof this.model:" + typeof this.model );
+
         Self.$el.html(Self.template(Self.steward.toJSON()));
-        //this.$back.attr("src","public/assets/images/app-back.png").off('click').on('click', {context: this}, this.back).show();
-        //this.$footer.show();
-        //this.$page.trigger('create');
+
         Self.$('#register-button').off('click').on('click', {context: Self}, Self.next);
         Self.$('#back').off('click').on('click', Self.back);
-        //console.log("typeof $.datepicker:" + typeof $.datepicker);
-        //console.log("typeof $.mobile.date:" + typeof $.mobile.date);
 
-        //this.$('#bday').date({ dateFormat: 'yy-mm-dd' }).inputmask("9999-99-99");
         Self.Form = Self.$('form#register');
         Self.Form.validate({
             onkeyup: false,
@@ -119,15 +113,6 @@ module.exports = Backbone.View.extend({
         console.log("form valid: ", valid);
         if( valid ) {
 
-          // console.log(window.location.href );
-          // $.ajaxSetup({
-          //   beforeSend: function(jqXHR, settings) {
-          //       jqXHR.url = settings.url;
-          //       jqXHR.method = settings.type;
-          //       //console.log(JSON.stringify(settings));
-          //   }
-          // });
-
             var steward = {
               stewardname: Self.$('input#stewardname').val(),
               email:  Self.$('input#email').val(),
@@ -145,8 +130,10 @@ module.exports = Backbone.View.extend({
               if(_.isFunction(done)){
                 done();
               }
-              Backbone.history.navigate('#login',{trigger:true, replace:false});
-              $('#success-notification').html('Successfully Signed Up New Steward.').show();
+
+              router.navigate('#login',{replace:false});
+              
+              $('#success-notification').html('Successfully signed up new steward, Log in.').show();
               setTimeout(function(){
                 $('#success-notification').hide();
               },10000);

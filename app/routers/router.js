@@ -215,7 +215,7 @@ module.exports = Marionette.AppRouter.extend({
 		console.log('Goto: LoginView');
     Self.initializeData(function(err, data){
       if(Self.steward.get('stewardname') == ''){
-        Self.page.set('currentPage', 'login');
+        //Self.page.set('currentPage', 'login');
         Self.changePage(new LoginView( { steward: Self.steward } ), {changeHash:false, transition: "none"});
       } else {
         Self.navigate('stewards/' + Self.steward.get('stewardname') + '/journals', true);

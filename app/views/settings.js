@@ -347,6 +347,9 @@ module.exports = Marionette.CollectionView.extend({
                       }
                       var description = elements[csvPosition['Description']];
                       var currency = elements[csvPosition['Currency']];
+                      if(currency.indexOF('.cc') === -1){
+                        currency = currency + '.' + Self.steward.get('stewardname') + '.cc';
+                      }
                       var amount = elements[csvPosition['Amount']];
                       //var balance = elements[7];
                       //var volume = elements[8];
@@ -547,8 +550,6 @@ module.exports = Marionette.CollectionView.extend({
                           });
                         }
                       }
-
-
                     }
                   }
                   row++;
@@ -585,6 +586,9 @@ module.exports = Marionette.CollectionView.extend({
                         }
                         var description = elements[csvPosition['Description']];
                         var currency = elements[csvPosition['Currency']];
+                        if(currency.indexOF('.cc') === -1){
+                          currency = currency + '.' + Self.steward.get('stewardname') + '.cc';
+                        }
                         var amount = elements[csvPosition['Amount']];
 
                         accountTasks[to + currency] = function(callback){
@@ -777,6 +781,9 @@ module.exports = Marionette.CollectionView.extend({
                             }
                             var description = elements[csvPosition['Description']];
                             var currency = elements[csvPosition['Currency']];
+                            if(currency.indexOF('.cc') === -1){
+                              currency = currency + '.' + Self.steward.get('stewardname') + '.cc';
+                            }
                             var amount = elements[csvPosition['Amount']];
 
                             journalTasks[from + to + currency + amount + row] = function(callback){
