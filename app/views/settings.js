@@ -347,7 +347,7 @@ module.exports = Marionette.CollectionView.extend({
                       }
                       var description = elements[csvPosition['Description']];
                       var currency = elements[csvPosition['Currency']];
-                      if(currency.indexOF('.cc') === -1){
+                      if(currency.indexOf('.cc') === -1){
                         currency = currency + '.' + Self.steward.get('stewardname') + '.cc';
                       }
                       var amount = elements[csvPosition['Amount']];
@@ -586,7 +586,7 @@ module.exports = Marionette.CollectionView.extend({
                         }
                         var description = elements[csvPosition['Description']];
                         var currency = elements[csvPosition['Currency']];
-                        if(currency.indexOF('.cc') === -1){
+                        if(currency.indexOf('.cc') === -1){
                           currency = currency + '.' + Self.steward.get('stewardname') + '.cc';
                         }
                         var amount = elements[csvPosition['Amount']];
@@ -781,7 +781,7 @@ module.exports = Marionette.CollectionView.extend({
                             }
                             var description = elements[csvPosition['Description']];
                             var currency = elements[csvPosition['Currency']];
-                            if(currency.indexOF('.cc') === -1){
+                            if(currency.indexOf('.cc') === -1){
                               currency = currency + '.' + Self.steward.get('stewardname') + '.cc';
                             }
                             var amount = elements[csvPosition['Amount']];
