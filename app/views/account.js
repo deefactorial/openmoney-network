@@ -294,13 +294,17 @@ module.exports = Marionette.ItemView.extend({
         if(typeof data.currency != 'undefined'){
           data.currency = data.currency.toJSON();
           data.currency.stewards.forEach(function(steward){
-            if(steward == Self.steward.get('id')){
-              data.isCurrencySteward = true;
+            if(typeof steward == 'string'){
+              if(steward == Self.steward.get('id')){
+                data.isCurrencySteward = true;
+              }
+            } else {
+              if(steward.get('id') == Self.steward.get('id')){
+                data.isCurrencySteward = true;
+              }
             }
           })
         }
-
-
 
         data.isSteward = true;
 
