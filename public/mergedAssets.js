@@ -3394,7 +3394,7 @@ module.exports = Marionette.ItemView.extend({
                 data.isCurrencySteward = true;
               }
             } else {
-              if(steward.get('id') == Self.steward.get('id')){
+              if(steward.id == Self.steward.get('id')){
                 data.isCurrencySteward = true;
               }
             }
