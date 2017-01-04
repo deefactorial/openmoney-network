@@ -3443,7 +3443,7 @@ module.exports = Marionette.ItemView.extend({
           data.currency = data.currency.toJSON();
           data.currency.stewards.forEach(function(steward){
             if((typeof steward == 'string' && steward == Self.steward.get('id'))
-              || steward.id == Self.steward.get('id')){
+              || (typeof steward != 'undefined' && steward.id == Self.steward.get('id'))){
               data.isCurrencySteward = true;
             }
           })
@@ -3454,7 +3454,7 @@ module.exports = Marionette.ItemView.extend({
           data.namespace = data.namespace.toJSON();
           data.namespace.stewards.forEach(function(steward){
             if((typeof steward == 'string' && steward == Self.steward.get('id'))
-              || steward.id == Self.steward.get('id')){
+              || (typeof steward != 'undefined' && steward.id == Self.steward.get('id'))){
               data.isNamespaceSteward = true;
             }
           })
