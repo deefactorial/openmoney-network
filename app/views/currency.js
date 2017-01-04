@@ -506,7 +506,8 @@ module.exports = Marionette.ItemView.extend({
                   var currencyName = Self.model.get('currency_namespace') == '' ? Self.model.get('currency') : Self.model.get('currency') + '.' + Self.model.get('currency_namespace');
                   // Self.model.set('id', 'currencies~' + currencyName);
                   // Self.collection.set(Self.model, {remove: false});
-
+                  Self.collection.credentials = {};
+                  Self.collection.credentials.token = Self.steward.get('access_token');
                   Self.collection.fetch();
                   //Self.journals.fetch();
                   if(typeof Self.namespace != 'undefined'){
@@ -571,12 +572,11 @@ module.exports = Marionette.ItemView.extend({
               }
               editedCurrency.set('private', Self.$('input[name=private]:checked').val() === 'true');
               editedCurrency.set('disabled', Self.$('input[name=disabled]:checked').val() === 'true');
-
-              var currencyName = editedCurrency.get('currency') + '.' + editedCurrency.get('currency_namespace');
+              
 
               editedCurrency.credentials = {};
               editedCurrency.credentials.token = Self.steward.get('access_token');
-              console.log('currency',editedCurrency.toJSON());
+              console.log('editedCurrency',editedCurrency.toJSON());
               editedCurrency.save({},{
                 success: function(model, response){
                   console.log('successfully saved model', model, response);

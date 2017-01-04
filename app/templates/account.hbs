@@ -17,11 +17,11 @@ tr.CREDIT {
         <strong>Edit</strong>
       </button>
     </div>
-    <div id="stats" class="statcard statcard-{{#disabled}}danger{{else}}success{{/disabled}} p-a-md m-b">
+    <div id="stats" class="statcard statcard-{{#disabled}}danger{{/disabled}}{{#currency_disabled}}danger{{/currency_disabled}}{{#namespace_disabled}}danger{{/namespace_disabled}}{{#if (not (or disabled (or currency_disabled namespace_disabled)))}}success{{/if}} p-a-md m-b">
       <h3><div class="statcard-number">
           <div>ACCOUNT: {{accountName}}</div>
           <div>CURRENCY: {{currencyName}}</div>
-          <div>PAYMENT STATUS: {{#disabled}}disabled{{else}}enabled{{/disabled}}
+          <div>PAYMENT STATUS: {{#disabled}}disabled{{/disabled}} {{#currency_disabled}}currency disabled{{/currency_disabled}} {{#namespace_disabled}}namespace disabled{{/namespace_disabled}} {{#if (not (or disabled (or currency_disabled namespace_disabled)))}}enabled{{/if}}
         </div>
         <div>STEWARDS:
           {{#stewards}}
@@ -71,21 +71,21 @@ tr.CREDIT {
       </select>
     </div>
     {{/if}}
-    {{#if isStewardOrCurrencySteward}}
+    {{#if (or isSteward (or isCurrencySteward isNamespaceSteward))}}
     <div style="padding-top:10px;padding-bottom: 10px;">
       <div style="padding-bottom: 10px;">
         <strong>Payment Status:</strong>
       </div>
       <div class="radio-inline custom-control custom-radio">
         <label>
-          <input type="radio" id="private" name="disabled" value="false" {{#if_eq disabled false}}checked="checked"{{/if_eq}}>
+          <input type="radio" id="private" name="disabled" value="false" {{#if (not (or disabled (or currency_disabled namespace_disabled)))}}checked="checked"{{/if}}>
           <span class="custom-control-indicator"></span>
           <strong>Enabled</strong>
         </label>
       </div>
       <div class="radio-inline custom-control custom-radio">
         <label>
-          <input type="radio" id="public" name="disabled" value="true" {{#if_eq disabled true}}checked="checked"{{/if_eq}}>
+          <input type="radio" id="public" name="disabled" value="true" {{#if (or disabled (or currency_disabled namespace_disabled))}}checked="checked"{{/if}}>
           <span class="custom-control-indicator"></span>
           <strong>Disabled</strong>
         </label>
@@ -93,6 +93,8 @@ tr.CREDIT {
       <div style="padding-top:5px; font-size: 12px;"><i>Enabled means payments can be processed on this account.</i></div>
       <div style="padding-bottom:5px; font-size: 12px;"><i>Disabled means payments can not be processed on this account.</i></div>
     </div>
+    {{/if}}
+    {{#if isSteward}}
     <div class="form-group text-left">
       <label for="stewards[]">Account Stewards</label>
       <div id="addButtonDiv" class="text-right" style="padding-bottom:10px;">

@@ -221,7 +221,7 @@ module.exports = Marionette.ItemView.extend({
         }
         if(typeof Self.model != 'undefined'){
           data = Self.model.toJSON();
-          data.namespace = data.account_namespace;
+          //data.namespace = data.account_namespace;
           var doubleEntries = [];
           var balance = 0;
           var volume = 0;
@@ -294,14 +294,20 @@ module.exports = Marionette.ItemView.extend({
         if(typeof data.currency != 'undefined'){
           data.currency = data.currency.toJSON();
           data.currency.stewards.forEach(function(steward){
-            if(typeof steward == 'string'){
-              if(steward == Self.steward.get('id')){
-                data.isCurrencySteward = true;
-              }
-            } else {
-              if(steward.id == Self.steward.get('id')){
-                data.isCurrencySteward = true;
-              }
+            if((typeof steward == 'string' && steward == Self.steward.get('id'))
+              || steward.id == Self.steward.get('id')){
+              data.isCurrencySteward = true;
+            }
+          })
+        }
+        data.isNamespaceSteward = false;
+        data.namespace = Self.namespaces.get('namespaces~' + data.account_namespace);
+        if(typeof data.namespace != 'undefined'){
+          data.namespace = data.namespace.toJSON();
+          data.namespace.stewards.forEach(function(steward){
+            if((typeof steward == 'string' && steward == Self.steward.get('id'))
+              || steward.id == Self.steward.get('id')){
+              data.isNamespaceSteward = true;
             }
           })
         }
@@ -343,8 +349,6 @@ module.exports = Marionette.ItemView.extend({
         if(!data.isSteward){
           data.isEditable = false;
         }
-
-        data.isStewardOrCurrencySteward = data.isSteward || data.isCurrencySteward;
 
         _.extend(data, ViewHelpers);
         console.log('account view data:', data);
@@ -473,14 +477,21 @@ module.exports = Marionette.ItemView.extend({
               editedAccount.set('currency', currencyName);
               editedAccount.set('currency_namespace', '');
             }
-            editedAccount.set('disabled', Self.$('input[name=disabled]:checked').val() === 'true');
 
-            //console.log('namespace save', Self.model.toJSON());
+            if(data.isSteward === false && data.isCurrencySteward === true){
+              editedAccount.set('currency_disabled', Self.$('input[name=disabled]:checked').val() === 'true');
+            } else if(data.isSteward === false && data.isNamespaceSteward === true){
+              editedAccount.set('namespace_disabled', Self.$('input[name=disabled]:checked').val() === 'true');
+            } else {
+              editedAccount.set('disabled', Self.$('input[name=disabled]:checked').val() === 'true');
+            }
+
             editedAccount.credentials = {};
             editedAccount.credentials.token = Self.steward.get('access_token');
+            console.log('editedAccount', editedAccount.toJSON());
             editedAccount.save({},{
               success: function(model, response){
-                console.log('successfully saved model', model, response);
+                console.log('successfully saved account', model, response);
                 var accountName = editedAccount.get('account_namespace') == '' ? editedAccount.get('account') : editedAccount.get('account') + '.' + editedAccount.get('account_namespace');
                 Self.collection.fetch();
                 //Self.journals.fetch();
