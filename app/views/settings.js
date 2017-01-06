@@ -64,7 +64,7 @@ module.exports = Marionette.CollectionView.extend({
         var data = {};
         //data = Self.steward.toJSON();
         console.log('Self.steward',Self.steward.toJSON());
-        data = Self.stewardsCollection.get(Self.steward.get('_id'));
+        data = Self.stewardsCollection.get(Self.steward.get('id'));
         if(typeof data != 'undefined'){
           data = data.toJSON();
         } else {

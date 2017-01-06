@@ -17,11 +17,11 @@ tr.CREDIT {
         <strong>Edit</strong>
       </button>
     </div>
-    <div id="stats" class="statcard statcard-{{#disabled}}danger{{/disabled}}{{#currency_disabled}}danger{{/currency_disabled}}{{#namespace_disabled}}danger{{/namespace_disabled}}{{#if (not (or disabled (or currency_disabled namespace_disabled)))}}success{{/if}} p-a-md m-b">
+    <div id="stats" class="statcard statcard-{{#if (or disabled (or currency_disabled namespace_disabled))}}danger{{/if}}{{#if (not (or disabled (or currency_disabled namespace_disabled)))}}success{{/if}} p-a-md m-b">
       <h3><div class="statcard-number">
           <div>ACCOUNT: {{accountName}}</div>
           <div>CURRENCY: {{currencyName}}</div>
-          <div>PAYMENT STATUS: {{#disabled}}disabled{{/disabled}} {{#currency_disabled}}currency disabled{{/currency_disabled}} {{#namespace_disabled}}namespace disabled{{/namespace_disabled}} {{#if (not (or disabled (or currency_disabled namespace_disabled)))}}enabled{{/if}}
+          <div>PAYMENT STATUS: {{#disabled}}steward disabled{{/disabled}} {{#currency_disabled}}currency disabled{{/currency_disabled}} {{#namespace_disabled}}namespace disabled{{/namespace_disabled}} {{#if (not (or disabled (or currency_disabled namespace_disabled)))}}enabled{{/if}}
         </div>
         <div>STEWARDS:
           {{#stewards}}

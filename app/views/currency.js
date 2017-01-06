@@ -319,8 +319,6 @@ module.exports = Marionette.ItemView.extend({
           }
         }
 
-
-
         data.journals = data.journals.concat(doubleEntries);
 
         for(var i = 0; i < data.journals.length; i++){
@@ -363,6 +361,16 @@ module.exports = Marionette.ItemView.extend({
         }
 
         data.stewardsCollection = Self.stewardsCollection.toJSON();
+
+        data.isNamespaceSteward = false;
+        data.namespaceId = 'namespaces~' + data.currency_namespace;
+        data.namespace = Self.namespaces.get('namespaces~' + data.currency_namespace);
+        if(typeof data.namespace != 'undefined'){
+          data.namespace = data.namespace.toJSON();
+          if(data.namespace.stewards.indexOf(Self.steward.get('id')) !== -1){
+            data.isNamespaceSteward = true;
+          }
+        }
 
         console.log('currency view data:', data);
         _.extend(data, ViewHelpers);
@@ -571,8 +579,13 @@ module.exports = Marionette.ItemView.extend({
                 }
               }
               editedCurrency.set('private', Self.$('input[name=private]:checked').val() === 'true');
-              editedCurrency.set('disabled', Self.$('input[name=disabled]:checked').val() === 'true');
-              
+              if(data.isNamespaceSteward){
+                editedCurrency.set('namespace_disabled', Self.$('input[name=disabled]:checked').val() === 'true');
+              } else {
+                editedCurrency.set('disabled', Self.$('input[name=disabled]:checked').val() === 'true');
+              }
+
+
 
               editedCurrency.credentials = {};
               editedCurrency.credentials.token = Self.steward.get('access_token');

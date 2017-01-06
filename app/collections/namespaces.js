@@ -24,8 +24,10 @@ module.exports = Backbone.Collection.extend({
               //console.log('is steward equal', steward, 'stewards~'+ stewardname)
               result = result || steward == 'stewards~' + stewardname;
             } else {
-              //console.log('is steward equal', steward.stewardname,  stewardname)
-              result = result || steward.stewardname == stewardname;
+              if(typeof steward != 'undefined'){
+                //console.log('is steward equal', steward.stewardname,  stewardname)
+                result = result || steward.stewardname == stewardname;
+              }
             }
           })
           return result;

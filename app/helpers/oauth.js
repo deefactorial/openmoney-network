@@ -9,7 +9,11 @@ exports.authenticate = function (steward, callback){
     //check expiry of token
     if(new Date(cache[steward.get('stewardname')].expires).getTime() > new Date().getTime()){
       // not expired
-      callback(null, cache[steward.get('stewardname')].access_token);
+      steward.set('access_token', cache[steward.get('stewardname')].access_token);
+      steward.set('expires', cache[steward.get('stewardname')].expires);
+      steward.set('refresh_token', cache[steward.get('stewardname')].refresh_token);
+      steward.save();
+      callback(null, steward);
     } else {
       //expired refresh token
       RefreshToken(steward.get('stewardname'), cache[steward.get('stewardname')].refresh_token, function(err, results){
@@ -31,7 +35,7 @@ exports.authenticate = function (steward, callback){
           cache[steward.get('stewardname')].refresh_token = results.refresh_token;
 
 
-          callback(null, results.access_token);
+          callback(null, steward);
         }//else err
       });//RefreshToken
     }//else expired
