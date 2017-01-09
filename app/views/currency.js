@@ -544,7 +544,7 @@ module.exports = Marionette.ItemView.extend({
                   Self.collection.fetch();
                   //Self.journals.fetch();
                   if(typeof Self.namespace != 'undefined'){
-                    router.navigate('stewards/' + Self.steward.get('stewardname') + '/namespaces/' + Self.namespace + '/currencies/' + currencyName.toLowerCase());
+                    router.navigate('stewards/' + Self.steward.get('stewardname') + '/namespaces/' + Self.namespace + '/currencies/' + Self.currencyName.toLowerCase());
                   } else {
                     router.navigate('stewards/' + Self.steward.get('stewardname') + '/currencies/' + currencyName);
                   }
@@ -626,7 +626,7 @@ module.exports = Marionette.ItemView.extend({
                   Self.collection.fetch();
                   //Self.journals.fetch();
                   if(typeof Self.namespace != 'undefined'){
-                    router.navigate('stewards/' + Self.steward.get('stewardname') + '/namespaces/' + Self.namespace + '/currencies/' + currencyName.toLowerCase);
+                    router.navigate('stewards/' + Self.steward.get('stewardname') + '/namespaces/' + Self.namespace + '/currencies/' + Self.currencyName.toLowerCase);
                   } else {
                     router.navigate('stewards/' + Self.steward.get('stewardname') + '/currencies/' + currencyName);
                   }

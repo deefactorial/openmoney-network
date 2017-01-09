@@ -54,7 +54,7 @@ tr.CREDIT {
         <select class="custom-select" name="currency_namespace">
           {{#each namespaces}}
             {{#this}}
-              <option value="{{namespace}}" {{#if_eq namespace ../currency_namespace}}selected="selected"{{/if_eq}}>{{namespace}}</option>
+              <option value="{{namespace}}" {{#if_eq namespace ../currency_namespace/namespace}}selected="selected"{{/if_eq}}>{{namespace}}</option>
             {{/this}}
           {{/each}}
         </select>
