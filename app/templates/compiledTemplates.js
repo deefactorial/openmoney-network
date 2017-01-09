@@ -5,8 +5,7 @@ this["openmoney"] = this["openmoney"] || {};
 this["openmoney"]["account"] = Handlebars.template({"1":function(container,depth0,helpers,partials,data) {
     var stack1, helper, options, alias1=depth0 != null ? depth0 : {}, alias2=helpers.helperMissing, alias3="function", alias4=container.escapeExpression, alias5=helpers.blockHelperMissing, buffer = 
   "    <div id=\"statsButton\" class=\"text-right\" style=\"padding-bottom:10px;\">\n      <button type=\"button\" name=\"showedit\" class=\"btn btn-lg btn-primary-outline\" >\n        <strong>Edit</strong>\n      </button>\n    </div>\n    <div id=\"stats\" class=\"statcard statcard-"
-    + ((stack1 = helpers["if"].call(alias1,(helpers.or || (depth0 && depth0.or) || alias2).call(alias1,(depth0 != null ? depth0.disabled : depth0),(helpers.or || (depth0 && depth0.or) || alias2).call(alias1,(depth0 != null ? depth0.currency_disabled : depth0),(depth0 != null ? depth0.namespace_disabled : depth0),{"name":"or","hash":{},"data":data}),{"name":"or","hash":{},"data":data}),{"name":"if","hash":{},"fn":container.program(2, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
-    + ((stack1 = helpers["if"].call(alias1,(helpers.not || (depth0 && depth0.not) || alias2).call(alias1,(helpers.or || (depth0 && depth0.or) || alias2).call(alias1,(depth0 != null ? depth0.disabled : depth0),(helpers.or || (depth0 && depth0.or) || alias2).call(alias1,(depth0 != null ? depth0.currency_disabled : depth0),(depth0 != null ? depth0.namespace_disabled : depth0),{"name":"or","hash":{},"data":data}),{"name":"or","hash":{},"data":data}),{"name":"not","hash":{},"data":data}),{"name":"if","hash":{},"fn":container.program(4, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
+    + ((stack1 = helpers["if"].call(alias1,(helpers.or || (depth0 && depth0.or) || alias2).call(alias1,(depth0 != null ? depth0.disabled : depth0),(helpers.or || (depth0 && depth0.or) || alias2).call(alias1,(depth0 != null ? depth0.currency_disabled : depth0),(helpers.or || (depth0 && depth0.or) || alias2).call(alias1,(depth0 != null ? depth0.namespace_disabled : depth0),(helpers.or || (depth0 && depth0.or) || alias2).call(alias1,(depth0 != null ? depth0.isParentNamespaceDisabled : depth0),(depth0 != null ? depth0.isCurrencyParentNamespaceDisabled : depth0),{"name":"or","hash":{},"data":data}),{"name":"or","hash":{},"data":data}),{"name":"or","hash":{},"data":data}),{"name":"or","hash":{},"data":data}),{"name":"if","hash":{},"fn":container.program(2, data, 0),"inverse":container.program(4, data, 0),"data":data})) != null ? stack1 : "")
     + " p-a-md m-b\">\n      <h3><div class=\"statcard-number\">\n          <div>ACCOUNT: "
     + alias4(((helper = (helper = helpers.accountName || (depth0 != null ? depth0.accountName : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"accountName","hash":{},"data":data}) : helper)))
     + "</div>\n          <div>CURRENCY: "
@@ -23,10 +22,18 @@ this["openmoney"]["account"] = Handlebars.template({"1":function(container,depth
   stack1 = ((helper = (helper = helpers.namespace_disabled || (depth0 != null ? depth0.namespace_disabled : depth0)) != null ? helper : alias2),(options={"name":"namespace_disabled","hash":{},"fn":container.program(10, data, 0),"inverse":container.noop,"data":data}),(typeof helper === alias3 ? helper.call(alias1,options) : helper));
   if (!helpers.namespace_disabled) { stack1 = alias5.call(depth0,stack1,options)}
   if (stack1 != null) { buffer += stack1; }
+  buffer += " ";
+  stack1 = ((helper = (helper = helpers.isParentNamespaceDisabled || (depth0 != null ? depth0.isParentNamespaceDisabled : depth0)) != null ? helper : alias2),(options={"name":"isParentNamespaceDisabled","hash":{},"fn":container.program(12, data, 0),"inverse":container.noop,"data":data}),(typeof helper === alias3 ? helper.call(alias1,options) : helper));
+  if (!helpers.isParentNamespaceDisabled) { stack1 = alias5.call(depth0,stack1,options)}
+  if (stack1 != null) { buffer += stack1; }
+  buffer += " ";
+  stack1 = ((helper = (helper = helpers.isCurrencyParentNamespaceDisabled || (depth0 != null ? depth0.isCurrencyParentNamespaceDisabled : depth0)) != null ? helper : alias2),(options={"name":"isCurrencyParentNamespaceDisabled","hash":{},"fn":container.program(14, data, 0),"inverse":container.noop,"data":data}),(typeof helper === alias3 ? helper.call(alias1,options) : helper));
+  if (!helpers.isCurrencyParentNamespaceDisabled) { stack1 = alias5.call(depth0,stack1,options)}
+  if (stack1 != null) { buffer += stack1; }
   buffer += " "
-    + ((stack1 = helpers["if"].call(alias1,(helpers.not || (depth0 && depth0.not) || alias2).call(alias1,(helpers.or || (depth0 && depth0.or) || alias2).call(alias1,(depth0 != null ? depth0.disabled : depth0),(helpers.or || (depth0 && depth0.or) || alias2).call(alias1,(depth0 != null ? depth0.currency_disabled : depth0),(depth0 != null ? depth0.namespace_disabled : depth0),{"name":"or","hash":{},"data":data}),{"name":"or","hash":{},"data":data}),{"name":"not","hash":{},"data":data}),{"name":"if","hash":{},"fn":container.program(12, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
+    + ((stack1 = helpers["if"].call(alias1,(helpers.not || (depth0 && depth0.not) || alias2).call(alias1,(helpers.or || (depth0 && depth0.or) || alias2).call(alias1,(depth0 != null ? depth0.disabled : depth0),(helpers.or || (depth0 && depth0.or) || alias2).call(alias1,(depth0 != null ? depth0.currency_disabled : depth0),(helpers.or || (depth0 && depth0.or) || alias2).call(alias1,(depth0 != null ? depth0.namespace_disabled : depth0),(helpers.or || (depth0 && depth0.or) || alias2).call(alias1,(depth0 != null ? depth0.isParentNamespaceDisabled : depth0),(depth0 != null ? depth0.isCurrencyParentNamespaceDisabled : depth0),{"name":"or","hash":{},"data":data}),{"name":"or","hash":{},"data":data}),{"name":"or","hash":{},"data":data}),{"name":"or","hash":{},"data":data}),{"name":"not","hash":{},"data":data}),{"name":"if","hash":{},"fn":container.program(16, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
     + "\n        </div>\n        <div>STEWARDS:\n";
-  stack1 = ((helper = (helper = helpers.stewards || (depth0 != null ? depth0.stewards : depth0)) != null ? helper : alias2),(options={"name":"stewards","hash":{},"fn":container.program(14, data, 0),"inverse":container.noop,"data":data}),(typeof helper === alias3 ? helper.call(alias1,options) : helper));
+  stack1 = ((helper = (helper = helpers.stewards || (depth0 != null ? depth0.stewards : depth0)) != null ? helper : alias2),(options={"name":"stewards","hash":{},"fn":container.program(18, data, 0),"inverse":container.noop,"data":data}),(typeof helper === alias3 ? helper.call(alias1,options) : helper));
   if (!helpers.stewards) { stack1 = alias5.call(depth0,stack1,options)}
   if (stack1 != null) { buffer += stack1; }
   return buffer + "        </div>\n      </h3>\n      <h4 class=\"statcard-number text-right\">\n        BALANCE "
@@ -43,14 +50,18 @@ this["openmoney"]["account"] = Handlebars.template({"1":function(container,depth
 },"4":function(container,depth0,helpers,partials,data) {
     return "success";
 },"6":function(container,depth0,helpers,partials,data) {
-    return "steward disabled";
+    return "Steward Disabled";
 },"8":function(container,depth0,helpers,partials,data) {
-    return "currency disabled";
+    return "Currency Disabled";
 },"10":function(container,depth0,helpers,partials,data) {
-    return "namespace disabled";
+    return "Namespace Disabled";
 },"12":function(container,depth0,helpers,partials,data) {
-    return "enabled";
+    return "Parent Namespace Disabled";
 },"14":function(container,depth0,helpers,partials,data) {
+    return "Currency Parent Namespace Disabled";
+},"16":function(container,depth0,helpers,partials,data) {
+    return "Enabled";
+},"18":function(container,depth0,helpers,partials,data) {
     var helper, alias1=depth0 != null ? depth0 : {}, alias2=helpers.helperMissing, alias3="function", alias4=container.escapeExpression;
 
   return "          <div style=\"padding-left: 40px;\">\n            <a href=\"#stewards/"
@@ -58,40 +69,24 @@ this["openmoney"]["account"] = Handlebars.template({"1":function(container,depth
     + "\" style=\"color: #4040a2\">"
     + alias4(((helper = (helper = helpers.stewardname || (depth0 != null ? depth0.stewardname : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"stewardname","hash":{},"data":data}) : helper)))
     + "</a>\n          </div>\n";
-},"16":function(container,depth0,helpers,partials,data) {
+},"20":function(container,depth0,helpers,partials,data) {
     return "style=\"display: none;\"";
-},"18":function(container,depth0,helpers,partials,data) {
+},"22":function(container,depth0,helpers,partials,data) {
     var helper;
 
   return "<input type=\"hidden\" name=\"id\" value=\""
     + container.escapeExpression(((helper = (helper = helpers.id || (depth0 != null ? depth0.id : depth0)) != null ? helper : helpers.helperMissing),(typeof helper === "function" ? helper.call(depth0 != null ? depth0 : {},{"name":"id","hash":{},"data":data}) : helper)))
     + "\" />";
-},"20":function(container,depth0,helpers,partials,data,blockParams,depths) {
+},"24":function(container,depth0,helpers,partials,data,blockParams,depths) {
     var stack1, helper, alias1=depth0 != null ? depth0 : {};
 
   return "    <div class=\"form-group text-left\">\n      <label for=\"key\">Account Name</label>\n      <input type=\"text\" id=\"account\" name=\"account\" value=\""
     + container.escapeExpression(((helper = (helper = helpers.account || (depth0 != null ? depth0.account : depth0)) != null ? helper : helpers.helperMissing),(typeof helper === "function" ? helper.call(alias1,{"name":"account","hash":{},"data":data}) : helper)))
     + "\" placeholder=\"Trading Account Name\" class=\"form-control\" />\n    </div>\n    <div class=\"form-group text-left\">\n      <label for=\"type\">Account Namespace</label>\n      <select class=\"custom-select\" name=\"account_namespace\">\n"
-    + ((stack1 = helpers.each.call(alias1,(depth0 != null ? depth0.namespaces : depth0),{"name":"each","hash":{},"fn":container.program(21, data, 0, blockParams, depths),"inverse":container.noop,"data":data})) != null ? stack1 : "")
+    + ((stack1 = helpers.each.call(alias1,(depth0 != null ? depth0.namespaces : depth0),{"name":"each","hash":{},"fn":container.program(25, data, 0, blockParams, depths),"inverse":container.noop,"data":data})) != null ? stack1 : "")
     + "      </select>\n    </div>\n    <div class=\"form-group text-left\">\n      <label for=\"type\">Account Currency</label>\n      <select class=\"custom-select\" name=\"currencyName\">\n"
-    + ((stack1 = helpers.each.call(alias1,(depth0 != null ? depth0.currencies : depth0),{"name":"each","hash":{},"fn":container.program(25, data, 0, blockParams, depths),"inverse":container.noop,"data":data})) != null ? stack1 : "")
+    + ((stack1 = helpers.each.call(alias1,(depth0 != null ? depth0.currencies : depth0),{"name":"each","hash":{},"fn":container.program(29, data, 0, blockParams, depths),"inverse":container.noop,"data":data})) != null ? stack1 : "")
     + "      </select>\n    </div>\n";
-},"21":function(container,depth0,helpers,partials,data,blockParams,depths) {
-    var stack1;
-
-  return ((stack1 = helpers.blockHelperMissing.call(depth0,container.lambda(depth0, depth0),{"name":"this","hash":{},"fn":container.program(22, data, 0, blockParams, depths),"inverse":container.noop,"data":data})) != null ? stack1 : "");
-},"22":function(container,depth0,helpers,partials,data,blockParams,depths) {
-    var stack1, helper, alias1=depth0 != null ? depth0 : {}, alias2=helpers.helperMissing, alias3="function", alias4=container.escapeExpression;
-
-  return "            <option value=\""
-    + alias4(((helper = (helper = helpers.namespace || (depth0 != null ? depth0.namespace : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"namespace","hash":{},"data":data}) : helper)))
-    + "\" "
-    + ((stack1 = (helpers.if_eq || (depth0 && depth0.if_eq) || alias2).call(alias1,(depth0 != null ? depth0.namespace : depth0),(depths[1] != null ? depths[1].namespace : depths[1]),{"name":"if_eq","hash":{},"fn":container.program(23, data, 0, blockParams, depths),"inverse":container.noop,"data":data})) != null ? stack1 : "")
-    + ">"
-    + alias4(((helper = (helper = helpers.namespace || (depth0 != null ? depth0.namespace : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"namespace","hash":{},"data":data}) : helper)))
-    + "</option>\n";
-},"23":function(container,depth0,helpers,partials,data) {
-    return "selected=\"selected\"";
 },"25":function(container,depth0,helpers,partials,data,blockParams,depths) {
     var stack1;
 
@@ -100,30 +95,46 @@ this["openmoney"]["account"] = Handlebars.template({"1":function(container,depth
     var stack1, helper, alias1=depth0 != null ? depth0 : {}, alias2=helpers.helperMissing, alias3="function", alias4=container.escapeExpression;
 
   return "            <option value=\""
+    + alias4(((helper = (helper = helpers.namespace || (depth0 != null ? depth0.namespace : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"namespace","hash":{},"data":data}) : helper)))
+    + "\" "
+    + ((stack1 = (helpers.if_eq || (depth0 && depth0.if_eq) || alias2).call(alias1,(depth0 != null ? depth0.namespace : depth0),(depths[1] != null ? depths[1].namespace : depths[1]),{"name":"if_eq","hash":{},"fn":container.program(27, data, 0, blockParams, depths),"inverse":container.noop,"data":data})) != null ? stack1 : "")
+    + ">"
+    + alias4(((helper = (helper = helpers.namespace || (depth0 != null ? depth0.namespace : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"namespace","hash":{},"data":data}) : helper)))
+    + "</option>\n";
+},"27":function(container,depth0,helpers,partials,data) {
+    return "selected=\"selected\"";
+},"29":function(container,depth0,helpers,partials,data,blockParams,depths) {
+    var stack1;
+
+  return ((stack1 = helpers.blockHelperMissing.call(depth0,container.lambda(depth0, depth0),{"name":"this","hash":{},"fn":container.program(30, data, 0, blockParams, depths),"inverse":container.noop,"data":data})) != null ? stack1 : "");
+},"30":function(container,depth0,helpers,partials,data,blockParams,depths) {
+    var stack1, helper, alias1=depth0 != null ? depth0 : {}, alias2=helpers.helperMissing, alias3="function", alias4=container.escapeExpression;
+
+  return "            <option value=\""
     + alias4(((helper = (helper = helpers.currencyName || (depth0 != null ? depth0.currencyName : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"currencyName","hash":{},"data":data}) : helper)))
     + "\" "
-    + ((stack1 = (helpers.if_eq || (depth0 && depth0.if_eq) || alias2).call(alias1,(depth0 != null ? depth0.currencyName : depth0),(depths[1] != null ? depths[1].currencyName : depths[1]),{"name":"if_eq","hash":{},"fn":container.program(23, data, 0, blockParams, depths),"inverse":container.noop,"data":data})) != null ? stack1 : "")
+    + ((stack1 = (helpers.if_eq || (depth0 && depth0.if_eq) || alias2).call(alias1,(depth0 != null ? depth0.currencyName : depth0),(depths[1] != null ? depths[1].currencyName : depths[1]),{"name":"if_eq","hash":{},"fn":container.program(27, data, 0, blockParams, depths),"inverse":container.noop,"data":data})) != null ? stack1 : "")
     + ">"
     + alias4(((helper = (helper = helpers.currencyName || (depth0 != null ? depth0.currencyName : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"currencyName","hash":{},"data":data}) : helper)))
     + "</option>\n";
-},"28":function(container,depth0,helpers,partials,data) {
+},"32":function(container,depth0,helpers,partials,data) {
     var stack1, alias1=depth0 != null ? depth0 : {}, alias2=helpers.helperMissing;
 
   return "    <div style=\"padding-top:10px;padding-bottom: 10px;\">\n      <div style=\"padding-bottom: 10px;\">\n        <strong>Payment Status:</strong>\n      </div>\n      <div class=\"radio-inline custom-control custom-radio\">\n        <label>\n          <input type=\"radio\" id=\"private\" name=\"disabled\" value=\"false\" "
-    + ((stack1 = helpers["if"].call(alias1,(helpers.not || (depth0 && depth0.not) || alias2).call(alias1,(helpers.or || (depth0 && depth0.or) || alias2).call(alias1,(depth0 != null ? depth0.disabled : depth0),(helpers.or || (depth0 && depth0.or) || alias2).call(alias1,(depth0 != null ? depth0.currency_disabled : depth0),(depth0 != null ? depth0.namespace_disabled : depth0),{"name":"or","hash":{},"data":data}),{"name":"or","hash":{},"data":data}),{"name":"not","hash":{},"data":data}),{"name":"if","hash":{},"fn":container.program(29, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
+    + ((stack1 = helpers["if"].call(alias1,(helpers.not || (depth0 && depth0.not) || alias2).call(alias1,(helpers.or || (depth0 && depth0.or) || alias2).call(alias1,(helpers.and || (depth0 && depth0.and) || alias2).call(alias1,(depth0 != null ? depth0.disabled : depth0),(depth0 != null ? depth0.isSteward : depth0),{"name":"and","hash":{},"data":data}),(helpers.or || (depth0 && depth0.or) || alias2).call(alias1,(helpers.and || (depth0 && depth0.and) || alias2).call(alias1,(depth0 != null ? depth0.currency_disabled : depth0),(depth0 != null ? depth0.isCurrencySteward : depth0),{"name":"and","hash":{},"data":data}),(helpers.and || (depth0 && depth0.and) || alias2).call(alias1,(depth0 != null ? depth0.namespace_disabled : depth0),(depth0 != null ? depth0.isNamespaceStweard : depth0),{"name":"and","hash":{},"data":data}),{"name":"or","hash":{},"data":data}),{"name":"or","hash":{},"data":data}),{"name":"not","hash":{},"data":data}),{"name":"if","hash":{},"fn":container.program(33, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
     + ">\n          <span class=\"custom-control-indicator\"></span>\n          <strong>Enabled</strong>\n        </label>\n      </div>\n      <div class=\"radio-inline custom-control custom-radio\">\n        <label>\n          <input type=\"radio\" id=\"public\" name=\"disabled\" value=\"true\" "
-    + ((stack1 = helpers["if"].call(alias1,(helpers.or || (depth0 && depth0.or) || alias2).call(alias1,(depth0 != null ? depth0.disabled : depth0),(helpers.or || (depth0 && depth0.or) || alias2).call(alias1,(depth0 != null ? depth0.currency_disabled : depth0),(depth0 != null ? depth0.namespace_disabled : depth0),{"name":"or","hash":{},"data":data}),{"name":"or","hash":{},"data":data}),{"name":"if","hash":{},"fn":container.program(29, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
+    + ((stack1 = helpers["if"].call(alias1,(helpers.or || (depth0 && depth0.or) || alias2).call(alias1,(helpers.and || (depth0 && depth0.and) || alias2).call(alias1,(depth0 != null ? depth0.disabled : depth0),(depth0 != null ? depth0.isSteward : depth0),{"name":"and","hash":{},"data":data}),(helpers.or || (depth0 && depth0.or) || alias2).call(alias1,(helpers.and || (depth0 && depth0.and) || alias2).call(alias1,(depth0 != null ? depth0.currency_disabled : depth0),(depth0 != null ? depth0.isCurrencySteward : depth0),{"name":"and","hash":{},"data":data}),(helpers.and || (depth0 && depth0.and) || alias2).call(alias1,(depth0 != null ? depth0.namespace_disabled : depth0),(depth0 != null ? depth0.isNamespaceStweard : depth0),{"name":"and","hash":{},"data":data}),{"name":"or","hash":{},"data":data}),{"name":"or","hash":{},"data":data}),{"name":"if","hash":{},"fn":container.program(33, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
     + ">\n          <span class=\"custom-control-indicator\"></span>\n          <strong>Disabled</strong>\n        </label>\n      </div>\n      <div style=\"padding-top:5px; font-size: 12px;\"><i>Enabled means payments can be processed on this account.</i></div>\n      <div style=\"padding-bottom:5px; font-size: 12px;\"><i>Disabled means payments can not be processed on this account.</i></div>\n    </div>\n";
-},"29":function(container,depth0,helpers,partials,data) {
+},"33":function(container,depth0,helpers,partials,data) {
     return "checked=\"checked\"";
-},"31":function(container,depth0,helpers,partials,data) {
+},"35":function(container,depth0,helpers,partials,data) {
     var stack1, helper, options, buffer = 
   "    <div class=\"form-group text-left\">\n      <label for=\"stewards[]\">Account Stewards</label>\n      <div id=\"addButtonDiv\" class=\"text-right\" style=\"padding-bottom:10px;\">\n        <button type=\"button\" name=\"addSteward\" class=\"btn btn-success-outline\">\n          Add Stewards\n          <span class=\"icon icon-add-to-list\"></span>\n        </button>\n      </div>\n      <ul id=\"stewards\" class=\"list-group\">\n";
-  stack1 = ((helper = (helper = helpers.stewards || (depth0 != null ? depth0.stewards : depth0)) != null ? helper : helpers.helperMissing),(options={"name":"stewards","hash":{},"fn":container.program(32, data, 0),"inverse":container.noop,"data":data}),(typeof helper === "function" ? helper.call(depth0 != null ? depth0 : {},options) : helper));
+  stack1 = ((helper = (helper = helpers.stewards || (depth0 != null ? depth0.stewards : depth0)) != null ? helper : helpers.helperMissing),(options={"name":"stewards","hash":{},"fn":container.program(36, data, 0),"inverse":container.noop,"data":data}),(typeof helper === "function" ? helper.call(depth0 != null ? depth0 : {},options) : helper));
   if (!helpers.stewards) { stack1 = helpers.blockHelperMissing.call(depth0,stack1,options)}
   if (stack1 != null) { buffer += stack1; }
   return buffer + "      </ul>\n    </div>\n";
-},"32":function(container,depth0,helpers,partials,data) {
+},"36":function(container,depth0,helpers,partials,data) {
     var helper, alias1=depth0 != null ? depth0 : {}, alias2=helpers.helperMissing, alias3="function", alias4=container.escapeExpression;
 
   return "          <div class=\"flextable\" style=\"padding-bottom: 10px;\">\n            <div class=\"flextable-item flextable-primary\">\n              <li class=\"list-group-item\">\n              "
@@ -133,9 +144,9 @@ this["openmoney"]["account"] = Handlebars.template({"1":function(container,depth
     + "\" />\n              </li>\n            </div>\n            <div class=\"flextable-item\">\n              <div class=\"btn-group\">\n                <button type=\"button\" name=\"remove\" value=\"stewards~"
     + alias4(((helper = (helper = helpers.stewardname || (depth0 != null ? depth0.stewardname : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"stewardname","hash":{},"data":data}) : helper)))
     + "\" class=\"btn btn-danger-outline\">\n                  <span class=\"icon icon-cross\" style=\"font-size: 1.2em\"></span>\n                </button>\n              </div>\n            </div>\n          </div>\n";
-},"34":function(container,depth0,helpers,partials,data) {
+},"38":function(container,depth0,helpers,partials,data) {
     return "Save";
-},"36":function(container,depth0,helpers,partials,data) {
+},"40":function(container,depth0,helpers,partials,data) {
     var helper, alias1=depth0 != null ? depth0 : {}, alias2=helpers.helperMissing, alias3="function", alias4=container.escapeExpression;
 
   return "                  <tr id=\""
@@ -145,17 +156,17 @@ this["openmoney"]["account"] = Handlebars.template({"1":function(container,depth
     + "\">\n                        <span class=\"custom-control-indicator\"></span>\n                        &nbsp;&nbsp;&nbsp;&nbsp;"
     + alias4(((helper = (helper = helpers.stewardname || (depth0 != null ? depth0.stewardname : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"stewardname","hash":{},"data":data}) : helper)))
     + "\n                      </label>\n                    </div>\n                    </td>\n                  </tr>\n";
-},"38":function(container,depth0,helpers,partials,data) {
+},"42":function(container,depth0,helpers,partials,data) {
     var stack1;
 
   return "  <h2><strong>Ledger</strong></h2>\n  <div id=\"newButtonDiv\" class=\"text-right\" style=\"padding-bottom:10px;\">\n    <button type=\"button\" name=\"csv\" class=\"btn btn-lg btn-primary-outline\" >\n      <strong>Export CSV</strong>\n    </button>\n    <button type=\"button\" name=\"newJournal\" class=\"btn btn-lg btn-success-outline\" >\n      <strong>Process Journal Entry</strong>\n    </button>\n  </div>\n  <div class=\"table-full\">\n    <table class=\"table\" data-sort=\"basic\">\n      <thead>\n        <tr>\n          <th>Timestamp</th>\n          <th>With</th>\n          <th>description</th>\n          <th>Amount</th>\n          <th>Balance</th>\n          <th>Volume</td>\n        </tr>\n      </thead>\n      <tbody class=\"table-rows\">\n"
-    + ((stack1 = helpers.each.call(depth0 != null ? depth0 : {},(depth0 != null ? depth0.journals : depth0),{"name":"each","hash":{},"fn":container.program(39, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
+    + ((stack1 = helpers.each.call(depth0 != null ? depth0 : {},(depth0 != null ? depth0.journals : depth0),{"name":"each","hash":{},"fn":container.program(43, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
     + "      </tbody>\n    </table>\n  </div>\n";
-},"39":function(container,depth0,helpers,partials,data) {
+},"43":function(container,depth0,helpers,partials,data) {
     var stack1;
 
-  return ((stack1 = helpers.blockHelperMissing.call(depth0,container.lambda(depth0, depth0),{"name":"this","hash":{},"fn":container.program(40, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "");
-},"40":function(container,depth0,helpers,partials,data) {
+  return ((stack1 = helpers.blockHelperMissing.call(depth0,container.lambda(depth0, depth0),{"name":"this","hash":{},"fn":container.program(44, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "");
+},"44":function(container,depth0,helpers,partials,data) {
     var stack1, helper, options, alias1=depth0 != null ? depth0 : {}, alias2=helpers.helperMissing, alias3="function", alias4=container.escapeExpression, buffer = 
   "            <tr id=\""
     + alias4(((helper = (helper = helpers.id || (depth0 != null ? depth0.id : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"id","hash":{},"data":data}) : helper)))
@@ -164,24 +175,24 @@ this["openmoney"]["account"] = Handlebars.template({"1":function(container,depth
     + "\">\n              <td>"
     + alias4((helpers.prettify_date_short || (depth0 && depth0.prettify_date_short) || alias2).call(alias1,(depth0 != null ? depth0.created : depth0),{"name":"prettify_date_short","hash":{},"data":data}))
     + "</td>\n              <td>"
-    + ((stack1 = helpers["if"].call(alias1,(depth0 != null ? depth0.withStewardname : depth0),{"name":"if","hash":{},"fn":container.program(41, data, 0),"inverse":container.program(43, data, 0),"data":data})) != null ? stack1 : "")
+    + ((stack1 = helpers["if"].call(alias1,(depth0 != null ? depth0.withStewardname : depth0),{"name":"if","hash":{},"fn":container.program(45, data, 0),"inverse":container.program(47, data, 0),"data":data})) != null ? stack1 : "")
     + "</td>\n              <td>";
-  stack1 = ((helper = (helper = helpers.payload || (depth0 != null ? depth0.payload : depth0)) != null ? helper : alias2),(options={"name":"payload","hash":{},"fn":container.program(45, data, 0),"inverse":container.noop,"data":data}),(typeof helper === alias3 ? helper.call(alias1,options) : helper));
+  stack1 = ((helper = (helper = helpers.payload || (depth0 != null ? depth0.payload : depth0)) != null ? helper : alias2),(options={"name":"payload","hash":{},"fn":container.program(49, data, 0),"inverse":container.noop,"data":data}),(typeof helper === alias3 ? helper.call(alias1,options) : helper));
   if (!helpers.payload) { stack1 = helpers.blockHelperMissing.call(depth0,stack1,options)}
   if (stack1 != null) { buffer += stack1; }
   return buffer + "</td>\n              <!-- <td>"
-    + ((stack1 = helpers["if"].call(alias1,(depth0 != null ? depth0.fromstewardname : depth0),{"name":"if","hash":{},"fn":container.program(47, data, 0),"inverse":container.program(49, data, 0),"data":data})) != null ? stack1 : "")
+    + ((stack1 = helpers["if"].call(alias1,(depth0 != null ? depth0.fromstewardname : depth0),{"name":"if","hash":{},"fn":container.program(51, data, 0),"inverse":container.program(53, data, 0),"data":data})) != null ? stack1 : "")
     + "</td>\n              <td>"
-    + ((stack1 = helpers["if"].call(alias1,(depth0 != null ? depth0.tostewardname : depth0),{"name":"if","hash":{},"fn":container.program(51, data, 0),"inverse":container.program(53, data, 0),"data":data})) != null ? stack1 : "")
+    + ((stack1 = helpers["if"].call(alias1,(depth0 != null ? depth0.tostewardname : depth0),{"name":"if","hash":{},"fn":container.program(55, data, 0),"inverse":container.program(57, data, 0),"data":data})) != null ? stack1 : "")
     + "</td> -->\n              <td>"
-    + ((stack1 = (helpers.if_eq || (depth0 && depth0.if_eq) || alias2).call(alias1,(depth0 != null ? depth0.charge : depth0),"CREDIT",{"name":"if_eq","hash":{},"fn":container.program(55, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
+    + ((stack1 = (helpers.if_eq || (depth0 && depth0.if_eq) || alias2).call(alias1,(depth0 != null ? depth0.charge : depth0),"CREDIT",{"name":"if_eq","hash":{},"fn":container.program(59, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
     + alias4((helpers.decimal_places || (depth0 && depth0.decimal_places) || alias2).call(alias1,(depth0 != null ? depth0.amount : depth0),{"name":"decimal_places","hash":{},"data":data}))
     + "</td>\n              <td>"
     + alias4((helpers.decimal_places || (depth0 && depth0.decimal_places) || alias2).call(alias1,(depth0 != null ? depth0.balance : depth0),{"name":"decimal_places","hash":{},"data":data}))
     + "</td>\n              <td>"
     + alias4((helpers.decimal_places || (depth0 && depth0.decimal_places) || alias2).call(alias1,(depth0 != null ? depth0.volume : depth0),{"name":"decimal_places","hash":{},"data":data}))
     + "</td>\n            </tr>\n";
-},"41":function(container,depth0,helpers,partials,data) {
+},"45":function(container,depth0,helpers,partials,data) {
     var helper, alias1=depth0 != null ? depth0 : {}, alias2=helpers.helperMissing, alias3="function", alias4=container.escapeExpression;
 
   return "<a href=\"#stewards/"
@@ -193,15 +204,15 @@ this["openmoney"]["account"] = Handlebars.template({"1":function(container,depth
     + "\">"
     + alias4(((helper = (helper = helpers.withAccount || (depth0 != null ? depth0.withAccount : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"withAccount","hash":{},"data":data}) : helper)))
     + "</a>";
-},"43":function(container,depth0,helpers,partials,data) {
+},"47":function(container,depth0,helpers,partials,data) {
     var helper;
 
   return container.escapeExpression(((helper = (helper = helpers.withAccount || (depth0 != null ? depth0.withAccount : depth0)) != null ? helper : helpers.helperMissing),(typeof helper === "function" ? helper.call(depth0 != null ? depth0 : {},{"name":"withAccount","hash":{},"data":data}) : helper)));
-},"45":function(container,depth0,helpers,partials,data) {
+},"49":function(container,depth0,helpers,partials,data) {
     var helper;
 
   return container.escapeExpression(((helper = (helper = helpers.description || (depth0 != null ? depth0.description : depth0)) != null ? helper : helpers.helperMissing),(typeof helper === "function" ? helper.call(depth0 != null ? depth0 : {},{"name":"description","hash":{},"data":data}) : helper)));
-},"47":function(container,depth0,helpers,partials,data) {
+},"51":function(container,depth0,helpers,partials,data) {
     var helper, alias1=depth0 != null ? depth0 : {}, alias2=helpers.helperMissing, alias3="function", alias4=container.escapeExpression;
 
   return "<a href=\"#stewards/"
@@ -217,13 +228,13 @@ this["openmoney"]["account"] = Handlebars.template({"1":function(container,depth
     + "."
     + alias4(((helper = (helper = helpers.from_account_namespace || (depth0 != null ? depth0.from_account_namespace : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"from_account_namespace","hash":{},"data":data}) : helper)))
     + "</a>";
-},"49":function(container,depth0,helpers,partials,data) {
+},"53":function(container,depth0,helpers,partials,data) {
     var helper, alias1=depth0 != null ? depth0 : {}, alias2=helpers.helperMissing, alias3="function", alias4=container.escapeExpression;
 
   return alias4(((helper = (helper = helpers.from_account || (depth0 != null ? depth0.from_account : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"from_account","hash":{},"data":data}) : helper)))
     + "."
     + alias4(((helper = (helper = helpers.from_account_namespace || (depth0 != null ? depth0.from_account_namespace : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"from_account_namespace","hash":{},"data":data}) : helper)));
-},"51":function(container,depth0,helpers,partials,data) {
+},"55":function(container,depth0,helpers,partials,data) {
     var helper, alias1=depth0 != null ? depth0 : {}, alias2=helpers.helperMissing, alias3="function", alias4=container.escapeExpression;
 
   return "<a href=\"#stewards/"
@@ -239,36 +250,36 @@ this["openmoney"]["account"] = Handlebars.template({"1":function(container,depth
     + "."
     + alias4(((helper = (helper = helpers.to_account_namespace || (depth0 != null ? depth0.to_account_namespace : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"to_account_namespace","hash":{},"data":data}) : helper)))
     + "</a>";
-},"53":function(container,depth0,helpers,partials,data) {
+},"57":function(container,depth0,helpers,partials,data) {
     var helper, alias1=depth0 != null ? depth0 : {}, alias2=helpers.helperMissing, alias3="function", alias4=container.escapeExpression;
 
   return alias4(((helper = (helper = helpers.to_account || (depth0 != null ? depth0.to_account : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"to_account","hash":{},"data":data}) : helper)))
     + "."
     + alias4(((helper = (helper = helpers.to_account_namespace || (depth0 != null ? depth0.to_account_namespace : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"to_account_namespace","hash":{},"data":data}) : helper)));
-},"55":function(container,depth0,helpers,partials,data) {
+},"59":function(container,depth0,helpers,partials,data) {
     return "-";
 },"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data,blockParams,depths) {
     var stack1, helper, options, alias1=depth0 != null ? depth0 : {}, alias2=helpers.helperMissing, alias3="function", buffer = 
   "<style>\n[data-sort=table] > tbody > tr:hover{\n  background-color: #159c6e;\n  cursor: pointer;\n}\ntr.DEBIT {\n  color: #159c6e;\n}\ntr.CREDIT {\n  color: #E64759;\n}\n</style>\n<div class=\"col-sm-12\" style=\"padding-top: 10px;\">\n"
     + ((stack1 = helpers["if"].call(alias1,(depth0 != null ? depth0.id : depth0),{"name":"if","hash":{},"fn":container.program(1, data, 0, blockParams, depths),"inverse":container.noop,"data":data})) != null ? stack1 : "")
     + "\n  <form id='accountForm' "
-    + ((stack1 = helpers["if"].call(alias1,(depth0 != null ? depth0.id : depth0),{"name":"if","hash":{},"fn":container.program(16, data, 0, blockParams, depths),"inverse":container.noop,"data":data})) != null ? stack1 : "")
+    + ((stack1 = helpers["if"].call(alias1,(depth0 != null ? depth0.id : depth0),{"name":"if","hash":{},"fn":container.program(20, data, 0, blockParams, depths),"inverse":container.noop,"data":data})) != null ? stack1 : "")
     + ">\n    "
-    + ((stack1 = helpers["if"].call(alias1,(depth0 != null ? depth0.id : depth0),{"name":"if","hash":{},"fn":container.program(18, data, 0, blockParams, depths),"inverse":container.noop,"data":data})) != null ? stack1 : "")
+    + ((stack1 = helpers["if"].call(alias1,(depth0 != null ? depth0.id : depth0),{"name":"if","hash":{},"fn":container.program(22, data, 0, blockParams, depths),"inverse":container.noop,"data":data})) != null ? stack1 : "")
     + "\n"
-    + ((stack1 = helpers["if"].call(alias1,(depth0 != null ? depth0.isEditable : depth0),{"name":"if","hash":{},"fn":container.program(20, data, 0, blockParams, depths),"inverse":container.noop,"data":data})) != null ? stack1 : "")
-    + ((stack1 = helpers["if"].call(alias1,(helpers.or || (depth0 && depth0.or) || alias2).call(alias1,(depth0 != null ? depth0.isSteward : depth0),(helpers.or || (depth0 && depth0.or) || alias2).call(alias1,(depth0 != null ? depth0.isCurrencySteward : depth0),(depth0 != null ? depth0.isNamespaceSteward : depth0),{"name":"or","hash":{},"data":data}),{"name":"or","hash":{},"data":data}),{"name":"if","hash":{},"fn":container.program(28, data, 0, blockParams, depths),"inverse":container.noop,"data":data})) != null ? stack1 : "")
-    + ((stack1 = helpers["if"].call(alias1,(depth0 != null ? depth0.isSteward : depth0),{"name":"if","hash":{},"fn":container.program(31, data, 0, blockParams, depths),"inverse":container.noop,"data":data})) != null ? stack1 : "")
+    + ((stack1 = helpers["if"].call(alias1,(depth0 != null ? depth0.isEditable : depth0),{"name":"if","hash":{},"fn":container.program(24, data, 0, blockParams, depths),"inverse":container.noop,"data":data})) != null ? stack1 : "")
+    + ((stack1 = helpers["if"].call(alias1,(helpers.or || (depth0 && depth0.or) || alias2).call(alias1,(depth0 != null ? depth0.isSteward : depth0),(helpers.or || (depth0 && depth0.or) || alias2).call(alias1,(depth0 != null ? depth0.isCurrencySteward : depth0),(depth0 != null ? depth0.isNamespaceSteward : depth0),{"name":"or","hash":{},"data":data}),{"name":"or","hash":{},"data":data}),{"name":"if","hash":{},"fn":container.program(32, data, 0, blockParams, depths),"inverse":container.noop,"data":data})) != null ? stack1 : "")
+    + ((stack1 = helpers["if"].call(alias1,(depth0 != null ? depth0.isSteward : depth0),{"name":"if","hash":{},"fn":container.program(35, data, 0, blockParams, depths),"inverse":container.noop,"data":data})) != null ? stack1 : "")
     + "    <div class=\"form-group text-right\">\n      <button type=\"button\" name=\"cancel\" class=\"btn btn-lg btn-primary-outline\" >Cancel</button>\n      <button type=\"button\" name=\"upsert\" class=\"btn btn-lg btn-primary-outline\" >\n        <strong>"
-    + ((stack1 = helpers["if"].call(alias1,(depth0 != null ? depth0.id : depth0),{"name":"if","hash":{},"fn":container.program(34, data, 0, blockParams, depths),"inverse":container.program(34, data, 0, blockParams, depths),"data":data})) != null ? stack1 : "")
+    + ((stack1 = helpers["if"].call(alias1,(depth0 != null ? depth0.id : depth0),{"name":"if","hash":{},"fn":container.program(38, data, 0, blockParams, depths),"inverse":container.program(38, data, 0, blockParams, depths),"data":data})) != null ? stack1 : "")
     + "</strong>\n      </button>\n    </div>\n  </form>\n\n  <div id=\"stewardsModal\" class=\"modal\" style=\"display: none;\">\n    <div class=\"modal-dialog modal-sm\">\n      <div class=\"modal-content\">\n        <div class=\"modal-header\">\n          <button type=\"button\" class=\"close\" data-dismiss=\"modal\" aria-label=\"Close\"><span aria-hidden=\"true\">&times;</span></button>\n          <h4 class=\"modal-title\">Add Stewards</h4>\n        </div>\n        <div class=\"modal-body\">\n          <div class=\"flextable\">\n            <div class=\"flextable-item flextable-primary\">\n              <div id=\"addStewardForm\" class=\"form-group\" style=\"margin-bottom: 0;\">\n                <input type=\"text\" id=\"stewardname\" name=\"stewardname\" value=\""
     + container.escapeExpression(((helper = (helper = helpers.stewardname || (depth0 != null ? depth0.stewardname : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"stewardname","hash":{},"data":data}) : helper)))
     + "\" placeholder=\"Steward Name\" class=\"form-control\" aria-describedby=\"helpBlock\"/>\n                <span id=\"helpBlock\" class=\"help-block\" style=\"margin: 0;\"></span>\n              </div>\n            </div>\n            <div class=\"flextable-item\">\n              <div class=\"btn-group\">\n                <button type=\"button\" name=\"addStewardToList\" class=\"btn btn-primary-outline\">\n                  <span class=\"icon icon-add-to-list\"></span>\n                </button>\n              </div>\n            </div>\n          </div>\n          <div class=\"table-full\">\n            <table class=\"table accounts\" data-sort=\"checkbox-table\">\n              <thead>\n                <tr>\n                  <th class=\"text-left\">Stewards</th>\n                </tr>\n              </thead>\n              <tbody id=\"modalList\" class=\"table-rows\">\n";
-  stack1 = ((helper = (helper = helpers.stewardsCollection || (depth0 != null ? depth0.stewardsCollection : depth0)) != null ? helper : alias2),(options={"name":"stewardsCollection","hash":{},"fn":container.program(36, data, 0, blockParams, depths),"inverse":container.noop,"data":data}),(typeof helper === alias3 ? helper.call(alias1,options) : helper));
+  stack1 = ((helper = (helper = helpers.stewardsCollection || (depth0 != null ? depth0.stewardsCollection : depth0)) != null ? helper : alias2),(options={"name":"stewardsCollection","hash":{},"fn":container.program(40, data, 0, blockParams, depths),"inverse":container.noop,"data":data}),(typeof helper === alias3 ? helper.call(alias1,options) : helper));
   if (!helpers.stewardsCollection) { stack1 = helpers.blockHelperMissing.call(depth0,stack1,options)}
   if (stack1 != null) { buffer += stack1; }
   return buffer + "              </tbody>\n            </table>\n          </div>\n        </div>\n        <div class=\"modal-actions\">\n          <button type=\"button\" class=\"btn-link modal-action cancel\" data-dismiss=\"modal\">Cancel</button>\n          <button type=\"button\" class=\"btn-link modal-action add\" data-dismiss=\"modal\">\n            <strong>Add Stewards</strong>\n          </button>\n        </div>\n      </div>\n    </div>\n  </div>\n\n"
-    + ((stack1 = helpers["if"].call(alias1,(depth0 != null ? depth0.id : depth0),{"name":"if","hash":{},"fn":container.program(38, data, 0, blockParams, depths),"inverse":container.noop,"data":data})) != null ? stack1 : "")
+    + ((stack1 = helpers["if"].call(alias1,(depth0 != null ? depth0.id : depth0),{"name":"if","hash":{},"fn":container.program(42, data, 0, blockParams, depths),"inverse":container.noop,"data":data})) != null ? stack1 : "")
     + "</div>\n";
 },"useData":true,"useDepths":true});
 
@@ -354,7 +365,7 @@ this["openmoney"]["currencies"] = Handlebars.template({"1":function(container,de
 this["openmoney"]["currency"] = Handlebars.template({"1":function(container,depth0,helpers,partials,data) {
     var stack1, helper, options, alias1=depth0 != null ? depth0 : {}, alias2=helpers.helperMissing, alias3="function", alias4=helpers.blockHelperMissing, alias5=container.escapeExpression, buffer = 
   "  <div id=\"statsButton\" class=\"text-right\" style=\"padding-bottom:10px;\">\n    <button type=\"button\" name=\"showedit\" class=\"btn btn-lg btn-primary-outline\" >\n      <strong>Edit</strong>\n    </button>\n  </div>\n  <div id=\"stats\" class=\"statcard statcard-"
-    + ((stack1 = helpers["if"].call(alias1,(helpers.or || (depth0 && depth0.or) || alias2).call(alias1,(depth0 != null ? depth0.disabled : depth0),(depth0 != null ? depth0.namespace_disabled : depth0),{"name":"or","hash":{},"data":data}),{"name":"if","hash":{},"fn":container.program(2, data, 0),"inverse":container.program(4, data, 0),"data":data})) != null ? stack1 : "")
+    + ((stack1 = helpers["if"].call(alias1,(helpers.or || (depth0 && depth0.or) || alias2).call(alias1,(depth0 != null ? depth0.disabled : depth0),(helpers.or || (depth0 && depth0.or) || alias2).call(alias1,(depth0 != null ? depth0.namespace_disabled : depth0),(depth0 != null ? depth0.isParentNamespaceDisabled : depth0),{"name":"or","hash":{},"data":data}),{"name":"or","hash":{},"data":data}),{"name":"if","hash":{},"fn":container.program(2, data, 0),"inverse":container.program(4, data, 0),"data":data})) != null ? stack1 : "")
     + " p-a-md m-b\">\n    <h3>\n      <div class=\"statcard-number\">\n        ";
   stack1 = ((helper = (helper = helpers["private"] || (depth0 != null ? depth0["private"] : depth0)) != null ? helper : alias2),(options={"name":"private","hash":{},"fn":container.program(6, data, 0),"inverse":container.program(8, data, 0),"data":data}),(typeof helper === alias3 ? helper.call(alias1,options) : helper));
   if (!helpers["private"]) { stack1 = alias4.call(depth0,stack1,options)}
@@ -369,10 +380,13 @@ this["openmoney"]["currency"] = Handlebars.template({"1":function(container,dept
   stack1 = ((helper = (helper = helpers.namespace_disabled || (depth0 != null ? depth0.namespace_disabled : depth0)) != null ? helper : alias2),(options={"name":"namespace_disabled","hash":{},"fn":container.program(12, data, 0),"inverse":container.noop,"data":data}),(typeof helper === alias3 ? helper.call(alias1,options) : helper));
   if (!helpers.namespace_disabled) { stack1 = alias4.call(depth0,stack1,options)}
   if (stack1 != null) { buffer += stack1; }
-  buffer += " "
-    + ((stack1 = helpers["if"].call(alias1,(helpers.not || (depth0 && depth0.not) || alias2).call(alias1,(helpers.or || (depth0 && depth0.or) || alias2).call(alias1,(depth0 != null ? depth0.disabled : depth0),(depth0 != null ? depth0.namespace_disabled : depth0),{"name":"or","hash":{},"data":data}),{"name":"not","hash":{},"data":data}),{"name":"if","hash":{},"fn":container.program(14, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
+  buffer += " ";
+  stack1 = ((helper = (helper = helpers.isParentNamespaceDisabled || (depth0 != null ? depth0.isParentNamespaceDisabled : depth0)) != null ? helper : alias2),(options={"name":"isParentNamespaceDisabled","hash":{},"fn":container.program(14, data, 0),"inverse":container.noop,"data":data}),(typeof helper === alias3 ? helper.call(alias1,options) : helper));
+  if (!helpers.isParentNamespaceDisabled) { stack1 = alias4.call(depth0,stack1,options)}
+  if (stack1 != null) { buffer += stack1; }
+  buffer += ((stack1 = helpers["if"].call(alias1,(helpers.not || (depth0 && depth0.not) || alias2).call(alias1,(helpers.or || (depth0 && depth0.or) || alias2).call(alias1,(depth0 != null ? depth0.disabled : depth0),(helpers.or || (depth0 && depth0.or) || alias2).call(alias1,(depth0 != null ? depth0.namespace_disabled : depth0),(depth0 != null ? depth0.isParentNamespaceDisabled : depth0),{"name":"or","hash":{},"data":data}),{"name":"or","hash":{},"data":data}),{"name":"not","hash":{},"data":data}),{"name":"if","hash":{},"fn":container.program(16, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
     + "\n      </div>\n      <div class=\"statcard-number\">\n        STEWARDS:\n";
-  stack1 = ((helper = (helper = helpers.stewards || (depth0 != null ? depth0.stewards : depth0)) != null ? helper : alias2),(options={"name":"stewards","hash":{},"fn":container.program(16, data, 0),"inverse":container.noop,"data":data}),(typeof helper === alias3 ? helper.call(alias1,options) : helper));
+  stack1 = ((helper = (helper = helpers.stewards || (depth0 != null ? depth0.stewards : depth0)) != null ? helper : alias2),(options={"name":"stewards","hash":{},"fn":container.program(18, data, 0),"inverse":container.noop,"data":data}),(typeof helper === alias3 ? helper.call(alias1,options) : helper));
   if (!helpers.stewards) { stack1 = alias4.call(depth0,stack1,options)}
   if (stack1 != null) { buffer += stack1; }
   return buffer + "      </div>\n    </h3>\n    <h4 class=\"statcard-number text-right\">\n      BALANCE "
@@ -389,12 +403,14 @@ this["openmoney"]["currency"] = Handlebars.template({"1":function(container,dept
 },"8":function(container,depth0,helpers,partials,data) {
     return "PUBLIC";
 },"10":function(container,depth0,helpers,partials,data) {
-    return "steward disabled";
+    return "Steward Disabled";
 },"12":function(container,depth0,helpers,partials,data) {
-    return "namespace disabled";
+    return "Namespace Disabled";
 },"14":function(container,depth0,helpers,partials,data) {
-    return "enabled";
+    return "Parent Namespace Disabled";
 },"16":function(container,depth0,helpers,partials,data) {
+    return "Enabled";
+},"18":function(container,depth0,helpers,partials,data) {
     var helper, alias1=depth0 != null ? depth0 : {}, alias2=helpers.helperMissing, alias3="function", alias4=container.escapeExpression;
 
   return "          <div style=\"padding-left: 40px;\">\n            <a href=\"#stewards/"
@@ -402,64 +418,64 @@ this["openmoney"]["currency"] = Handlebars.template({"1":function(container,dept
     + "\" style=\"color: #4040a2\">"
     + alias4(((helper = (helper = helpers.stewardname || (depth0 != null ? depth0.stewardname : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"stewardname","hash":{},"data":data}) : helper)))
     + "</a>\n          </div>\n";
-},"18":function(container,depth0,helpers,partials,data) {
-    return "style=\"display: none;\"";
 },"20":function(container,depth0,helpers,partials,data) {
+    return "style=\"display: none;\"";
+},"22":function(container,depth0,helpers,partials,data) {
     var helper;
 
   return "<input type=\"hidden\" name=\"id\" value=\""
     + container.escapeExpression(((helper = (helper = helpers.id || (depth0 != null ? depth0.id : depth0)) != null ? helper : helpers.helperMissing),(typeof helper === "function" ? helper.call(depth0 != null ? depth0 : {},{"name":"id","hash":{},"data":data}) : helper)))
     + "\" />";
-},"22":function(container,depth0,helpers,partials,data,blockParams,depths) {
+},"24":function(container,depth0,helpers,partials,data,blockParams,depths) {
     var stack1, helper, alias1=depth0 != null ? depth0 : {};
 
   return "      <div class=\"form-group text-left\">\n        <label for=\"key\">Currency Name</label>\n        <input type=\"text\" id=\"currency\" name=\"currency\" value=\""
     + container.escapeExpression(((helper = (helper = helpers.currency || (depth0 != null ? depth0.currency : depth0)) != null ? helper : helpers.helperMissing),(typeof helper === "function" ? helper.call(alias1,{"name":"currency","hash":{},"data":data}) : helper)))
     + "\" placeholder=\"Currency Name\" class=\"form-control\" />\n      </div>\n      <div class=\"form-group text-left\">\n        <label for=\"type\">Currency Namespace</label>\n        <select class=\"custom-select\" name=\"currency_namespace\">\n"
-    + ((stack1 = helpers.each.call(alias1,(depth0 != null ? depth0.namespaces : depth0),{"name":"each","hash":{},"fn":container.program(23, data, 0, blockParams, depths),"inverse":container.noop,"data":data})) != null ? stack1 : "")
+    + ((stack1 = helpers.each.call(alias1,(depth0 != null ? depth0.namespaces : depth0),{"name":"each","hash":{},"fn":container.program(25, data, 0, blockParams, depths),"inverse":container.noop,"data":data})) != null ? stack1 : "")
     + "        </select>\n      </div>\n";
-},"23":function(container,depth0,helpers,partials,data,blockParams,depths) {
+},"25":function(container,depth0,helpers,partials,data,blockParams,depths) {
     var stack1;
 
-  return ((stack1 = helpers.blockHelperMissing.call(depth0,container.lambda(depth0, depth0),{"name":"this","hash":{},"fn":container.program(24, data, 0, blockParams, depths),"inverse":container.noop,"data":data})) != null ? stack1 : "");
-},"24":function(container,depth0,helpers,partials,data,blockParams,depths) {
+  return ((stack1 = helpers.blockHelperMissing.call(depth0,container.lambda(depth0, depth0),{"name":"this","hash":{},"fn":container.program(26, data, 0, blockParams, depths),"inverse":container.noop,"data":data})) != null ? stack1 : "");
+},"26":function(container,depth0,helpers,partials,data,blockParams,depths) {
     var stack1, helper, alias1=depth0 != null ? depth0 : {}, alias2=helpers.helperMissing, alias3="function", alias4=container.escapeExpression;
 
   return "              <option value=\""
     + alias4(((helper = (helper = helpers.namespace || (depth0 != null ? depth0.namespace : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"namespace","hash":{},"data":data}) : helper)))
     + "\" "
-    + ((stack1 = (helpers.if_eq || (depth0 && depth0.if_eq) || alias2).call(alias1,(depth0 != null ? depth0.namespace : depth0),(depths[1] != null ? depths[1].currency_namespace : depths[1]),{"name":"if_eq","hash":{},"fn":container.program(25, data, 0, blockParams, depths),"inverse":container.noop,"data":data})) != null ? stack1 : "")
+    + ((stack1 = (helpers.if_eq || (depth0 && depth0.if_eq) || alias2).call(alias1,(depth0 != null ? depth0.namespace : depth0),(depths[1] != null ? depths[1].currency_namespace : depths[1]),{"name":"if_eq","hash":{},"fn":container.program(27, data, 0, blockParams, depths),"inverse":container.noop,"data":data})) != null ? stack1 : "")
     + ">"
     + alias4(((helper = (helper = helpers.namespace || (depth0 != null ? depth0.namespace : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"namespace","hash":{},"data":data}) : helper)))
     + "</option>\n";
-},"25":function(container,depth0,helpers,partials,data) {
-    return "selected=\"selected\"";
 },"27":function(container,depth0,helpers,partials,data) {
+    return "selected=\"selected\"";
+},"29":function(container,depth0,helpers,partials,data) {
     var stack1, alias1=depth0 != null ? depth0 : {}, alias2=helpers.helperMissing;
 
   return "    <div style=\"padding-top:10px;padding-bottom: 10px;\">\n      <div style=\"padding-bottom: 10px;\">\n        <strong>Join Status:</strong>\n      </div>\n      <div class=\"radio-inline custom-control custom-radio\">\n        <label>\n          <input type=\"radio\" id=\"public\" name=\"private\" value=\"false\" "
-    + ((stack1 = (helpers.if_eq || (depth0 && depth0.if_eq) || alias2).call(alias1,(depth0 != null ? depth0["private"] : depth0),false,{"name":"if_eq","hash":{},"fn":container.program(28, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
+    + ((stack1 = (helpers.if_eq || (depth0 && depth0.if_eq) || alias2).call(alias1,(depth0 != null ? depth0["private"] : depth0),false,{"name":"if_eq","hash":{},"fn":container.program(30, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
     + ">\n          <span class=\"custom-control-indicator\"></span>\n          <strong>Public</strong>\n        </label>\n      </div>\n      <div class=\"radio-inline custom-control custom-radio\">\n        <label>\n          <input type=\"radio\" id=\"private\" name=\"private\" value=\"true\" "
-    + ((stack1 = (helpers.if_eq || (depth0 && depth0.if_eq) || alias2).call(alias1,(depth0 != null ? depth0["private"] : depth0),true,{"name":"if_eq","hash":{},"fn":container.program(28, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
+    + ((stack1 = (helpers.if_eq || (depth0 && depth0.if_eq) || alias2).call(alias1,(depth0 != null ? depth0["private"] : depth0),true,{"name":"if_eq","hash":{},"fn":container.program(30, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
     + ">\n          <span class=\"custom-control-indicator\"></span>\n          <strong>Private</strong>\n        </label>\n      </div>\n      <div style=\"padding-top:5px; font-size: 12px;\"><i>Public means other stewards can create accounts in this currency.</i></div>\n      <div style=\"padding-bottom:5px; font-size: 12px;\"><i>Private means only you can create accounts in this currency.</i></div>\n    </div>\n";
-},"28":function(container,depth0,helpers,partials,data) {
-    return "checked=\"checked\"";
 },"30":function(container,depth0,helpers,partials,data) {
+    return "checked=\"checked\"";
+},"32":function(container,depth0,helpers,partials,data) {
     var stack1, alias1=depth0 != null ? depth0 : {}, alias2=helpers.helperMissing;
 
   return "    <div style=\"padding-top:10px;padding-bottom: 10px;\">\n      <div style=\"padding-bottom: 10px;\">\n        <strong>Payment Status:</strong>\n      </div>\n      <div class=\"radio-inline custom-control custom-radio\">\n        <label>\n          <input type=\"radio\" id=\"private\" name=\"disabled\" value=\"false\" "
-    + ((stack1 = helpers["if"].call(alias1,(helpers.not || (depth0 && depth0.not) || alias2).call(alias1,(helpers.or || (depth0 && depth0.or) || alias2).call(alias1,(depth0 != null ? depth0.disabled : depth0),(depth0 != null ? depth0.namespace_disabled : depth0),{"name":"or","hash":{},"data":data}),{"name":"not","hash":{},"data":data}),{"name":"if","hash":{},"fn":container.program(28, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
+    + ((stack1 = helpers["if"].call(alias1,(helpers.not || (depth0 && depth0.not) || alias2).call(alias1,(helpers.or || (depth0 && depth0.or) || alias2).call(alias1,(helpers.and || (depth0 && depth0.and) || alias2).call(alias1,(depth0 != null ? depth0.disabled : depth0),(depth0 != null ? depth0.isSteward : depth0),{"name":"and","hash":{},"data":data}),(helpers.and || (depth0 && depth0.and) || alias2).call(alias1,(depth0 != null ? depth0.namespace_disabled : depth0),(depth0 != null ? depth0.isNamespaceSteward : depth0),{"name":"and","hash":{},"data":data}),{"name":"or","hash":{},"data":data}),{"name":"not","hash":{},"data":data}),{"name":"if","hash":{},"fn":container.program(30, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
     + ">\n          <span class=\"custom-control-indicator\"></span>\n          <strong>Enabled</strong>\n        </label>\n      </div>\n      <div class=\"radio-inline custom-control custom-radio\">\n        <label>\n          <input type=\"radio\" id=\"public\" name=\"disabled\" value=\"true\" "
-    + ((stack1 = helpers["if"].call(alias1,(helpers.or || (depth0 && depth0.or) || alias2).call(alias1,(depth0 != null ? depth0.disabled : depth0),(depth0 != null ? depth0.namespace_disabled : depth0),{"name":"or","hash":{},"data":data}),{"name":"if","hash":{},"fn":container.program(28, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
+    + ((stack1 = helpers["if"].call(alias1,(helpers.or || (depth0 && depth0.or) || alias2).call(alias1,(helpers.and || (depth0 && depth0.and) || alias2).call(alias1,(depth0 != null ? depth0.disabled : depth0),(depth0 != null ? depth0.isSteward : depth0),{"name":"and","hash":{},"data":data}),(helpers.and || (depth0 && depth0.and) || alias2).call(alias1,(depth0 != null ? depth0.namespace_disabled : depth0),(depth0 != null ? depth0.isNamespaceSteward : depth0),{"name":"and","hash":{},"data":data}),{"name":"or","hash":{},"data":data}),{"name":"if","hash":{},"fn":container.program(30, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
     + ">\n          <span class=\"custom-control-indicator\"></span>\n          <strong>Disabled</strong>\n        </label>\n      </div>\n      <div style=\"padding-top:5px; font-size: 12px;\"><i>Enabled means payments can be processed on this currency.</i></div>\n      <div style=\"padding-bottom:5px; font-size: 12px;\"><i>Disabled means payments can not be processed on this currency.</i></div>\n    </div>\n";
-},"32":function(container,depth0,helpers,partials,data) {
+},"34":function(container,depth0,helpers,partials,data) {
     var stack1, helper, options, buffer = 
   "    <div class=\"form-group text-left\">\n      <label for=\"stewards[]\">Currency Stewards</label>\n      <div id=\"addButtonDiv\" class=\"text-right\" style=\"padding-bottom:10px;\">\n        <button type=\"button\" name=\"addSteward\" class=\"btn btn-success-outline\">\n          Add Stewards\n          <span class=\"icon icon-add-to-list\"></span>\n        </button>\n      </div>\n      <ul id=\"stewards\" class=\"list-group\">\n";
-  stack1 = ((helper = (helper = helpers.stewards || (depth0 != null ? depth0.stewards : depth0)) != null ? helper : helpers.helperMissing),(options={"name":"stewards","hash":{},"fn":container.program(33, data, 0),"inverse":container.noop,"data":data}),(typeof helper === "function" ? helper.call(depth0 != null ? depth0 : {},options) : helper));
+  stack1 = ((helper = (helper = helpers.stewards || (depth0 != null ? depth0.stewards : depth0)) != null ? helper : helpers.helperMissing),(options={"name":"stewards","hash":{},"fn":container.program(35, data, 0),"inverse":container.noop,"data":data}),(typeof helper === "function" ? helper.call(depth0 != null ? depth0 : {},options) : helper));
   if (!helpers.stewards) { stack1 = helpers.blockHelperMissing.call(depth0,stack1,options)}
   if (stack1 != null) { buffer += stack1; }
   return buffer + "      </ul>\n    </div>\n";
-},"33":function(container,depth0,helpers,partials,data) {
+},"35":function(container,depth0,helpers,partials,data) {
     var helper, alias1=depth0 != null ? depth0 : {}, alias2=helpers.helperMissing, alias3="function", alias4=container.escapeExpression;
 
   return "          <div class=\"flextable\" style=\"padding-bottom: 10px;\">\n            <div class=\"flextable-item flextable-primary\">\n              <li class=\"list-group-item\">\n              "
@@ -469,15 +485,15 @@ this["openmoney"]["currency"] = Handlebars.template({"1":function(container,dept
     + "\" />\n              </li>\n            </div>\n            <div class=\"flextable-item\">\n              <div class=\"btn-group\">\n                <button type=\"button\" name=\"remove\" value=\"stewards~"
     + alias4(((helper = (helper = helpers.stewardname || (depth0 != null ? depth0.stewardname : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"stewardname","hash":{},"data":data}) : helper)))
     + "\" class=\"btn btn-danger-outline\">\n                  <span class=\"icon icon-cross\" style=\"font-size: 1.2em\"></span>\n                </button>\n              </div>\n            </div>\n          </div>\n";
-},"35":function(container,depth0,helpers,partials,data) {
+},"37":function(container,depth0,helpers,partials,data) {
     return "Save";
-},"37":function(container,depth0,helpers,partials,data,blockParams,depths) {
+},"39":function(container,depth0,helpers,partials,data,blockParams,depths) {
     var stack1;
 
-  return ((stack1 = (helpers.if_eq || (depth0 && depth0.if_eq) || helpers.helperMissing).call(depth0 != null ? depth0 : {},(depth0 != null ? depth0.currencyName : depth0),"add",{"name":"if_eq","hash":{},"fn":container.program(38, data, 0, blockParams, depths),"inverse":container.program(35, data, 0, blockParams, depths),"data":data})) != null ? stack1 : "");
-},"38":function(container,depth0,helpers,partials,data) {
-    return "Add";
+  return ((stack1 = (helpers.if_eq || (depth0 && depth0.if_eq) || helpers.helperMissing).call(depth0 != null ? depth0 : {},(depth0 != null ? depth0.currencyName : depth0),"add",{"name":"if_eq","hash":{},"fn":container.program(40, data, 0, blockParams, depths),"inverse":container.program(37, data, 0, blockParams, depths),"data":data})) != null ? stack1 : "");
 },"40":function(container,depth0,helpers,partials,data) {
+    return "Add";
+},"42":function(container,depth0,helpers,partials,data) {
     var helper, alias1=depth0 != null ? depth0 : {}, alias2=helpers.helperMissing, alias3="function", alias4=container.escapeExpression;
 
   return "                  <tr id=\""
@@ -487,19 +503,19 @@ this["openmoney"]["currency"] = Handlebars.template({"1":function(container,dept
     + "\">\n                        <span class=\"custom-control-indicator\"></span>\n                        &nbsp;&nbsp;&nbsp;&nbsp;"
     + alias4(((helper = (helper = helpers.stewardname || (depth0 != null ? depth0.stewardname : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"stewardname","hash":{},"data":data}) : helper)))
     + "\n                      </label>\n                    </div>\n                    </td>\n                  </tr>\n";
-},"42":function(container,depth0,helpers,partials,data) {
+},"44":function(container,depth0,helpers,partials,data) {
     var stack1, alias1=depth0 != null ? depth0 : {};
 
   return "  <h2><strong>Accounts</strong></h2>\n  <div id=\"newButtonDiv\" class=\"text-right\" style=\"padding-bottom:10px;\">\n    <button type=\"button\" name=\"csvaccounts\" class=\"btn btn-lg btn-primary-outline\" >\n      <strong>Export CSV</strong>\n    </button>\n    <button type=\"button\" name=\"newAccount\" class=\"btn btn-lg btn-success-outline\" >\n      <strong>New Account</strong>\n    </button>\n  </div>\n  <div class=\"table-full\">\n    <table class=\"table accounts\" data-sort=\"table\">\n      <thead>\n        <tr>\n          <th>Account</th>\n          <th>Balance</th>\n          <th>Volume</th>\n        </tr>\n      </thead>\n      <tbody class=\"table-rows\">\n"
-    + ((stack1 = helpers.each.call(alias1,(depth0 != null ? depth0.accounts : depth0),{"name":"each","hash":{},"fn":container.program(43, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
+    + ((stack1 = helpers.each.call(alias1,(depth0 != null ? depth0.accounts : depth0),{"name":"each","hash":{},"fn":container.program(45, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
     + "      </tbody>\n    </table>\n  </div>\n\n  <h2><strong>Ledger</strong></h2>\n  <div id=\"newButtonDiv\" class=\"text-right\" style=\"padding-bottom:10px;\">\n    <button type=\"button\" name=\"csvledger\" class=\"btn btn-lg btn-primary-outline\" >\n      <strong>Export CSV</strong>\n    </button>\n    <button type=\"button\" name=\"newTransaction\" class=\"btn btn-lg btn-success-outline\" >\n      <strong>Process Journal Entry</strong>\n    </button>\n  </div>\n  <div class=\"table-full\">\n    <table class=\"table\" data-sort=\"basic\">\n      <thead>\n        <tr>\n          <th>Timestamp</th>\n          <th>From</th>\n          <th>To</th>\n          <th>Description</th>\n          <th>Amount</th>\n          <th>balance</th>\n          <th>volume</th>\n        </tr>\n      </thead>\n      <tbody class=\"table-rows\">\n"
-    + ((stack1 = helpers.each.call(alias1,(depth0 != null ? depth0.journals : depth0),{"name":"each","hash":{},"fn":container.program(46, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
+    + ((stack1 = helpers.each.call(alias1,(depth0 != null ? depth0.journals : depth0),{"name":"each","hash":{},"fn":container.program(48, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
     + "      </tbody>\n    </table>\n  </div>\n";
-},"43":function(container,depth0,helpers,partials,data) {
+},"45":function(container,depth0,helpers,partials,data) {
     var stack1;
 
-  return ((stack1 = helpers.blockHelperMissing.call(depth0,container.lambda(depth0, depth0),{"name":"this","hash":{},"fn":container.program(44, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "");
-},"44":function(container,depth0,helpers,partials,data) {
+  return ((stack1 = helpers.blockHelperMissing.call(depth0,container.lambda(depth0, depth0),{"name":"this","hash":{},"fn":container.program(46, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "");
+},"46":function(container,depth0,helpers,partials,data) {
     var helper, alias1=depth0 != null ? depth0 : {}, alias2=helpers.helperMissing, alias3="function", alias4=container.escapeExpression;
 
   return "          <tr id=\""
@@ -511,11 +527,11 @@ this["openmoney"]["currency"] = Handlebars.template({"1":function(container,dept
     + "</td>\n            <td>"
     + alias4((helpers.decimal_places || (depth0 && depth0.decimal_places) || alias2).call(alias1,(depth0 != null ? depth0.volume : depth0),{"name":"decimal_places","hash":{},"data":data}))
     + "</td>\n          </tr>\n";
-},"46":function(container,depth0,helpers,partials,data) {
+},"48":function(container,depth0,helpers,partials,data) {
     var stack1;
 
-  return ((stack1 = helpers.blockHelperMissing.call(depth0,container.lambda(depth0, depth0),{"name":"this","hash":{},"fn":container.program(47, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "");
-},"47":function(container,depth0,helpers,partials,data) {
+  return ((stack1 = helpers.blockHelperMissing.call(depth0,container.lambda(depth0, depth0),{"name":"this","hash":{},"fn":container.program(49, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "");
+},"49":function(container,depth0,helpers,partials,data) {
     var stack1, helper, options, alias1=depth0 != null ? depth0 : {}, alias2=helpers.helperMissing, alias3="function", alias4=container.escapeExpression, buffer = 
   "            <tr id=\""
     + alias4(((helper = (helper = helpers.id || (depth0 != null ? depth0.id : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"id","hash":{},"data":data}) : helper)))
@@ -524,22 +540,22 @@ this["openmoney"]["currency"] = Handlebars.template({"1":function(container,dept
     + "\">\n              <td>"
     + alias4((helpers.prettify_date_short || (depth0 && depth0.prettify_date_short) || alias2).call(alias1,(depth0 != null ? depth0.created : depth0),{"name":"prettify_date_short","hash":{},"data":data}))
     + "</td>\n              <td>"
-    + ((stack1 = helpers["if"].call(alias1,(depth0 != null ? depth0.fromstewardname : depth0),{"name":"if","hash":{},"fn":container.program(48, data, 0),"inverse":container.program(50, data, 0),"data":data})) != null ? stack1 : "")
+    + ((stack1 = helpers["if"].call(alias1,(depth0 != null ? depth0.fromstewardname : depth0),{"name":"if","hash":{},"fn":container.program(50, data, 0),"inverse":container.program(52, data, 0),"data":data})) != null ? stack1 : "")
     + "</td>\n              <td>"
-    + ((stack1 = helpers["if"].call(alias1,(depth0 != null ? depth0.tostewardname : depth0),{"name":"if","hash":{},"fn":container.program(52, data, 0),"inverse":container.program(54, data, 0),"data":data})) != null ? stack1 : "")
+    + ((stack1 = helpers["if"].call(alias1,(depth0 != null ? depth0.tostewardname : depth0),{"name":"if","hash":{},"fn":container.program(54, data, 0),"inverse":container.program(56, data, 0),"data":data})) != null ? stack1 : "")
     + "</td>\n              <td>";
-  stack1 = ((helper = (helper = helpers.payload || (depth0 != null ? depth0.payload : depth0)) != null ? helper : alias2),(options={"name":"payload","hash":{},"fn":container.program(56, data, 0),"inverse":container.noop,"data":data}),(typeof helper === alias3 ? helper.call(alias1,options) : helper));
+  stack1 = ((helper = (helper = helpers.payload || (depth0 != null ? depth0.payload : depth0)) != null ? helper : alias2),(options={"name":"payload","hash":{},"fn":container.program(58, data, 0),"inverse":container.noop,"data":data}),(typeof helper === alias3 ? helper.call(alias1,options) : helper));
   if (!helpers.payload) { stack1 = helpers.blockHelperMissing.call(depth0,stack1,options)}
   if (stack1 != null) { buffer += stack1; }
   return buffer + "\n              <td>"
-    + ((stack1 = (helpers.if_eq || (depth0 && depth0.if_eq) || alias2).call(alias1,(depth0 != null ? depth0.charge : depth0),"CREDIT",{"name":"if_eq","hash":{},"fn":container.program(58, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
+    + ((stack1 = (helpers.if_eq || (depth0 && depth0.if_eq) || alias2).call(alias1,(depth0 != null ? depth0.charge : depth0),"CREDIT",{"name":"if_eq","hash":{},"fn":container.program(60, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
     + alias4((helpers.decimal_places || (depth0 && depth0.decimal_places) || alias2).call(alias1,(depth0 != null ? depth0.amount : depth0),{"name":"decimal_places","hash":{},"data":data}))
     + "</td>\n              <td>"
     + alias4((helpers.decimal_places || (depth0 && depth0.decimal_places) || alias2).call(alias1,(depth0 != null ? depth0.balance : depth0),{"name":"decimal_places","hash":{},"data":data}))
     + "</td>\n              <td>"
     + alias4((helpers.decimal_places || (depth0 && depth0.decimal_places) || alias2).call(alias1,(depth0 != null ? depth0.volume : depth0),{"name":"decimal_places","hash":{},"data":data}))
     + "</td>\n            </tr>\n";
-},"48":function(container,depth0,helpers,partials,data) {
+},"50":function(container,depth0,helpers,partials,data) {
     var helper, alias1=depth0 != null ? depth0 : {}, alias2=helpers.helperMissing, alias3="function", alias4=container.escapeExpression;
 
   return "<a href=\"#stewards/"
@@ -555,13 +571,13 @@ this["openmoney"]["currency"] = Handlebars.template({"1":function(container,dept
     + "."
     + alias4(((helper = (helper = helpers.from_account_namespace || (depth0 != null ? depth0.from_account_namespace : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"from_account_namespace","hash":{},"data":data}) : helper)))
     + "</a>";
-},"50":function(container,depth0,helpers,partials,data) {
+},"52":function(container,depth0,helpers,partials,data) {
     var helper, alias1=depth0 != null ? depth0 : {}, alias2=helpers.helperMissing, alias3="function", alias4=container.escapeExpression;
 
   return alias4(((helper = (helper = helpers.from_account || (depth0 != null ? depth0.from_account : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"from_account","hash":{},"data":data}) : helper)))
     + "."
     + alias4(((helper = (helper = helpers.from_account_namespace || (depth0 != null ? depth0.from_account_namespace : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"from_account_namespace","hash":{},"data":data}) : helper)));
-},"52":function(container,depth0,helpers,partials,data) {
+},"54":function(container,depth0,helpers,partials,data) {
     var helper, alias1=depth0 != null ? depth0 : {}, alias2=helpers.helperMissing, alias3="function", alias4=container.escapeExpression;
 
   return "<a href=\"#stewards/"
@@ -577,41 +593,41 @@ this["openmoney"]["currency"] = Handlebars.template({"1":function(container,dept
     + "."
     + alias4(((helper = (helper = helpers.to_account_namespace || (depth0 != null ? depth0.to_account_namespace : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"to_account_namespace","hash":{},"data":data}) : helper)))
     + "</a>";
-},"54":function(container,depth0,helpers,partials,data) {
+},"56":function(container,depth0,helpers,partials,data) {
     var helper, alias1=depth0 != null ? depth0 : {}, alias2=helpers.helperMissing, alias3="function", alias4=container.escapeExpression;
 
   return alias4(((helper = (helper = helpers.to_account || (depth0 != null ? depth0.to_account : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"to_account","hash":{},"data":data}) : helper)))
     + "."
     + alias4(((helper = (helper = helpers.to_account_namespace || (depth0 != null ? depth0.to_account_namespace : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"to_account_namespace","hash":{},"data":data}) : helper)));
-},"56":function(container,depth0,helpers,partials,data) {
+},"58":function(container,depth0,helpers,partials,data) {
     var helper;
 
   return container.escapeExpression(((helper = (helper = helpers.description || (depth0 != null ? depth0.description : depth0)) != null ? helper : helpers.helperMissing),(typeof helper === "function" ? helper.call(depth0 != null ? depth0 : {},{"name":"description","hash":{},"data":data}) : helper)));
-},"58":function(container,depth0,helpers,partials,data) {
+},"60":function(container,depth0,helpers,partials,data) {
     return "-";
 },"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data,blockParams,depths) {
     var stack1, helper, options, alias1=depth0 != null ? depth0 : {}, alias2=helpers.helperMissing, alias3="function", buffer = 
   "<style>\n[data-sort=table] > tbody > tr:hover{\n  background-color: #159c6e;\n  cursor: pointer;\n}\ntr.DEBIT {\n  color: #159c6e;\n}\ntr.CREDIT {\n  color: #E64759;\n}\n</style>\n<div class=\"col-sm-12\" style=\"padding-top: 10px;\">\n"
     + ((stack1 = helpers["if"].call(alias1,(depth0 != null ? depth0.id : depth0),{"name":"if","hash":{},"fn":container.program(1, data, 0, blockParams, depths),"inverse":container.noop,"data":data})) != null ? stack1 : "")
     + "  <form id='currencyForm' "
-    + ((stack1 = helpers["if"].call(alias1,(depth0 != null ? depth0.id : depth0),{"name":"if","hash":{},"fn":container.program(18, data, 0, blockParams, depths),"inverse":container.noop,"data":data})) != null ? stack1 : "")
-    + ">\n    "
     + ((stack1 = helpers["if"].call(alias1,(depth0 != null ? depth0.id : depth0),{"name":"if","hash":{},"fn":container.program(20, data, 0, blockParams, depths),"inverse":container.noop,"data":data})) != null ? stack1 : "")
+    + ">\n    "
+    + ((stack1 = helpers["if"].call(alias1,(depth0 != null ? depth0.id : depth0),{"name":"if","hash":{},"fn":container.program(22, data, 0, blockParams, depths),"inverse":container.noop,"data":data})) != null ? stack1 : "")
     + "\n"
-    + ((stack1 = helpers["if"].call(alias1,(depth0 != null ? depth0.isEditable : depth0),{"name":"if","hash":{},"fn":container.program(22, data, 0, blockParams, depths),"inverse":container.noop,"data":data})) != null ? stack1 : "")
-    + ((stack1 = helpers["if"].call(alias1,(depth0 != null ? depth0.isSteward : depth0),{"name":"if","hash":{},"fn":container.program(27, data, 0, blockParams, depths),"inverse":container.noop,"data":data})) != null ? stack1 : "")
-    + ((stack1 = helpers["if"].call(alias1,(helpers.or || (depth0 && depth0.or) || alias2).call(alias1,(depth0 != null ? depth0.isSteward : depth0),(depth0 != null ? depth0.isNamespaceSteward : depth0),{"name":"or","hash":{},"data":data}),{"name":"if","hash":{},"fn":container.program(30, data, 0, blockParams, depths),"inverse":container.noop,"data":data})) != null ? stack1 : "")
-    + ((stack1 = helpers["if"].call(alias1,(depth0 != null ? depth0.isSteward : depth0),{"name":"if","hash":{},"fn":container.program(32, data, 0, blockParams, depths),"inverse":container.noop,"data":data})) != null ? stack1 : "")
+    + ((stack1 = helpers["if"].call(alias1,(depth0 != null ? depth0.isEditable : depth0),{"name":"if","hash":{},"fn":container.program(24, data, 0, blockParams, depths),"inverse":container.noop,"data":data})) != null ? stack1 : "")
+    + ((stack1 = helpers["if"].call(alias1,(depth0 != null ? depth0.isSteward : depth0),{"name":"if","hash":{},"fn":container.program(29, data, 0, blockParams, depths),"inverse":container.noop,"data":data})) != null ? stack1 : "")
+    + ((stack1 = helpers["if"].call(alias1,(helpers.or || (depth0 && depth0.or) || alias2).call(alias1,(depth0 != null ? depth0.isSteward : depth0),(depth0 != null ? depth0.isNamespaceSteward : depth0),{"name":"or","hash":{},"data":data}),{"name":"if","hash":{},"fn":container.program(32, data, 0, blockParams, depths),"inverse":container.noop,"data":data})) != null ? stack1 : "")
+    + ((stack1 = helpers["if"].call(alias1,(depth0 != null ? depth0.isSteward : depth0),{"name":"if","hash":{},"fn":container.program(34, data, 0, blockParams, depths),"inverse":container.noop,"data":data})) != null ? stack1 : "")
     + "    <div class=\"form-group text-right\">\n      <button type=\"button\" name=\"cancel\" class=\"btn btn-lg btn-primary-outline\" >Cancel</button>\n      <button type=\"button\" name=\"upsert\" class=\"btn btn-lg btn-primary-outline\" >\n        <strong>"
-    + ((stack1 = helpers["if"].call(alias1,(depth0 != null ? depth0.id : depth0),{"name":"if","hash":{},"fn":container.program(35, data, 0, blockParams, depths),"inverse":container.program(37, data, 0, blockParams, depths),"data":data})) != null ? stack1 : "")
+    + ((stack1 = helpers["if"].call(alias1,(depth0 != null ? depth0.id : depth0),{"name":"if","hash":{},"fn":container.program(37, data, 0, blockParams, depths),"inverse":container.program(39, data, 0, blockParams, depths),"data":data})) != null ? stack1 : "")
     + "</strong>\n      </button>\n    </div>\n  </form>\n\n  <div id=\"stewardsModal\" class=\"modal\" style=\"display: none;\">\n    <div class=\"modal-dialog modal-sm\">\n      <div class=\"modal-content\">\n        <div class=\"modal-header\">\n          <button type=\"button\" class=\"close\" data-dismiss=\"modal\" aria-label=\"Close\"><span aria-hidden=\"true\">&times;</span></button>\n          <h4 class=\"modal-title\">Add Stewards</h4>\n        </div>\n        <div class=\"modal-body\">\n          <div class=\"flextable\">\n            <div class=\"flextable-item flextable-primary\">\n              <div id=\"addStewardForm\" class=\"form-group\" style=\"margin-bottom: 0;\">\n                <input type=\"text\" id=\"stewardname\" name=\"stewardname\" value=\""
     + container.escapeExpression(((helper = (helper = helpers.stewardname || (depth0 != null ? depth0.stewardname : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"stewardname","hash":{},"data":data}) : helper)))
     + "\" placeholder=\"Steward Name\" class=\"form-control\" aria-describedby=\"helpBlock\"/>\n                <span id=\"helpBlock\" class=\"help-block\" style=\"margin: 0;\"></span>\n              </div>\n            </div>\n            <div class=\"flextable-item\">\n              <div class=\"btn-group\">\n                <button type=\"button\" name=\"addStewardToList\" class=\"btn btn-primary-outline\">\n                  <span class=\"icon icon-add-to-list\"></span>\n                </button>\n              </div>\n            </div>\n          </div>\n          <div class=\"table-full\">\n            <table class=\"table accounts\" data-sort=\"checkbox-table\">\n              <thead>\n                <tr>\n                  <th class=\"text-left\">Stewards</th>\n                </tr>\n              </thead>\n              <tbody id=\"modalList\" class=\"table-rows\">\n";
-  stack1 = ((helper = (helper = helpers.stewardsCollection || (depth0 != null ? depth0.stewardsCollection : depth0)) != null ? helper : alias2),(options={"name":"stewardsCollection","hash":{},"fn":container.program(40, data, 0, blockParams, depths),"inverse":container.noop,"data":data}),(typeof helper === alias3 ? helper.call(alias1,options) : helper));
+  stack1 = ((helper = (helper = helpers.stewardsCollection || (depth0 != null ? depth0.stewardsCollection : depth0)) != null ? helper : alias2),(options={"name":"stewardsCollection","hash":{},"fn":container.program(42, data, 0, blockParams, depths),"inverse":container.noop,"data":data}),(typeof helper === alias3 ? helper.call(alias1,options) : helper));
   if (!helpers.stewardsCollection) { stack1 = helpers.blockHelperMissing.call(depth0,stack1,options)}
   if (stack1 != null) { buffer += stack1; }
   return buffer + "              </tbody>\n            </table>\n          </div>\n        </div>\n        <div class=\"modal-actions\">\n          <button type=\"button\" class=\"btn-link modal-action cancel\" data-dismiss=\"modal\">Cancel</button>\n          <button type=\"button\" class=\"btn-link modal-action add\" data-dismiss=\"modal\">\n            <strong>Add Stewards</strong>\n          </button>\n        </div>\n      </div>\n    </div>\n  </div>\n\n"
-    + ((stack1 = helpers["if"].call(alias1,(depth0 != null ? depth0.id : depth0),{"name":"if","hash":{},"fn":container.program(42, data, 0, blockParams, depths),"inverse":container.noop,"data":data})) != null ? stack1 : "")
+    + ((stack1 = helpers["if"].call(alias1,(depth0 != null ? depth0.id : depth0),{"name":"if","hash":{},"fn":container.program(44, data, 0, blockParams, depths),"inverse":container.noop,"data":data})) != null ? stack1 : "")
     + "</div>\n";
 },"useData":true,"useDepths":true});
 
@@ -689,22 +705,29 @@ this["openmoney"]["login"] = Handlebars.template({"compiler":[7,">= 4.0.0"],"mai
 
 this["openmoney"]["namespace"] = Handlebars.template({"1":function(container,depth0,helpers,partials,data) {
     var stack1, helper, options, alias1=depth0 != null ? depth0 : {}, alias2=helpers.helperMissing, alias3="function", alias4=helpers.blockHelperMissing, buffer = 
-  "  <div id=\"statsButton\" class=\"text-right\" style=\"padding-bottom:10px;\">\n    <button type=\"button\" name=\"showedit\" class=\"btn btn-lg btn-primary-outline\" >\n      <strong>Edit</strong>\n    </button>\n  </div>\n  <div id=\"stats\" class=\"statcard statcard-";
-  stack1 = ((helper = (helper = helpers.disabled || (depth0 != null ? depth0.disabled : depth0)) != null ? helper : alias2),(options={"name":"disabled","hash":{},"fn":container.program(2, data, 0),"inverse":container.program(4, data, 0),"data":data}),(typeof helper === alias3 ? helper.call(alias1,options) : helper));
-  if (!helpers.disabled) { stack1 = alias4.call(depth0,stack1,options)}
-  if (stack1 != null) { buffer += stack1; }
-  buffer += " p-a-md m-b\">\n    <h2>\n      <div class=\"statcard-number\">";
+  "  <div id=\"statsButton\" class=\"text-right\" style=\"padding-bottom:10px;\">\n    <button type=\"button\" name=\"showedit\" class=\"btn btn-lg btn-primary-outline\" >\n      <strong>Edit</strong>\n    </button>\n  </div>\n  <div id=\"stats\" class=\"statcard statcard-"
+    + ((stack1 = helpers["if"].call(alias1,(helpers.or || (depth0 && depth0.or) || alias2).call(alias1,(depth0 != null ? depth0.namespace_disabled : depth0),(helpers.or || (depth0 && depth0.or) || alias2).call(alias1,(depth0 != null ? depth0.disabled : depth0),(depth0 != null ? depth0.isParentNamespaceDisabled : depth0),{"name":"or","hash":{},"data":data}),{"name":"or","hash":{},"data":data}),{"name":"if","hash":{},"fn":container.program(2, data, 0),"inverse":container.program(4, data, 0),"data":data})) != null ? stack1 : "")
+    + " p-a-md m-b\">\n    <h2>\n      <div class=\"statcard-number\">";
   stack1 = ((helper = (helper = helpers["private"] || (depth0 != null ? depth0["private"] : depth0)) != null ? helper : alias2),(options={"name":"private","hash":{},"fn":container.program(6, data, 0),"inverse":container.program(8, data, 0),"data":data}),(typeof helper === alias3 ? helper.call(alias1,options) : helper));
   if (!helpers["private"]) { stack1 = alias4.call(depth0,stack1,options)}
   if (stack1 != null) { buffer += stack1; }
   buffer += " NAMESPACE: "
     + container.escapeExpression(((helper = (helper = helpers.namespace || (depth0 != null ? depth0.namespace : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"namespace","hash":{},"data":data}) : helper)))
     + "</div>\n      <div class=\"statcard-number\">PAYMENT STATUS: ";
-  stack1 = ((helper = (helper = helpers.disabled || (depth0 != null ? depth0.disabled : depth0)) != null ? helper : alias2),(options={"name":"disabled","hash":{},"fn":container.program(10, data, 0),"inverse":container.program(12, data, 0),"data":data}),(typeof helper === alias3 ? helper.call(alias1,options) : helper));
+  stack1 = ((helper = (helper = helpers.disabled || (depth0 != null ? depth0.disabled : depth0)) != null ? helper : alias2),(options={"name":"disabled","hash":{},"fn":container.program(10, data, 0),"inverse":container.noop,"data":data}),(typeof helper === alias3 ? helper.call(alias1,options) : helper));
   if (!helpers.disabled) { stack1 = alias4.call(depth0,stack1,options)}
   if (stack1 != null) { buffer += stack1; }
-  return buffer + "</div>\n    </h2>\n    "
-    + ((stack1 = helpers.each.call(alias1,(depth0 != null ? depth0.stewards : depth0),{"name":"each","hash":{},"fn":container.program(14, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
+  buffer += " ";
+  stack1 = ((helper = (helper = helpers.namespace_disabled || (depth0 != null ? depth0.namespace_disabled : depth0)) != null ? helper : alias2),(options={"name":"namespace_disabled","hash":{},"fn":container.program(12, data, 0),"inverse":container.noop,"data":data}),(typeof helper === alias3 ? helper.call(alias1,options) : helper));
+  if (!helpers.namespace_disabled) { stack1 = alias4.call(depth0,stack1,options)}
+  if (stack1 != null) { buffer += stack1; }
+  buffer += " ";
+  stack1 = ((helper = (helper = helpers.isParentNamespaceDisabled || (depth0 != null ? depth0.isParentNamespaceDisabled : depth0)) != null ? helper : alias2),(options={"name":"isParentNamespaceDisabled","hash":{},"fn":container.program(14, data, 0),"inverse":container.noop,"data":data}),(typeof helper === alias3 ? helper.call(alias1,options) : helper));
+  if (!helpers.isParentNamespaceDisabled) { stack1 = alias4.call(depth0,stack1,options)}
+  if (stack1 != null) { buffer += stack1; }
+  return buffer + ((stack1 = helpers["if"].call(alias1,(helpers.not || (depth0 && depth0.not) || alias2).call(alias1,(helpers.or || (depth0 && depth0.or) || alias2).call(alias1,(depth0 != null ? depth0.disabled : depth0),(helpers.or || (depth0 && depth0.or) || alias2).call(alias1,(depth0 != null ? depth0.namespace_disabled : depth0),(depth0 != null ? depth0.isParentNamespaceDisabled : depth0),{"name":"or","hash":{},"data":data}),{"name":"or","hash":{},"data":data}),{"name":"not","hash":{},"data":data}),{"name":"if","hash":{},"fn":container.program(16, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
+    + "</div>\n    </h2>\n    "
+    + ((stack1 = helpers.each.call(alias1,(depth0 != null ? depth0.stewards : depth0),{"name":"each","hash":{},"fn":container.program(18, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
     + "\n  </div>\n";
 },"2":function(container,depth0,helpers,partials,data) {
     return "danger";
@@ -715,14 +738,18 @@ this["openmoney"]["namespace"] = Handlebars.template({"1":function(container,dep
 },"8":function(container,depth0,helpers,partials,data) {
     return "PUBLIC";
 },"10":function(container,depth0,helpers,partials,data) {
-    return "disabled";
+    return "Steward Disabled";
 },"12":function(container,depth0,helpers,partials,data) {
-    return "enabled";
+    return "Namespace Disabled";
 },"14":function(container,depth0,helpers,partials,data) {
+    return "Parent Namespace Disabled";
+},"16":function(container,depth0,helpers,partials,data) {
+    return "Enabled";
+},"18":function(container,depth0,helpers,partials,data) {
     var stack1;
 
-  return ((stack1 = helpers.blockHelperMissing.call(depth0,container.lambda(depth0, depth0),{"name":"this","hash":{},"fn":container.program(15, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "");
-},"15":function(container,depth0,helpers,partials,data) {
+  return ((stack1 = helpers.blockHelperMissing.call(depth0,container.lambda(depth0, depth0),{"name":"this","hash":{},"fn":container.program(19, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "");
+},"19":function(container,depth0,helpers,partials,data) {
     var helper, alias1=depth0 != null ? depth0 : {}, alias2=helpers.helperMissing, alias3="function", alias4=container.escapeExpression;
 
   return "<div class=\"statcard-desc\">STEWARD: <a href=\"#stewards/"
@@ -730,42 +757,50 @@ this["openmoney"]["namespace"] = Handlebars.template({"1":function(container,dep
     + "\" style='color:#FFF'>"
     + alias4(((helper = (helper = helpers.stewardname || (depth0 != null ? depth0.stewardname : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"stewardname","hash":{},"data":data}) : helper)))
     + "</a></div>";
-},"17":function(container,depth0,helpers,partials,data) {
+},"21":function(container,depth0,helpers,partials,data) {
     return "style=\"display: none;\"";
-},"19":function(container,depth0,helpers,partials,data) {
+},"23":function(container,depth0,helpers,partials,data) {
     var helper;
 
   return "<input type=\"hidden\" name=\"id\" value=\""
     + container.escapeExpression(((helper = (helper = helpers.id || (depth0 != null ? depth0.id : depth0)) != null ? helper : helpers.helperMissing),(typeof helper === "function" ? helper.call(depth0 != null ? depth0 : {},{"name":"id","hash":{},"data":data}) : helper)))
     + "\" />";
-},"21":function(container,depth0,helpers,partials,data) {
+},"25":function(container,depth0,helpers,partials,data) {
     var stack1;
 
   return "    <div class=\"form-group text-left\">\n      <label for=\"namespace\">Namespace</label>\n      <input type=\"text\" id=\"namespace\" name=\"namespace\" value=\""
-    + ((stack1 = helpers["if"].call(depth0 != null ? depth0 : {},(depth0 != null ? depth0.id : depth0),{"name":"if","hash":{},"fn":container.program(22, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
+    + ((stack1 = helpers["if"].call(depth0 != null ? depth0 : {},(depth0 != null ? depth0.id : depth0),{"name":"if","hash":{},"fn":container.program(26, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
     + "\" placeholder=\"Namespace\" class=\"form-control\" />\n    </div>\n";
-},"22":function(container,depth0,helpers,partials,data) {
+},"26":function(container,depth0,helpers,partials,data) {
     var helper;
 
   return container.escapeExpression(((helper = (helper = helpers.namespace || (depth0 != null ? depth0.namespace : depth0)) != null ? helper : helpers.helperMissing),(typeof helper === "function" ? helper.call(depth0 != null ? depth0 : {},{"name":"namespace","hash":{},"data":data}) : helper)));
-},"24":function(container,depth0,helpers,partials,data) {
-    var stack1, helper, options, alias1=depth0 != null ? depth0 : {}, alias2=helpers.helperMissing, buffer = 
-  "    <div style=\"padding-top:10px;padding-bottom: 10px;\">\n      <div style=\"padding-bottom: 10px;\">\n        <strong>Join Status:</strong>\n      </div>\n      <div class=\"radio-inline custom-control custom-radio\">\n        <label>\n          <input type=\"radio\" id=\"public\" name=\"private\" value=\"false\" "
-    + ((stack1 = (helpers.if_eq || (depth0 && depth0.if_eq) || alias2).call(alias1,(depth0 != null ? depth0["private"] : depth0),false,{"name":"if_eq","hash":{},"fn":container.program(25, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
+},"28":function(container,depth0,helpers,partials,data) {
+    var stack1, alias1=depth0 != null ? depth0 : {}, alias2=helpers.helperMissing;
+
+  return "    <div style=\"padding-top:10px;padding-bottom: 10px;\">\n      <div style=\"padding-bottom: 10px;\">\n        <strong>Join Status:</strong>\n      </div>\n      <div class=\"radio-inline custom-control custom-radio\">\n        <label>\n          <input type=\"radio\" id=\"public\" name=\"private\" value=\"false\" "
+    + ((stack1 = (helpers.if_eq || (depth0 && depth0.if_eq) || alias2).call(alias1,(depth0 != null ? depth0["private"] : depth0),false,{"name":"if_eq","hash":{},"fn":container.program(29, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
     + ">\n          <span class=\"custom-control-indicator\"></span>\n          <strong>Public</strong>\n        </label>\n      </div>\n      <div class=\"radio-inline custom-control custom-radio\">\n        <label>\n          <input type=\"radio\" id=\"private\" name=\"private\" value=\"true\" "
-    + ((stack1 = (helpers.if_eq || (depth0 && depth0.if_eq) || alias2).call(alias1,(depth0 != null ? depth0["private"] : depth0),true,{"name":"if_eq","hash":{},"fn":container.program(25, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
-    + ">\n          <span class=\"custom-control-indicator\"></span>\n          <strong>Private</strong>\n        </label>\n      </div>\n      <div style=\"padding-top:5px; font-size: 12px;\"><i>Public means other stewards can create accounts and currencies in this namespace.</i></div>\n      <div style=\"padding-bottom:5px; font-size: 12px;\"><i>Private means only you can create accounts and currencies in this namespace.</i></div>\n    </div>\n    <div style=\"padding-top:10px;padding-bottom: 10px;\">\n      <div style=\"padding-bottom: 10px;\">\n        <strong>Payment Status:</strong>\n      </div>\n      <div class=\"radio-inline custom-control custom-radio\">\n        <label>\n          <input type=\"radio\" id=\"private\" name=\"disabled\" value=\"false\" "
-    + ((stack1 = (helpers.if_eq || (depth0 && depth0.if_eq) || alias2).call(alias1,(depth0 != null ? depth0.disabled : depth0),false,{"name":"if_eq","hash":{},"fn":container.program(25, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
+    + ((stack1 = (helpers.if_eq || (depth0 && depth0.if_eq) || alias2).call(alias1,(depth0 != null ? depth0["private"] : depth0),true,{"name":"if_eq","hash":{},"fn":container.program(29, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
+    + ">\n          <span class=\"custom-control-indicator\"></span>\n          <strong>Private</strong>\n        </label>\n      </div>\n      <div style=\"padding-top:5px; font-size: 12px;\"><i>Public means other stewards can create accounts and currencies in this namespace.</i></div>\n      <div style=\"padding-bottom:5px; font-size: 12px;\"><i>Private means only you can create accounts and currencies in this namespace.</i></div>\n    </div>\n";
+},"29":function(container,depth0,helpers,partials,data) {
+    return "checked=\"checked\"";
+},"31":function(container,depth0,helpers,partials,data) {
+    var stack1, alias1=depth0 != null ? depth0 : {}, alias2=helpers.helperMissing;
+
+  return "    <div style=\"padding-top:10px;padding-bottom: 10px;\">\n      <div style=\"padding-bottom: 10px;\">\n        <strong>Payment Status:</strong>\n      </div>\n      <div class=\"radio-inline custom-control custom-radio\">\n        <label>\n          <input type=\"radio\" id=\"private\" name=\"disabled\" value=\"false\" "
+    + ((stack1 = helpers["if"].call(alias1,(helpers.not || (depth0 && depth0.not) || alias2).call(alias1,(helpers.or || (depth0 && depth0.or) || alias2).call(alias1,(helpers.and || (depth0 && depth0.and) || alias2).call(alias1,(depth0 != null ? depth0.disabled : depth0),(depth0 != null ? depth0.isSteward : depth0),{"name":"and","hash":{},"data":data}),(helpers.and || (depth0 && depth0.and) || alias2).call(alias1,(depth0 != null ? depth0.namespace_disabled : depth0),(depth0 != null ? depth0.isNamespaceSteward : depth0),{"name":"and","hash":{},"data":data}),{"name":"or","hash":{},"data":data}),{"name":"not","hash":{},"data":data}),{"name":"if","hash":{},"fn":container.program(29, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
     + ">\n          <span class=\"custom-control-indicator\"></span>\n          <strong>Enabled</strong>\n        </label>\n      </div>\n      <div class=\"radio-inline custom-control custom-radio\">\n        <label>\n          <input type=\"radio\" id=\"public\" name=\"disabled\" value=\"true\" "
-    + ((stack1 = (helpers.if_eq || (depth0 && depth0.if_eq) || alias2).call(alias1,(depth0 != null ? depth0.disabled : depth0),true,{"name":"if_eq","hash":{},"fn":container.program(25, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
-    + ">\n          <span class=\"custom-control-indicator\"></span>\n          <strong>Disabled</strong>\n        </label>\n      </div>\n      <div style=\"padding-top:5px; font-size: 12px;\"><i>Enabled means payments can be processed on accounts and currencies in this namespace.</i></div>\n      <div style=\"padding-bottom:5px; font-size: 12px;\"><i>Disabled means payments can not be processed on accounts and currencies in this namespace.</i></div>\n    </div>\n    <div class=\"form-group text-left\">\n      <label for=\"stewards[]\">Namespace Stewards</label>\n      <div id=\"addButtonDiv\" class=\"text-right\" style=\"padding-bottom:10px;\">\n        <button type=\"button\" name=\"addSteward\" class=\"btn btn-success-outline\">\n          Add Stewards\n          <span class=\"icon icon-add-to-list\"></span>\n        </button>\n      </div>\n      <ul id=\"stewards\" class=\"list-group\">\n";
-  stack1 = ((helper = (helper = helpers.stewards || (depth0 != null ? depth0.stewards : depth0)) != null ? helper : alias2),(options={"name":"stewards","hash":{},"fn":container.program(27, data, 0),"inverse":container.noop,"data":data}),(typeof helper === "function" ? helper.call(alias1,options) : helper));
+    + ((stack1 = helpers["if"].call(alias1,(helpers.or || (depth0 && depth0.or) || alias2).call(alias1,(helpers.and || (depth0 && depth0.and) || alias2).call(alias1,(depth0 != null ? depth0.disabled : depth0),(depth0 != null ? depth0.isSteward : depth0),{"name":"and","hash":{},"data":data}),(helpers.and || (depth0 && depth0.and) || alias2).call(alias1,(depth0 != null ? depth0.namespace_disabled : depth0),(depth0 != null ? depth0.isNamespaceSteward : depth0),{"name":"and","hash":{},"data":data}),{"name":"or","hash":{},"data":data}),{"name":"if","hash":{},"fn":container.program(29, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
+    + ">\n          <span class=\"custom-control-indicator\"></span>\n          <strong>Disabled</strong>\n        </label>\n      </div>\n      <div style=\"padding-top:5px; font-size: 12px;\"><i>Enabled means payments can be processed on accounts and currencies in this namespace.</i></div>\n      <div style=\"padding-bottom:5px; font-size: 12px;\"><i>Disabled means payments can not be processed on accounts and currencies in this namespace.</i></div>\n    </div>\n";
+},"33":function(container,depth0,helpers,partials,data) {
+    var stack1, helper, options, buffer = 
+  "    <div class=\"form-group text-left\">\n      <label for=\"stewards[]\">Namespace Stewards</label>\n      <div id=\"addButtonDiv\" class=\"text-right\" style=\"padding-bottom:10px;\">\n        <button type=\"button\" name=\"addSteward\" class=\"btn btn-success-outline\">\n          Add Stewards\n          <span class=\"icon icon-add-to-list\"></span>\n        </button>\n      </div>\n      <ul id=\"stewards\" class=\"list-group\">\n";
+  stack1 = ((helper = (helper = helpers.stewards || (depth0 != null ? depth0.stewards : depth0)) != null ? helper : helpers.helperMissing),(options={"name":"stewards","hash":{},"fn":container.program(34, data, 0),"inverse":container.noop,"data":data}),(typeof helper === "function" ? helper.call(depth0 != null ? depth0 : {},options) : helper));
   if (!helpers.stewards) { stack1 = helpers.blockHelperMissing.call(depth0,stack1,options)}
   if (stack1 != null) { buffer += stack1; }
   return buffer + "      </ul>\n    </div>\n";
-},"25":function(container,depth0,helpers,partials,data) {
-    return "checked=\"checked\"";
-},"27":function(container,depth0,helpers,partials,data) {
+},"34":function(container,depth0,helpers,partials,data) {
     var helper, alias1=depth0 != null ? depth0 : {}, alias2=helpers.helperMissing, alias3="function", alias4=container.escapeExpression;
 
   return "          <div class=\"flextable\" style=\"padding-bottom: 10px;\">\n            <div class=\"flextable-item flextable-primary\">\n              <li class=\"list-group-item\">\n              "
@@ -775,15 +810,15 @@ this["openmoney"]["namespace"] = Handlebars.template({"1":function(container,dep
     + "\" />\n              </li>\n            </div>\n            <div class=\"flextable-item\">\n              <div class=\"btn-group\">\n                <button type=\"button\" name=\"remove\" value=\"stewards~"
     + alias4(((helper = (helper = helpers.stewardname || (depth0 != null ? depth0.stewardname : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"stewardname","hash":{},"data":data}) : helper)))
     + "\" class=\"btn btn-danger-outline\">\n                  <span class=\"icon icon-cross\" style=\"font-size: 1.2em\"></span>\n                </button>\n              </div>\n            </div>\n          </div>\n";
-},"29":function(container,depth0,helpers,partials,data) {
+},"36":function(container,depth0,helpers,partials,data) {
     return "Save";
-},"31":function(container,depth0,helpers,partials,data) {
+},"38":function(container,depth0,helpers,partials,data) {
     var stack1;
 
-  return ((stack1 = (helpers.if_eq || (depth0 && depth0.if_eq) || helpers.helperMissing).call(depth0 != null ? depth0 : {},(depth0 != null ? depth0.namespace : depth0),"add",{"name":"if_eq","hash":{},"fn":container.program(32, data, 0),"inverse":container.program(29, data, 0),"data":data})) != null ? stack1 : "");
-},"32":function(container,depth0,helpers,partials,data) {
+  return ((stack1 = (helpers.if_eq || (depth0 && depth0.if_eq) || helpers.helperMissing).call(depth0 != null ? depth0 : {},(depth0 != null ? depth0.namespace : depth0),"add",{"name":"if_eq","hash":{},"fn":container.program(39, data, 0),"inverse":container.program(36, data, 0),"data":data})) != null ? stack1 : "");
+},"39":function(container,depth0,helpers,partials,data) {
     return "Add";
-},"34":function(container,depth0,helpers,partials,data) {
+},"41":function(container,depth0,helpers,partials,data) {
     var helper, alias1=depth0 != null ? depth0 : {}, alias2=helpers.helperMissing, alias3="function", alias4=container.escapeExpression;
 
   return "                  <tr id=\""
@@ -793,19 +828,19 @@ this["openmoney"]["namespace"] = Handlebars.template({"1":function(container,dep
     + "\">\n                        <span class=\"custom-control-indicator\"></span>\n                        &nbsp;&nbsp;&nbsp;&nbsp;"
     + alias4(((helper = (helper = helpers.stewardname || (depth0 != null ? depth0.stewardname : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"stewardname","hash":{},"data":data}) : helper)))
     + "\n                      </label>\n                    </div>\n                    </td>\n                  </tr>\n";
-},"36":function(container,depth0,helpers,partials,data) {
+},"43":function(container,depth0,helpers,partials,data) {
     var stack1, alias1=depth0 != null ? depth0 : {};
 
   return "  <h2><strong>Accounts</strong></h2>\n  <div id=\"newButtonDiv\" class=\"text-right\" style=\"padding-bottom:10px;\">\n    <button type=\"button\" name=\"newAccount\" class=\"btn btn-lg btn-success-outline\" >\n      <strong>New Account</strong>\n    </button>\n  </div>\n  <div class=\"table-full\">\n    <table class=\"table accounts\" data-sort=\"table\">\n      <thead>\n        <tr>\n          <th class=\"text-right\">Account</th>\n          <th>Currency</th>\n          <th>Balance</th>\n          <th>Volume</th>\n        </tr>\n      </thead>\n      <tbody class=\"table-rows\">\n"
-    + ((stack1 = helpers.each.call(alias1,(depth0 != null ? depth0.accounts : depth0),{"name":"each","hash":{},"fn":container.program(37, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
+    + ((stack1 = helpers.each.call(alias1,(depth0 != null ? depth0.accounts : depth0),{"name":"each","hash":{},"fn":container.program(44, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
     + "      </tbody>\n    </table>\n  </div>\n\n  <h2><strong>Currencies</strong></h2>\n  <div id=\"newButtonDiv\" class=\"text-right\" style=\"padding-bottom:10px;\">\n    <button type=\"button\" name=\"newCurrency\" class=\"btn btn-lg btn-success-outline\" >\n      <strong>New Currency</strong>\n    </button>\n  </div>\n  <div class=\"table-full\">\n    <table class=\"table currencies\" data-sort=\"table\">\n      <thead>\n        <tr>\n          <th>Currency</th>\n          <th>Stewards</th>\n        </tr>\n      </thead>\n      <tbody class=\"table-rows\">\n"
-    + ((stack1 = helpers.each.call(alias1,(depth0 != null ? depth0.currencies : depth0),{"name":"each","hash":{},"fn":container.program(40, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
+    + ((stack1 = helpers.each.call(alias1,(depth0 != null ? depth0.currencies : depth0),{"name":"each","hash":{},"fn":container.program(47, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
     + "      </tbody>\n    </table>\n  </div>\n";
-},"37":function(container,depth0,helpers,partials,data) {
+},"44":function(container,depth0,helpers,partials,data) {
     var stack1;
 
-  return ((stack1 = helpers.blockHelperMissing.call(depth0,container.lambda(depth0, depth0),{"name":"this","hash":{},"fn":container.program(38, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "");
-},"38":function(container,depth0,helpers,partials,data) {
+  return ((stack1 = helpers.blockHelperMissing.call(depth0,container.lambda(depth0, depth0),{"name":"this","hash":{},"fn":container.program(45, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "");
+},"45":function(container,depth0,helpers,partials,data) {
     var helper, alias1=depth0 != null ? depth0 : {}, alias2=helpers.helperMissing, alias3="function", alias4=container.escapeExpression;
 
   return "          <tr id=\""
@@ -819,11 +854,11 @@ this["openmoney"]["namespace"] = Handlebars.template({"1":function(container,dep
     + "</td>\n            <td>"
     + alias4((helpers.decimal_places || (depth0 && depth0.decimal_places) || alias2).call(alias1,(depth0 != null ? depth0.volume : depth0),{"name":"decimal_places","hash":{},"data":data}))
     + "</td>\n          </tr>\n";
-},"40":function(container,depth0,helpers,partials,data) {
+},"47":function(container,depth0,helpers,partials,data) {
     var stack1;
 
-  return ((stack1 = helpers.blockHelperMissing.call(depth0,container.lambda(depth0, depth0),{"name":"this","hash":{},"fn":container.program(41, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "");
-},"41":function(container,depth0,helpers,partials,data) {
+  return ((stack1 = helpers.blockHelperMissing.call(depth0,container.lambda(depth0, depth0),{"name":"this","hash":{},"fn":container.program(48, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "");
+},"48":function(container,depth0,helpers,partials,data) {
     var stack1, helper, alias1=depth0 != null ? depth0 : {}, alias2=helpers.helperMissing, alias3="function", alias4=container.escapeExpression;
 
   return "          <tr id=\""
@@ -831,13 +866,13 @@ this["openmoney"]["namespace"] = Handlebars.template({"1":function(container,dep
     + "\">\n            <td>"
     + alias4(((helper = (helper = helpers.currencyName || (depth0 != null ? depth0.currencyName : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"currencyName","hash":{},"data":data}) : helper)))
     + "</td>\n            <td>"
-    + ((stack1 = helpers.each.call(alias1,(depth0 != null ? depth0.stewards : depth0),{"name":"each","hash":{},"fn":container.program(42, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
+    + ((stack1 = helpers.each.call(alias1,(depth0 != null ? depth0.stewards : depth0),{"name":"each","hash":{},"fn":container.program(49, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
     + "</td>\n          </tr>\n";
-},"42":function(container,depth0,helpers,partials,data) {
+},"49":function(container,depth0,helpers,partials,data) {
     var stack1;
 
-  return ((stack1 = helpers.blockHelperMissing.call(depth0,container.lambda(depth0, depth0),{"name":"this","hash":{},"fn":container.program(43, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "");
-},"43":function(container,depth0,helpers,partials,data) {
+  return ((stack1 = helpers.blockHelperMissing.call(depth0,container.lambda(depth0, depth0),{"name":"this","hash":{},"fn":container.program(50, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "");
+},"50":function(container,depth0,helpers,partials,data) {
     var helper, alias1=depth0 != null ? depth0 : {}, alias2=helpers.helperMissing, alias3="function", alias4=container.escapeExpression;
 
   return "<a href='#stewards/"
@@ -850,22 +885,24 @@ this["openmoney"]["namespace"] = Handlebars.template({"1":function(container,dep
   "<style>\n[data-sort=table] > tbody > tr:hover{\n  background-color: #159c6e;\n  cursor: pointer;\n}\n</style>\n<div class=\"col-sm-12\" style=\"padding-top: 10px;\">\n"
     + ((stack1 = helpers["if"].call(alias1,(depth0 != null ? depth0.id : depth0),{"name":"if","hash":{},"fn":container.program(1, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
     + "  <form id='namespaceForm' "
-    + ((stack1 = helpers["if"].call(alias1,(depth0 != null ? depth0.id : depth0),{"name":"if","hash":{},"fn":container.program(17, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
+    + ((stack1 = helpers["if"].call(alias1,(depth0 != null ? depth0.id : depth0),{"name":"if","hash":{},"fn":container.program(21, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
     + ">\n    "
-    + ((stack1 = helpers["if"].call(alias1,(depth0 != null ? depth0.id : depth0),{"name":"if","hash":{},"fn":container.program(19, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
+    + ((stack1 = helpers["if"].call(alias1,(depth0 != null ? depth0.id : depth0),{"name":"if","hash":{},"fn":container.program(23, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
     + "\n"
-    + ((stack1 = helpers["if"].call(alias1,(depth0 != null ? depth0.isEditable : depth0),{"name":"if","hash":{},"fn":container.program(21, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
-    + ((stack1 = helpers["if"].call(alias1,(depth0 != null ? depth0.isSteward : depth0),{"name":"if","hash":{},"fn":container.program(24, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
+    + ((stack1 = helpers["if"].call(alias1,(depth0 != null ? depth0.isEditable : depth0),{"name":"if","hash":{},"fn":container.program(25, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
+    + ((stack1 = helpers["if"].call(alias1,(depth0 != null ? depth0.isSteward : depth0),{"name":"if","hash":{},"fn":container.program(28, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
+    + ((stack1 = helpers["if"].call(alias1,(helpers.or || (depth0 && depth0.or) || alias2).call(alias1,(depth0 != null ? depth0.isSteward : depth0),(depth0 != null ? depth0.isNamespaceParent : depth0),{"name":"or","hash":{},"data":data}),{"name":"if","hash":{},"fn":container.program(31, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
+    + ((stack1 = helpers["if"].call(alias1,(depth0 != null ? depth0.isSteward : depth0),{"name":"if","hash":{},"fn":container.program(33, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
     + "    <div class=\"form-group text-right\">\n      <button type=\"button\" name=\"cancel\" class=\"btn btn-lg btn-primary-outline\" >Cancel</button>\n      <button type=\"button\" name=\"upsert\" class=\"btn btn-lg btn-primary-outline\" >\n        <strong>"
-    + ((stack1 = helpers["if"].call(alias1,(depth0 != null ? depth0.id : depth0),{"name":"if","hash":{},"fn":container.program(29, data, 0),"inverse":container.program(31, data, 0),"data":data})) != null ? stack1 : "")
+    + ((stack1 = helpers["if"].call(alias1,(depth0 != null ? depth0.id : depth0),{"name":"if","hash":{},"fn":container.program(36, data, 0),"inverse":container.program(38, data, 0),"data":data})) != null ? stack1 : "")
     + "</strong>\n      </button>\n    </div>\n  </form>\n\n  <div id=\"stewardsModal\" class=\"modal\" style=\"display: none;\">\n    <div class=\"modal-dialog modal-sm\">\n      <div class=\"modal-content\">\n        <div class=\"modal-header\">\n          <button type=\"button\" class=\"close\" data-dismiss=\"modal\" aria-label=\"Close\"><span aria-hidden=\"true\">&times;</span></button>\n          <h4 class=\"modal-title\">Add Stewards</h4>\n        </div>\n        <div class=\"modal-body\">\n          <div class=\"flextable\">\n            <div class=\"flextable-item flextable-primary\">\n              <div id=\"addStewardForm\" class=\"form-group\" style=\"margin-bottom: 0;\">\n                <input type=\"text\" id=\"stewardname\" name=\"stewardname\" value=\""
     + container.escapeExpression(((helper = (helper = helpers.stewardname || (depth0 != null ? depth0.stewardname : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"stewardname","hash":{},"data":data}) : helper)))
     + "\" placeholder=\"Steward Name\" class=\"form-control\" aria-describedby=\"helpBlock\"/>\n                <span id=\"helpBlock\" class=\"help-block\" style=\"margin: 0;\"></span>\n              </div>\n            </div>\n            <div class=\"flextable-item\">\n              <div class=\"btn-group\">\n                <button type=\"button\" name=\"addStewardToList\" class=\"btn btn-primary-outline\">\n                  <span class=\"icon icon-add-to-list\"></span>\n                </button>\n              </div>\n            </div>\n          </div>\n          <div class=\"table-full\">\n            <table class=\"table accounts\" data-sort=\"checkbox-table\">\n              <thead>\n                <tr>\n                  <th class=\"text-left\">Stewards</th>\n                </tr>\n              </thead>\n              <tbody id=\"modalList\" class=\"table-rows\">\n";
-  stack1 = ((helper = (helper = helpers.stewardsCollection || (depth0 != null ? depth0.stewardsCollection : depth0)) != null ? helper : alias2),(options={"name":"stewardsCollection","hash":{},"fn":container.program(34, data, 0),"inverse":container.noop,"data":data}),(typeof helper === alias3 ? helper.call(alias1,options) : helper));
+  stack1 = ((helper = (helper = helpers.stewardsCollection || (depth0 != null ? depth0.stewardsCollection : depth0)) != null ? helper : alias2),(options={"name":"stewardsCollection","hash":{},"fn":container.program(41, data, 0),"inverse":container.noop,"data":data}),(typeof helper === alias3 ? helper.call(alias1,options) : helper));
   if (!helpers.stewardsCollection) { stack1 = helpers.blockHelperMissing.call(depth0,stack1,options)}
   if (stack1 != null) { buffer += stack1; }
   return buffer + "              </tbody>\n            </table>\n          </div>\n        </div>\n        <div class=\"modal-actions\">\n          <button type=\"button\" class=\"btn-link modal-action cancel\" data-dismiss=\"modal\">Cancel</button>\n          <button type=\"button\" class=\"btn-link modal-action add\" data-dismiss=\"modal\">\n            <strong>Add Stewards</strong>\n          </button>\n        </div>\n      </div>\n    </div>\n  </div>\n\n"
-    + ((stack1 = helpers["if"].call(alias1,(depth0 != null ? depth0.id : depth0),{"name":"if","hash":{},"fn":container.program(36, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
+    + ((stack1 = helpers["if"].call(alias1,(depth0 != null ? depth0.id : depth0),{"name":"if","hash":{},"fn":container.program(43, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
     + "</div>\n";
 },"useData":true});
 

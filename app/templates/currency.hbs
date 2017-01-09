@@ -17,13 +17,13 @@ tr.CREDIT {
       <strong>Edit</strong>
     </button>
   </div>
-  <div id="stats" class="statcard statcard-{{#if (or disabled namespace_disabled)}}danger{{else}}primary{{/if}} p-a-md m-b">
+  <div id="stats" class="statcard statcard-{{#if (or disabled (or namespace_disabled isParentNamespaceDisabled))}}danger{{else}}primary{{/if}} p-a-md m-b">
     <h3>
       <div class="statcard-number">
         {{#private}}PRIVATE{{else}}PUBLIC{{/private}} CURRENCY: {{currencyName}}
       </div>
       <div class="statcard-number">
-        PAYMENT STATUS: {{#disabled}}steward disabled{{/disabled}} {{#namespace_disabled}}namespace disabled{{/namespace_disabled}} {{#if (not (or disabled namespace_disabled))}}enabled{{/if}}
+        PAYMENT STATUS: {{#disabled}}Steward Disabled{{/disabled}} {{#namespace_disabled}}Namespace Disabled{{/namespace_disabled}} {{#isParentNamespaceDisabled}}Parent Namespace Disabled{{/isParentNamespaceDisabled}}{{#if (not (or disabled (or namespace_disabled isParentNamespaceDisabled)))}}Enabled{{/if}}
       </div>
       <div class="statcard-number">
         STEWARDS:
@@ -90,14 +90,14 @@ tr.CREDIT {
       </div>
       <div class="radio-inline custom-control custom-radio">
         <label>
-          <input type="radio" id="private" name="disabled" value="false" {{#if (not (or disabled namespace_disabled))}}checked="checked"{{/if}}>
+          <input type="radio" id="private" name="disabled" value="false" {{#if (not (or (and disabled isSteward) (and namespace_disabled isNamespaceSteward)))}}checked="checked"{{/if}}>
           <span class="custom-control-indicator"></span>
           <strong>Enabled</strong>
         </label>
       </div>
       <div class="radio-inline custom-control custom-radio">
         <label>
-          <input type="radio" id="public" name="disabled" value="true" {{#if (or disabled namespace_disabled)}}checked="checked"{{/if}}>
+          <input type="radio" id="public" name="disabled" value="true" {{#if (or (and disabled isSteward) (and namespace_disabled isNamespaceSteward))}}checked="checked"{{/if}}>
           <span class="custom-control-indicator"></span>
           <strong>Disabled</strong>
         </label>

@@ -300,17 +300,7 @@ module.exports = Marionette.ItemView.extend({
             }
           })
         }
-        data.isNamespaceSteward = false;
-        data.namespace = Self.namespaces.get('namespaces~' + data.account_namespace);
-        if(typeof data.namespace != 'undefined'){
-          data.namespace = data.namespace.toJSON();
-          data.namespace.stewards.forEach(function(steward){
-            if((typeof steward == 'string' && steward == Self.steward.get('id'))
-              || (typeof steward != 'undefined' && steward.id == Self.steward.get('id'))){
-              data.isNamespaceSteward = true;
-            }
-          })
-        }
+
 
         data.isSteward = true;
 
@@ -349,6 +339,64 @@ module.exports = Marionette.ItemView.extend({
         if(!data.isSteward){
           data.isEditable = false;
         }
+
+        data.isParentNamespaceDisabled = false;
+        data.isNamespaceSteward = false;
+        data.namespace = Self.namespaces.get('namespaces~' + data.account_namespace);
+        if(typeof data.namespace != 'undefined'){
+          data.namespace = data.namespace.toJSON();
+          data.namespace.stewards.forEach(function(steward){
+            if((typeof steward == 'string' && steward == Self.steward.get('id'))
+              || (typeof steward != 'undefined' && steward.id == Self.steward.get('id'))){
+              data.isNamespaceSteward = true;
+            }
+          })
+          var namespaceList = [];
+          var namespace = data.namespace.namespace;
+          while(namespace.indexOf('.') !== -1){
+            namespaceList.push(namespace);
+            namespace = namespace.substring(namespace.indexOf('.') + 1, namespace.length);
+          }
+          if(namespace != ''){
+            namespaceList.push(namespace);
+          }
+          namespaceList.forEach(function(namespace){
+            var namespaceObject = Self.namespaces.get('namespaces~' + namespace);
+            if(typeof namespaceObject != 'undefined'){
+              namespaceObject = namespaceObject.toJSON();
+              if((typeof namespaceObject.disabled != 'undefined' && namespaceObject.disabled)
+                || (typeof namespaceObject.namespace_disabled != 'undefined' && namespaceObject.namespace_disabled)){
+                data.isParentNamespaceDisabled = true;
+              }
+            }
+          })
+        }
+
+        data.isCurrencyParentNamespaceDisabled = false;
+        data.currency_namespace = Self.namespaces.get('namespaces~' + data.currency_namespace);
+        if(typeof data.currency_namespace != 'undefined'){
+          data.currency_namespace = data.currency_namespace.toJSON();
+          var namespaceList = [];
+          var namespace = data.currency_namespace.namespace;
+          while(namespace.indexOf('.') !== -1){
+            namespaceList.push(namespace);
+            namespace = namespace.substring(namespace.indexOf('.') + 1, namespace.length);
+          }
+          if(namespace != ''){
+            namespaceList.push(namespace);
+          }
+          namespaceList.forEach(function(namespace){
+            var namespaceObject = Self.namespaces.get('namespaces~' + namespace);
+            if(typeof namespaceObject != 'undefined'){
+              namespaceObject = namespaceObject.toJSON();
+              if((typeof namespaceObject.disabled != 'undefined' && namespaceObject.disabled)
+                || (typeof namespaceObject.namespace_disabled != 'undefined' && namespaceObject.namespace_disabled)){
+                data.isCurrencyParentNamespaceDisabled = true;
+              }
+            }
+          })
+        }
+
 
         _.extend(data, ViewHelpers);
         console.log('account view data:', data);

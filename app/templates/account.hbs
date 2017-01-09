@@ -17,11 +17,11 @@ tr.CREDIT {
         <strong>Edit</strong>
       </button>
     </div>
-    <div id="stats" class="statcard statcard-{{#if (or disabled (or currency_disabled namespace_disabled))}}danger{{/if}}{{#if (not (or disabled (or currency_disabled namespace_disabled)))}}success{{/if}} p-a-md m-b">
+    <div id="stats" class="statcard statcard-{{#if (or disabled (or currency_disabled (or namespace_disabled (or isParentNamespaceDisabled isCurrencyParentNamespaceDisabled))))}}danger{{else}}success{{/if}} p-a-md m-b">
       <h3><div class="statcard-number">
           <div>ACCOUNT: {{accountName}}</div>
           <div>CURRENCY: {{currencyName}}</div>
-          <div>PAYMENT STATUS: {{#disabled}}steward disabled{{/disabled}} {{#currency_disabled}}currency disabled{{/currency_disabled}} {{#namespace_disabled}}namespace disabled{{/namespace_disabled}} {{#if (not (or disabled (or currency_disabled namespace_disabled)))}}enabled{{/if}}
+          <div>PAYMENT STATUS: {{#disabled}}Steward Disabled{{/disabled}} {{#currency_disabled}}Currency Disabled{{/currency_disabled}} {{#namespace_disabled}}Namespace Disabled{{/namespace_disabled}} {{#isParentNamespaceDisabled}}Parent Namespace Disabled{{/isParentNamespaceDisabled}} {{#isCurrencyParentNamespaceDisabled}}Currency Parent Namespace Disabled{{/isCurrencyParentNamespaceDisabled}} {{#if (not (or disabled (or currency_disabled (or namespace_disabled (or isParentNamespaceDisabled isCurrencyParentNamespaceDisabled)))))}}Enabled{{/if}}
         </div>
         <div>STEWARDS:
           {{#stewards}}
@@ -78,14 +78,14 @@ tr.CREDIT {
       </div>
       <div class="radio-inline custom-control custom-radio">
         <label>
-          <input type="radio" id="private" name="disabled" value="false" {{#if (not (or disabled (or currency_disabled namespace_disabled)))}}checked="checked"{{/if}}>
+          <input type="radio" id="private" name="disabled" value="false" {{#if (not (or (and disabled isSteward) (or (and currency_disabled isCurrencySteward) (and namespace_disabled isNamespaceStweard))))}}checked="checked"{{/if}}>
           <span class="custom-control-indicator"></span>
           <strong>Enabled</strong>
         </label>
       </div>
       <div class="radio-inline custom-control custom-radio">
         <label>
-          <input type="radio" id="public" name="disabled" value="true" {{#if (or disabled (or currency_disabled namespace_disabled))}}checked="checked"{{/if}}>
+          <input type="radio" id="public" name="disabled" value="true" {{#if (or (and disabled isSteward) (or (and currency_disabled isCurrencySteward) (and namespace_disabled isNamespaceStweard)))}}checked="checked"{{/if}}>
           <span class="custom-control-indicator"></span>
           <strong>Disabled</strong>
         </label>

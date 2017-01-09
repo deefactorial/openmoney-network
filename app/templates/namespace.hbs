@@ -11,10 +11,10 @@
       <strong>Edit</strong>
     </button>
   </div>
-  <div id="stats" class="statcard statcard-{{#disabled}}danger{{else}}info{{/disabled}} p-a-md m-b">
+  <div id="stats" class="statcard statcard-{{#if (or namespace_disabled (or disabled isParentNamespaceDisabled))}}danger{{else}}info{{/if}} p-a-md m-b">
     <h2>
       <div class="statcard-number">{{#private}}PRIVATE{{else}}PUBLIC{{/private}} NAMESPACE: {{namespace}}</div>
-      <div class="statcard-number">PAYMENT STATUS: {{#disabled}}disabled{{else}}enabled{{/disabled}}</div>
+      <div class="statcard-number">PAYMENT STATUS: {{#disabled}}Steward Disabled{{/disabled}} {{#namespace_disabled}}Namespace Disabled{{/namespace_disabled}} {{#isParentNamespaceDisabled}}Parent Namespace Disabled{{/isParentNamespaceDisabled}}{{#if (not (or disabled (or namespace_disabled isParentNamespaceDisabled)))}}Enabled{{/if}}</div>
     </h2>
     {{#each stewards}}{{#this}}<div class="statcard-desc">STEWARD: <a href="#stewards/{{stewardname}}" style='color:#FFF'>{{stewardname}}</a></div>{{/this}}{{/each}}
   </div>
@@ -49,20 +49,22 @@
       <div style="padding-top:5px; font-size: 12px;"><i>Public means other stewards can create accounts and currencies in this namespace.</i></div>
       <div style="padding-bottom:5px; font-size: 12px;"><i>Private means only you can create accounts and currencies in this namespace.</i></div>
     </div>
+    {{/if}}
+    {{#if (or isSteward isNamespaceParent)}}
     <div style="padding-top:10px;padding-bottom: 10px;">
       <div style="padding-bottom: 10px;">
         <strong>Payment Status:</strong>
       </div>
       <div class="radio-inline custom-control custom-radio">
         <label>
-          <input type="radio" id="private" name="disabled" value="false" {{#if_eq disabled false}}checked="checked"{{/if_eq}}>
+          <input type="radio" id="private" name="disabled" value="false" {{#if (not (or (and disabled isSteward) (and namespace_disabled isNamespaceSteward)))}}checked="checked"{{/if}}>
           <span class="custom-control-indicator"></span>
           <strong>Enabled</strong>
         </label>
       </div>
       <div class="radio-inline custom-control custom-radio">
         <label>
-          <input type="radio" id="public" name="disabled" value="true" {{#if_eq disabled true}}checked="checked"{{/if_eq}}>
+          <input type="radio" id="public" name="disabled" value="true" {{#if (or (and disabled isSteward) (and namespace_disabled isNamespaceSteward))}}checked="checked"{{/if}}>
           <span class="custom-control-indicator"></span>
           <strong>Disabled</strong>
         </label>
@@ -70,6 +72,8 @@
       <div style="padding-top:5px; font-size: 12px;"><i>Enabled means payments can be processed on accounts and currencies in this namespace.</i></div>
       <div style="padding-bottom:5px; font-size: 12px;"><i>Disabled means payments can not be processed on accounts and currencies in this namespace.</i></div>
     </div>
+    {{/if}}
+    {{#if isSteward}}
     <div class="form-group text-left">
       <label for="stewards[]">Namespace Stewards</label>
       <div id="addButtonDiv" class="text-right" style="padding-bottom:10px;">

@@ -293,6 +293,38 @@ module.exports = Marionette.ItemView.extend({
 
         data.stewardsCollection = Self.stewardsCollection.toJSON();
 
+        data.isParentNamespaceDisabled = false;
+        data.isNamespaceParent = false;
+        data.namespace_parent = Self.collection.get('namespaces~' + Self.namespace.substring(Self.namespace.indexOf('.') + 1, Self.namespace.length));
+        if(typeof data.namespace_parent != 'undefined'){
+          data.namespace_parent = data.namespace_parent.toJSON();
+          data.namespace_parent.stewards.forEach(function(steward){
+            if((typeof steward == 'string' && steward == Self.steward.get('id'))
+              ||(typeof steward != 'undefined' && steward.id == Self.steward.get('id'))){
+                data.isNamespaceParent = true;
+            }
+          });
+          var namespaceList = [];
+          var namespace = data.namespace_parent.namespace;
+          while(namespace.indexOf('.') !== -1){
+            namespaceList.push(namespace);
+            namespace = namespace.substring(namespace.indexOf('.') + 1, namespace.length);
+          }
+          if(namespace != ''){
+            namespaceList.push(namespace);
+          }
+          namespaceList.forEach(function(namespace){
+            var namespaceObject = Self.collection.get('namespaces~' + namespace);
+            if(typeof namespaceObject != 'undefined'){
+              namespaceObject = namespaceObject.toJSON();
+              if((typeof namespaceObject.disabled != 'undefined' && namespaceObject.disabled)
+                || (typeof namespaceObject.namespace_disabled != 'undefined' && namespaceObject.namespace_disabled)){
+                data.isParentNamespaceDisabled = true;
+              }
+            }
+          })
+        }
+
         console.log('Namespace Data:', data);
         _.extend(data, ViewHelpers);
         this.$el.html(this.template(data));
@@ -387,12 +419,17 @@ module.exports = Marionette.ItemView.extend({
             }
 
             Self.model.set('private', Self.$('input[name=private]:checked').val() === 'true');
-            Self.model.set('disabled', Self.$('input[name=disabled]:checked').val() === 'true');
+            if(data.isNamespaceParent){
+              Self.model.set('namespace_disabled', Self.$('input[name=disabled]:checked').val() === 'true');
+            } else {
+              Self.model.set('disabled', Self.$('input[name=disabled]:checked').val() === 'true');
+            }
 
             //console.log('namespace save', Self.model.toJSON());
             Self.model.credentials = {};
             Self.model.credentials.token = Self.steward.get('access_token');
 
+            console.log('namespace', Self.model.toJSON());
             if(Self.namespace == 'add'){
               Self.model.fetch({
                 success: function(model, response){
