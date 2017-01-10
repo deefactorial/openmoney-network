@@ -348,7 +348,7 @@ module.exports = Marionette.ItemView.extend({
                     minlength: 1,
                     maxlength: 65,
                     regex: '^[A-Za-z0-9_.-]+$'
-                },
+                }
             },
             messages: {
                 namespace: {

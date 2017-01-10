@@ -222,6 +222,9 @@ module.exports = Marionette.ItemView.extend({
         data.private = false;
         data.disabled = false;
         data.currency_namespace = Self.namespace;
+        if(typeof data.currency_namespace == 'undefined'){
+          data.currency_namespace = '';
+        }
         if(typeof Self.model != 'undefined'){
           data = Self.model.toJSON();
           if(typeof data.disabled == 'undefined'){
@@ -257,9 +260,21 @@ module.exports = Marionette.ItemView.extend({
 
 
         data.namespaces = Self.namespaces.toJSON();
-        for(var i = 0; i < data.namespaces.length; i++){
-          _.extend(data.namespaces[i], ViewHelpers);
+        //if your the steward of the cc namespace allow creation in the root.
+
+        var cc_namespace = Self.namespaces.get('namespaces~cc');
+        if(typeof cc_namespace != 'undefined'){
+          cc_namespace = cc_namespace.toJSON();
+          console.log('cc_namespace', cc_namespace);
+          cc_namespace.stewards.forEach(function(steward){
+            if((typeof steward == 'string' && steward == Self.steward.get('id'))
+            || (typeof steward != 'undefined' && steward.id == Self.steward.get('id'))){
+              console.log('add root namespace');
+              data.namespaces.push({namespace: ''});
+            }
+          });
         }
+
         data.balance = 0;
         data.volume = 0;
 
@@ -395,6 +410,8 @@ module.exports = Marionette.ItemView.extend({
               }
             }
           })
+        } else {
+          data.currency_namespace = {namespace: ''};
         }
 
         console.log('currency view data:', data);
@@ -458,9 +475,6 @@ module.exports = Marionette.ItemView.extend({
                     minlength: 1,
                     maxlength: 65,
                     regex: '^[A-Za-z0-9_-]+$'
-                },
-                currency_namespace: {
-                    required: true,
                 }
             },
             messages: {
@@ -469,9 +483,6 @@ module.exports = Marionette.ItemView.extend({
                     minlength: "At least 1 characters is required.",
                     maxlength: "Less than 65 characters is required.",
                     reges: "Alpha, numberic, underscores, periods and hypens are only allowed."
-                },
-                currency_namespace: {
-                    required: "Currency namespace is required.",
                 }
             },
             submitHandler: function(form) {
@@ -609,8 +620,6 @@ module.exports = Marionette.ItemView.extend({
               } else {
                 editedCurrency.set('disabled', Self.$('input[name=disabled]:checked').val() === 'true');
               }
-
-
 
               editedCurrency.credentials = {};
               editedCurrency.credentials.token = Self.steward.get('access_token');

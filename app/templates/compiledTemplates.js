@@ -444,7 +444,7 @@ this["openmoney"]["currency"] = Handlebars.template({"1":function(container,dept
   return "              <option value=\""
     + alias4(((helper = (helper = helpers.namespace || (depth0 != null ? depth0.namespace : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"namespace","hash":{},"data":data}) : helper)))
     + "\" "
-    + ((stack1 = (helpers.if_eq || (depth0 && depth0.if_eq) || alias2).call(alias1,(depth0 != null ? depth0.namespace : depth0),((stack1 = (depths[1] != null ? depths[1].currency_namespace : depths[1])) != null ? stack1.namespace : stack1),{"name":"if_eq","hash":{},"fn":container.program(27, data, 0, blockParams, depths),"inverse":container.noop,"data":data})) != null ? stack1 : "")
+    + ((stack1 = ((depths[1] && depths[1].if_eq) || alias2).call(alias1,(depth0 != null ? depth0.namespace : depth0),((stack1 = (depths[1] != null ? depths[1].currency_namespace : depths[1])) != null ? stack1.namespace : stack1),{"name":"../if_eq","hash":{},"fn":container.program(27, data, 0, blockParams, depths),"inverse":container.noop,"data":data})) != null ? stack1 : "")
     + ">"
     + alias4(((helper = (helper = helpers.namespace || (depth0 != null ? depth0.namespace : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"namespace","hash":{},"data":data}) : helper)))
     + "</option>\n";

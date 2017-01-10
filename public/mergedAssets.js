@@ -731,14 +731,14 @@ module.exports = Backbone.Model.extend({
     sync: function(method, model, options) {
       options = options || {};
       if(method.toLowerCase() == 'create'){
-        options.url = '/V2/stewards/' + model.get('steward').get('stewardname') + '/namespaces/' + model.get('currency_namespace') + '/currencies';
+        options.url = '/V2/stewards/' + model.get('steward').get('stewardname') + '/currencies';
       } else if(method.toLowerCase() == 'update'){
         //use the id attribute for update because the id has not been modified.
-        var currency = model.get('id').split('~')[1].substr(0,model.get('id').split('~')[1].indexOf('.'))
-        var currency_namespace = model.get('id').split('~')[1].substr(model.get('id').split('~')[1].indexOf('.')+1, model.get('id').split('~')[1].length);
-        options.url = '/V2/stewards/' + model.get('steward').get('stewardname') + '/namespaces/' + currency_namespace + '/currencies/' + currency;
+        //var currency = model.get('id').split('~')[1].substr(0,model.get('id').split('~')[1].indexOf('.'))
+        //var currency_namespace = model.get('id').split('~')[1].substr(model.get('id').split('~')[1].indexOf('.')+1, model.get('id').split('~')[1].length);
+        options.url = '/V2/stewards/' + model.get('steward').get('stewardname') + '/currencies/' + model.get('id').split('~')[1];
       } else {
-        options.url = '/V2/stewards/' + model.get('steward').get('stewardname') + '/namespaces/' + model.get('currency_namespace') + '/currencies/' + model.get('currency');
+        options.url = '/V2/stewards/' + model.get('steward').get('stewardname') + '/currencies/' + model.get('currency') + '.' + model.get('currency_namespace');
       }
       return Backbone.sync.apply(this, arguments);
     },
@@ -2108,7 +2108,7 @@ this["openmoney"]["currency"] = Handlebars.template({"1":function(container,dept
   return "              <option value=\""
     + alias4(((helper = (helper = helpers.namespace || (depth0 != null ? depth0.namespace : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"namespace","hash":{},"data":data}) : helper)))
     + "\" "
-    + ((stack1 = (helpers.if_eq || (depth0 && depth0.if_eq) || alias2).call(alias1,(depth0 != null ? depth0.namespace : depth0),((stack1 = (depths[1] != null ? depths[1].currency_namespace : depths[1])) != null ? stack1.namespace : stack1),{"name":"if_eq","hash":{},"fn":container.program(27, data, 0, blockParams, depths),"inverse":container.noop,"data":data})) != null ? stack1 : "")
+    + ((stack1 = ((depths[1] && depths[1].if_eq) || alias2).call(alias1,(depth0 != null ? depth0.namespace : depth0),((stack1 = (depths[1] != null ? depths[1].currency_namespace : depths[1])) != null ? stack1.namespace : stack1),{"name":"../if_eq","hash":{},"fn":container.program(27, data, 0, blockParams, depths),"inverse":container.noop,"data":data})) != null ? stack1 : "")
     + ">"
     + alias4(((helper = (helper = helpers.namespace || (depth0 != null ? depth0.namespace : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"namespace","hash":{},"data":data}) : helper)))
     + "</option>\n";
@@ -4537,6 +4537,9 @@ module.exports = Marionette.ItemView.extend({
         data.private = false;
         data.disabled = false;
         data.currency_namespace = Self.namespace;
+        if(typeof data.currency_namespace == 'undefined'){
+          data.currency_namespace = '';
+        }
         if(typeof Self.model != 'undefined'){
           data = Self.model.toJSON();
           if(typeof data.disabled == 'undefined'){
@@ -4572,9 +4575,21 @@ module.exports = Marionette.ItemView.extend({
 
 
         data.namespaces = Self.namespaces.toJSON();
-        for(var i = 0; i < data.namespaces.length; i++){
-          _.extend(data.namespaces[i], ViewHelpers);
+        //if your the steward of the cc namespace allow creation in the root.
+
+        var cc_namespace = Self.namespaces.get('namespaces~cc');
+        if(typeof cc_namespace != 'undefined'){
+          cc_namespace = cc_namespace.toJSON();
+          console.log('cc_namespace', cc_namespace);
+          cc_namespace.stewards.forEach(function(steward){
+            if((typeof steward == 'string' && steward == Self.steward.get('id'))
+            || (typeof steward != 'undefined' && steward.id == Self.steward.get('id'))){
+              console.log('add root namespace');
+              data.namespaces.push({namespace: ''});
+            }
+          });
         }
+
         data.balance = 0;
         data.volume = 0;
 
@@ -4710,6 +4725,8 @@ module.exports = Marionette.ItemView.extend({
               }
             }
           })
+        } else {
+          data.currency_namespace = {namespace: ''};
         }
 
         console.log('currency view data:', data);
@@ -4773,9 +4790,6 @@ module.exports = Marionette.ItemView.extend({
                     minlength: 1,
                     maxlength: 65,
                     regex: '^[A-Za-z0-9_-]+$'
-                },
-                currency_namespace: {
-                    required: true,
                 }
             },
             messages: {
@@ -4784,9 +4798,6 @@ module.exports = Marionette.ItemView.extend({
                     minlength: "At least 1 characters is required.",
                     maxlength: "Less than 65 characters is required.",
                     reges: "Alpha, numberic, underscores, periods and hypens are only allowed."
-                },
-                currency_namespace: {
-                    required: "Currency namespace is required.",
                 }
             },
             submitHandler: function(form) {
@@ -4924,8 +4935,6 @@ module.exports = Marionette.ItemView.extend({
               } else {
                 editedCurrency.set('disabled', Self.$('input[name=disabled]:checked').val() === 'true');
               }
-
-
 
               editedCurrency.credentials = {};
               editedCurrency.credentials.token = Self.steward.get('access_token');
@@ -6567,7 +6576,7 @@ module.exports = Marionette.ItemView.extend({
                     minlength: 1,
                     maxlength: 65,
                     regex: '^[A-Za-z0-9_.-]+$'
-                },
+                }
             },
             messages: {
                 namespace: {
