@@ -49,6 +49,7 @@ tr.CREDIT {
         <label for="key">Currency Name</label>
         <input type="text" id="currency" name="currency" value="{{currency}}" placeholder="Currency Name" class="form-control" />
       </div>
+      {{#if_not_eq currencyName 'add'}}
       <div class="form-group text-left">
         <label for="type">Currency Namespace</label>
         <select class="custom-select" name="currency_namespace">
@@ -59,6 +60,7 @@ tr.CREDIT {
           {{/each}}
         </select>
       </div>
+      {{/if_not_eq}}
     {{/if}}
     {{#if isSteward}}
     <div style="padding-top:10px;padding-bottom: 10px;">

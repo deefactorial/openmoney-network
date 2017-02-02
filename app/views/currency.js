@@ -353,7 +353,10 @@ module.exports = Marionette.ItemView.extend({
             console.log('steward compare', steward, Self.steward.get('id'))
             if(typeof steward != 'undefined'){
               if(typeof steward == 'string'){
-                stewardsArray.push(Self.stewardsCollection.get(steward).toJSON());
+                var stewardObject = Self.stewardsCollection.get(steward);
+                if(typeof stewardObject != 'undefined'){
+                  stewardsArray.push(stewardObject.toJSON());
+                }
                 if(steward == Self.steward.get('id')){
                   data.isSteward = true;
                 }
@@ -474,7 +477,7 @@ module.exports = Marionette.ItemView.extend({
                     required: true,
                     minlength: 1,
                     maxlength: 65,
-                    regex: '^[A-Za-z0-9_-]+$'
+                    regex: '^[A-Za-z0-9\\._-]+$'
                 }
             },
             messages: {
@@ -538,8 +541,15 @@ module.exports = Marionette.ItemView.extend({
               }
               Self.model.set('steward', Self.steward);
               Self.model.set('stewards', [ Self.steward.get('id') ]);
-              Self.model.set('currency', Self.$('input[name=currency]').val().toLowerCase());
-              Self.model.set('currency_namespace', Self.$('select[name=currency_namespace]').val());
+              var currencyName = Self.$('input[name=currency]').val().toLowerCase();
+              var currency = currencyName;
+              var currency_namespace = '';
+              if(currencyName.indexOf('.') !== -1){
+                currency = currencyName.substring(0, currencyName.indexOf('.'));
+                currency_namespace = currencyName.substring(currencyName.indexOf('.') + 1, currencyName.lenth);
+              }
+              Self.model.set('currency', currency);
+              Self.model.set('currency_namespace', currency_namespace);
 
               //console.log('namespace save', Self.model.toJSON());
               Self.model.credentials = {};
