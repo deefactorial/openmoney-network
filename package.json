@@ -117,7 +117,7 @@
     "grunt-contrib-stylus": "^1.2.0",
     "grunt-contrib-watch": "^1.0.0",
     "grunt-mocha": "^1.0.2",
-    "mocha": "^2.5.3",
+    "mocha": "^10.1.0",
     "sinon": "^1.17.4"
   }
 }
